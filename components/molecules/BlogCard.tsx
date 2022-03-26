@@ -1,7 +1,8 @@
 import {FunctionComponent} from "react";
 import Link from "next/link";
-import {BlogPost} from "../@types/schema";
+import {BlogPost} from "../../@types/schema";
 import dayjs from 'dayjs'
+import styled from '@emotion/styled'
 
 type BlogCardProps = {
     post: BlogPost
@@ -12,13 +13,9 @@ dayjs.extend(localizedFormat)
 const BlogCard: FunctionComponent<BlogCardProps> = ({post}) => {
 
     return (
-        <Link href={`/post/${post.slug}`}>
-            <a>
-                <div key={post.title}>
-                    <div>
-                        <img src={post.cover} alt="" />
-                    </div>
-                    <div>
+        <Link href={`/post/${post.slug}`} passHref>
+                <Card>
+                    <Image src={post.cover} alt=""  />
                         <div>
                             <span>
                                 <h4>{dayjs(post.date).format('LL')}</h4>
@@ -39,11 +36,22 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({post}) => {
                                 }
                             </span>
                         </div>
-                    </div>
-                </div>
-            </a>
+                </Card>
+            
         </Link>
     );
 };
 
 export default BlogCard;
+
+const Card = styled.a`
+    display:flex;
+    flex-direction: column;
+    max-width:320px;
+`
+
+const Image = styled.img`
+    width:100%;
+    height:320px;
+    object-fit:cover ;
+`

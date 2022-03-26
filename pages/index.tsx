@@ -2,7 +2,8 @@ import {GetStaticProps, InferGetStaticPropsType} from "next";
 import Head from "next/head";
 import {BlogPost} from "../@types/schema";
 import NotionService from "../services/notion-service";
-import BlogCard from "../components/BlogCard";
+import BlogCard from "../components/molecules/BlogCard";
+import styled from "@emotion/styled";
 
 export const getStaticProps: GetStaticProps = async (context) => {
     const notionService = new NotionService();
@@ -16,8 +17,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
 }
 
 const Home = ({posts}: InferGetStaticPropsType<typeof getStaticProps>) => {
-    const title = 'Test Blog';
-    const description = 'Welcome to my Notion Blog.'
+    const title = 'Toaster';
+    const description = 'Toasterは料理のレシピをシェアするようにものづくりのノウハウをシェアし、市民の手でできるものづくりの範囲を広げていく活動です'
 
     return (
         <>
@@ -32,13 +33,13 @@ const Home = ({posts}: InferGetStaticPropsType<typeof getStaticProps>) => {
                 <main >
                     <div>
                         <div>
-                            <h1 >Notion + NextJS Sample Blog</h1>
+                            <Title>Toaster</Title>
                         </div>
-                        <div >
+                        <CardGrid>
                             {posts.map((post: BlogPost) => (
                                 <BlogCard key={post.id} post={post}/>
                             ))}
-                        </div>
+                        </CardGrid>
                     </div>
                 </main>
             </div>
@@ -47,3 +48,15 @@ const Home = ({posts}: InferGetStaticPropsType<typeof getStaticProps>) => {
 };
 
 export default Home;
+
+const Title= styled.h1`
+    text-align: center;
+
+`
+const CardGrid = styled.div`
+    display: grid;
+    grid-template-columns:auto auto auto;
+    gap:32px;
+    max-width:calc(320px * 3 + 32px * 2);
+    margin:0 auto;
+`
