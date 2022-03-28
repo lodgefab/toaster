@@ -1,6 +1,6 @@
 import {FunctionComponent, ReactNode} from "react";
 import Link from "next/link";
-import {BlogPost} from "../../@types/schema";
+import {BlogPost} from "../../../@types/schema";
 import dayjs from 'dayjs'
 import styled from '@emotion/styled'
 import ReactMarkdown from "react-markdown";

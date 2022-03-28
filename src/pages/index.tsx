@@ -1,9 +1,12 @@
 import {GetServerSideProps, GetStaticProps, InferGetStaticPropsType} from "next";
 import Head from "next/head";
-import {BlogPost} from "../@types/schema";
+import {BlogPost} from "../../@types/schema";
 import NotionService from "../services/notion-service";
 import BlogCard from "../components/molecules/BlogCard";
 import styled from "@emotion/styled";
+import Footer from "../components/molecules/Footer";
+import Layout from "../components/Layout";
+
 
 export async function getServerSideProps() {
     const notionService = new NotionService();
@@ -16,7 +19,7 @@ export async function getServerSideProps() {
     }
 }
 
-const Home = ({posts}: InferGetStaticPropsType<typeof getServerSideProps>) => {
+const Page = ({posts}: InferGetStaticPropsType<typeof getServerSideProps>) => {
     const title = 'Toaster';
     const description = 'Toasterは料理のレシピをシェアするようにものづくりのノウハウをシェアし、市民の手でできるものづくりの範囲を広げていく活動です'
 
@@ -29,25 +32,25 @@ const Home = ({posts}: InferGetStaticPropsType<typeof getServerSideProps>) => {
                 <meta name={"og:description"} title={"og:description"} content={title}/>
             </Head>
 
-            <div className="min-h-screen">
-                <main >
-                    <div>
-                        <div>
-                            <Title>Toaster</Title>
-                        </div>
-                        <CardGrid>
-                            {posts.map((post: BlogPost) => (
-                                <BlogCard key={post.id} post={post}/>
-                            ))}
-                        </CardGrid>
-                    </div>
-                </main>
-            </div>
+            <Layout>
+                {/* <CommonMeta
+                    url={`${baseUrl}${currentPath}`}
+                    ogpImagePath={`${baseUrl}/images/ogp/OGP.jpg`}
+                    title={'TOP'}
+                /> */}
+                <CardGrid>
+                    {posts.map((post: BlogPost) => (
+                        <BlogCard key={post.id} post={post}/>
+                    ))}
+                </CardGrid>
+            </Layout>
         </>
     )
 };
 
-export default Home;
+export default Page;
+
+
 
 const Title= styled.h1`
     text-align: center;
