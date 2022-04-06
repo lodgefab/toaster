@@ -6,6 +6,8 @@ import BlogCard from "../components/molecules/BlogCard";
 import styled from "@emotion/styled";
 import Footer from "../components/molecules/Footer";
 import Layout from "../components/Layout";
+import { color, font } from "../styles";
+import { Home } from "../components/organisms/Home";
 
 
 export async function getServerSideProps() {
@@ -32,34 +34,10 @@ const Page = ({posts}: InferGetStaticPropsType<typeof getServerSideProps>) => {
                 <meta name={"og:description"} title={"og:description"} content={title}/>
             </Head>
 
-            <Layout>
-                {/* <CommonMeta
-                    url={`${baseUrl}${currentPath}`}
-                    ogpImagePath={`${baseUrl}/images/ogp/OGP.jpg`}
-                    title={'TOP'}
-                /> */}
-                <CardGrid>
-                    {posts.map((post: BlogPost) => (
-                        <BlogCard key={post.id} post={post}/>
-                    ))}
-                </CardGrid>
-            </Layout>
+            <Home posts={posts} ></Home>
         </>
     )
 };
 
 export default Page;
 
-
-
-const Title= styled.h1`
-    text-align: center;
-
-`
-const CardGrid = styled.div`
-    display: grid;
-    grid-template-columns:auto auto auto;
-    gap:32px;
-    max-width:calc(320px * 3 + 32px * 2);
-    margin:0 auto;
-`

@@ -16,7 +16,7 @@ const Recipe: FunctionComponent = ({ children }: Props) => {
 
     return (
         <Wrapper>
-              {children}  
+            {children}  
         </Wrapper>
     );
 };

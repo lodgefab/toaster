@@ -1,17 +1,16 @@
-import {css} from '@emotion/css'
-
+import {css} from '@emotion/react'
 
 export const color = {
-  primary: '#ffffff',
-  secondary: '#DBC0BD',
+  primary: '#f2c13a',
+  secondary: '#0997ba',
   subColor: {
     blue: '#3D98B8',
     orange: '#FF9575',
     yellow: '#DDB882',
   },
   background: {
-    base: '#121212',
-    gray: '#292929',
+    base: '#eeeeee',
+    gray: '#cccccc',
     white: '#fff',
   },
   utils: {
@@ -25,24 +24,7 @@ export const color = {
     gray1: '#7A7A7A',
     black: 'rgba(0, 0, 0, 1.0)',
   },
-  surface: {
-    transparent: {
-      e1px: 'rgba(255,255,255,.05)',
-      e2px: 'rgba(255,255,255,.07)',
-      e4px: 'rgba(255,255,255,.09)',
-      e8px: 'rgba(255,255,255,.12)',
-      e16px: 'rgba(255,255,255,.15)',
-      e24px: 'rgba(255,255,255,.16)',
-    },
-    nonTransparent: {
-      e1px: '#191919',
-      e2px: '#1e1e1e',
-      e4px: '#232323',
-      e8px: '#2a2a2a',
-      e16px: '#323232',
-      e24px: '#353535',
-    },
-  },
+
   active: 'linear-gradient(180deg, #FD80A8 0%, #FCCF42 100%);',
 } as const
 

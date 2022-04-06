@@ -2,6 +2,8 @@ import React, { ReactNode, useEffect } from 'react'
 import styled from '@emotion/styled'
 import Footer from './molecules/Footer'
 import Header from './molecules/Header'
+import NextNProgress from 'nextjs-progressbar'
+import { color, media } from '../styles'
 
 
 type Props = {
@@ -12,9 +14,12 @@ const Layout = ({ children}: Props) => {
   
   return (
     <Container>
-      <Header />
+      <NextNProgress
+        color={color.primary}
+      />
+      {/* <Header /> */}
       {children}
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </Container>
   )
 }
@@ -22,7 +27,7 @@ const Layout = ({ children}: Props) => {
 export default Layout
 
 const Container = styled.div`
-  background-color: transparent;
+  background-color: ${color.background.base};
   position: relative;
-  height:100vh;
+  /* height:100vh; */
 `
