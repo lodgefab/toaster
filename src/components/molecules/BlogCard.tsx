@@ -19,16 +19,14 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({post}) => {
             <Card>
                 <Link href={`/post/${post.slug}`} passHref>
                     <Contents>
+                        <RecipeTitle>{post.title}</RecipeTitle>
                         <Image src={post.cover} alt=""  />
-                        <div>
-                            <h4>{dayjs(post.date).format('LL')}</h4>
-                            <RecipeTitle>{post.title}</RecipeTitle>
+                        <HashTag>{dayjs(post.date).format('LL')}</HashTag>
                             {
                                 post.tags.map(tag => (
                                     <span key={tag.id}>#{tag.name}</span>
                                 ))
                             }
-                        </div>
                     </Contents>
                 </Link>
                 {/* <GithubCorner/> */}
@@ -38,13 +36,12 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({post}) => {
 
 export default BlogCard;
 
-const Card = styled.a`
+const Card = styled.div`
     display:flex;
     flex-direction: column;
     max-width:320px;
     width:100%;
     position: relative;
-    border:solid 1px ${color.content.dark};
     
     :before{
         content: '';
@@ -60,18 +57,25 @@ const Card = styled.a`
 const Contents = styled.a`
     background-color: ${color.background.base};
     z-index: ${zIndex.elevation.ev5};
+    border:solid 1px ${color.content.dark};
 `
 const Image = styled.img`
     position: relative;
     width:100%;
     height:320px;
     object-fit:cover ;
+    padding:0 24px 24px 24px;
 `
 const RecipeTitle = styled.h3`
     ${font.subtitle2};
     color:${color.content.dark};
-    margin:0 16px;
+    margin:16px 16px 0;
     padding:8px;
     border-top: solid 1px ${color.content.dark};
     border-bottom: solid 1px ${color.content.dark};
+`
+
+const HashTag = styled.p`
+    ${font.subtitle2};
+    color:${color.content.dark};
 `

@@ -17,8 +17,9 @@ export const Home: React.VFC<Props> = ({posts})=>{
             <Left>
                 <Menu/>
             </Left>
-            <Right>
-                <Title id={"recipe"}>Recipe</Title>
+            <Right id ="homeView">
+                <Title id="recipe" className='recipe'>Recipe</Title>
+                <section id='recipe'></section>
                 <CardGrid>
                     {posts.map((post: BlogPost) => (
                         <BlogCard key={post.id} post={post}/>
