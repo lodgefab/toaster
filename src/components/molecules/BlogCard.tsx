@@ -5,6 +5,7 @@ import dayjs from 'dayjs'
 import styled from '@emotion/styled'
 import { color, font, zIndex } from "../../styles";
 import { GithubCorner } from "../Atoms/GithubCorner";
+import { motion } from "framer-motion";
 
 type BlogCardProps = {
     post: BlogPost
@@ -13,10 +14,23 @@ const localizedFormat = require('dayjs/plugin/localizedFormat');
 dayjs.extend(localizedFormat)
 
 const BlogCard: FunctionComponent<BlogCardProps> = ({post}) => {
+    const parent = {
+        variantA: { },
+        variantB: { }
+    }
 
+    const child = {
+        variantA: { x:-8, y:8},
+        variantB: { x:-16, y:16 }
+    }
     return (
         
-            <Card>
+            <Card
+                initial="variantA"
+                whileHover="variantB"
+                variants={parent}
+            >
+                <BG  variants={child} ></BG>
                 <Link href={`/post/${post.slug}`} passHref>
                     <Contents>
                         <RecipeTitle>{post.title}</RecipeTitle>
@@ -36,13 +50,13 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({post}) => {
 
 export default BlogCard;
 
-const Card = styled.div`
+const Card = styled(motion.div)`
     display:flex;
     flex-direction: column;
     max-width:320px;
     width:100%;
     position: relative;
-    
+/*     
     :before{
         content: '';
         width: 100%;
@@ -51,9 +65,18 @@ const Card = styled.div`
         left:-10px;
         top:8px;
         border:solid 1px ${color.content.dark};
-    }
+    } */
     
 `
+const BG = styled(motion.div)`
+    width: 100%;
+    height:100%;
+    position: absolute;
+
+    border:solid 1px ${color.content.dark};
+`
+
+
 const Contents = styled.a`
     background-color: ${color.background.base};
     z-index: ${zIndex.elevation.ev5};

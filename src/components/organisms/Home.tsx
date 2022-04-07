@@ -18,8 +18,7 @@ export const Home: React.VFC<Props> = ({posts})=>{
                 <Menu/>
             </Left>
             <Right id ="homeView">
-                <Title id="recipe" className='recipe'>Recipe</Title>
-                <section id='recipe'></section>
+                <Title id="recipe">Recipe</Title>
                 <CardGrid>
                     {posts.map((post: BlogPost) => (
                         <BlogCard key={post.id} post={post}/>
@@ -68,6 +67,7 @@ const Right = styled.div`
 `
 
 const Title= styled.h1`
+        margin:0 0 64px 0;
         text-align: left;
         ${font.h2};
         color:${color.content.dark};
