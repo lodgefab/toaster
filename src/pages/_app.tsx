@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 import { css, Global } from '@emotion/react';
 import emotionReset from 'emotion-reset';
 import Layout from '../components/Layout';
+import { color } from '../styles';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -18,8 +19,12 @@ function MyApp({ Component, pageProps }: AppProps) {
             padding: 0;
             margin: 0;
             overscroll-behavior: none;
+            
             font-family: 'Courier Prime','Zen Kaku Gothic New', monospace, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
               Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+          }
+          body{
+            background-color: ${color.background.base};
           }
 
           a {

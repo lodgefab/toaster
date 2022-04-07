@@ -13,11 +13,7 @@ type Props = {
 
 export const Home: React.VFC<Props> = ({posts})=>{
     return(
-        <Wrapper>
-            <Left>
-                <Menu/>
-            </Left>
-            <Right id ="homeView">
+        <>
                 <Title id="recipe">Recipe</Title>
                 <CardGrid>
                     {posts.map((post: BlogPost) => (
@@ -34,40 +30,16 @@ export const Home: React.VFC<Props> = ({posts})=>{
                 <Map></Map>
                 <Title id={"people"}>People</Title>
                 <Map></Map>
-            </Right>
-        </Wrapper>
+        </>
     )
 }
 
 
 
-const Wrapper = styled.div`
-    height:100vh;
-    max-width:1040px;
-    margin:0 auto;
-    padding:56px 0 0;
-    display: grid;
-    grid-template-columns:1fr auto;
-    gap:32px;
-    ${media.sp`
-    width:100%;
-    
-    `}
-    `
 
-const Left = styled.div`
-    background-color: blueviolet;
-    width: 200px;
-`
-
-const Right = styled.div`
-    width: 100%;
-    overflow-y: auto;
-    overflow-x: visible;
-`
 
 const Title= styled.h1`
-        margin:0 0 64px 0;
+        margin:64px 0 32px 0;
         text-align: left;
         ${font.h2};
         color:${color.content.dark};

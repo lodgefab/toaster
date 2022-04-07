@@ -4,6 +4,7 @@ import Footer from './molecules/Footer'
 import Header from './molecules/Header'
 import NextNProgress from 'nextjs-progressbar'
 import { color, media } from '../styles'
+import Menu from './molecules/Menu'
 
 
 type Props = {
@@ -13,21 +14,45 @@ type Props = {
 const Layout = ({ children}: Props) => {
   
   return (
-    <Container>
+    <Wrapper>
       <NextNProgress
         color={color.primary}
       />
-      {/* <Header /> */}
-      {children}
-      {/* <Footer></Footer> */}
-    </Container>
+      <Left>
+        <Menu/>
+      </Left>
+      <Right id='homeView'>
+        {children}
+      </Right>
+    </Wrapper>
   )
 }
 
 export default Layout
 
-const Container = styled.div`
-  background-color: ${color.background.base};
-  position: relative;
-  /* height:100vh; */
+
+const Wrapper = styled.div`
+    position: relative;
+    height:100vh;
+    max-width:1040px;
+    margin:0 auto;
+    padding:56px 0 0;
+    display: grid;
+    grid-template-columns:1fr auto;
+    gap:32px;
+    ${media.sp`
+    width:100%;
+    
+    `}
+    `
+
+const Left = styled.div`
+    background-color: blueviolet;
+    width: 200px;
+`
+
+const Right = styled.div`
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: visible;
 `

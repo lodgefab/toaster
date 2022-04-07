@@ -19,10 +19,15 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({post}) => {
         variantB: { }
     }
 
-    const child = {
+    const bg = {
         variantA: { x:-8, y:8},
         variantB: { x:-16, y:16 }
     }
+    const img = {
+        variantA: { scale:1},
+        variantB: { scale:1.05 }
+    }
+
     return (
         
             <Card
@@ -30,11 +35,11 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({post}) => {
                 whileHover="variantB"
                 variants={parent}
             >
-                <BG  variants={child} ></BG>
+                <BG  variants={bg} ></BG>
                 <Link href={`/post/${post.slug}`} passHref>
                     <Contents>
                         <RecipeTitle>{post.title}</RecipeTitle>
-                        <Image src={post.cover} alt=""  />
+                        <Image src={post.cover} alt="" variants={img}  />
                         <HashTag>{dayjs(post.date).format('LL')}</HashTag>
                             {
                                 post.tags.map(tag => (
@@ -82,7 +87,7 @@ const Contents = styled.a`
     z-index: ${zIndex.elevation.ev5};
     border:solid 1px ${color.content.dark};
 `
-const Image = styled.img`
+const Image = styled(motion.img)`
     position: relative;
     width:100%;
     height:320px;
