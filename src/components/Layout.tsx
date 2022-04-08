@@ -15,9 +15,6 @@ type Props = {
 const Layout = ({ children}: Props) => {
   const MenuWidth = 200
 
-  React.useEffect(() => {
-    console.log("mount")
-  }, [])
   return (
     <Wrapper paddingLeft={MenuWidth}>
       {/* <NextNProgress

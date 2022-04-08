@@ -10,7 +10,7 @@ const Post = ({markdown, post}: InferGetStaticPropsType<typeof getStaticProps>) 
         <motion.div
             initial={{ opacity: 0, y:50 }}
             animate={{ opacity: 1, y:0 }}
-            exit={{ opacity: 0, y:50 }}
+            exit={{ opacity: 0}}
             key='item'
         >
             <Head>

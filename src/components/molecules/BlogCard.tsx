@@ -36,7 +36,7 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({post}) => {
                 variants={parent}
             >
                 <BG  variants={bg} ></BG>
-                <Link href={`/post/${post.slug}`} passHref>
+                <Link href={`/post/${post.slug}`}  passHref>
                     <Contents>
                         <RecipeTitle>{post.title}</RecipeTitle>
                         <Image src={post.cover} alt="" variants={img}  />
