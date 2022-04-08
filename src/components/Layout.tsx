@@ -12,18 +12,18 @@ type Props = {
 }
 
 const Layout = ({ children}: Props) => {
-  
+  const MenuWidth = 200
   return (
-    <Wrapper>
-      <NextNProgress
+    <Wrapper paddingLeft={MenuWidth}>
+      {/* <NextNProgress
         color={color.primary}
-      />
-      <Left>
-        <Menu/>
-      </Left>
-      <Right id='homeView'>
+      /> */}
+        <Menu width={MenuWidth}/>
+        
+
         {children}
-      </Right>
+        
+      
     </Wrapper>
   )
 }
@@ -31,17 +31,15 @@ const Layout = ({ children}: Props) => {
 export default Layout
 
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{paddingLeft:number}>`
     position: relative;
     height:100vh;
     max-width:1040px;
     margin:0 auto;
-    padding:56px 0 0;
-    display: grid;
-    grid-template-columns:1fr auto;
-    gap:32px;
+    padding-left: ${(props)=>props.paddingLeft}px;
     ${media.sp`
-    width:100%;
+      width:100%;
+      padding:0;
     
     `}
     `
@@ -51,8 +49,7 @@ const Left = styled.div`
     width: 200px;
 `
 
-const Right = styled.div`
+const Contents = styled.div`
     width: 100%;
-    overflow-y: auto;
-    overflow-x: visible;
+    
 `

@@ -13,7 +13,7 @@ type Props = {
 
 export const Home: React.VFC<Props> = ({posts})=>{
     return(
-        <>
+        <div id='homeView'>
                 <Title id="recipe">Recipe</Title>
                 <CardGrid>
                     {posts.map((post: BlogPost) => (
@@ -30,7 +30,7 @@ export const Home: React.VFC<Props> = ({posts})=>{
                 <Map></Map>
                 <Title id={"people"}>People</Title>
                 <Map></Map>
-        </>
+        </div>
     )
 }
 
