@@ -117,7 +117,7 @@ const Container = styled(motion.div)<{width:number}>`
 `
 
 const Logo = styled.h1`
-    ${font.h2};
+    ${font.h3};
     color:${color.content.dark};
     cursor:pointer;
     margin:0 0 24px 0;

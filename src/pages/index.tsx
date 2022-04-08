@@ -8,9 +8,10 @@ import Footer from "../components/molecules/Footer";
 import Layout from "../components/Layout";
 import { color, font } from "../styles";
 import { Home } from "../components/organisms/Home";
+import { motion } from "framer-motion";
 
 
-export async function getServerSideProps() {
+export const getStaticProps: GetStaticProps = async (context) => {
     const notionService = new NotionService();
     const posts = await notionService.getPublishedBlogPosts()
 
@@ -21,12 +22,16 @@ export async function getServerSideProps() {
     }
 }
 
-const Page = ({posts}: InferGetStaticPropsType<typeof getServerSideProps>) => {
+const Page = ({posts}: InferGetStaticPropsType<typeof getStaticProps>) => {
     const title = 'Toaster';
     const description = 'Toasterは料理のレシピをシェアするようにものづくりのノウハウをシェアし、市民の手でできるものづくりの範囲を広げていく活動です'
 
     return (
-        <>
+        <motion.div
+            initial={{ opacity: 0, y:50 }}
+            animate={{ opacity: 1, y:0 }}
+            exit={{ opacity: 0, y:50 }}
+        >
             <Head>
                 <title>{title}</title>
                 <meta name={"description"} title={"description"} content={description}/>
@@ -35,7 +40,7 @@ const Page = ({posts}: InferGetStaticPropsType<typeof getServerSideProps>) => {
             </Head>
 
             <Home posts={posts} ></Home>
-        </>
+        </motion.div>
     )
 };
 

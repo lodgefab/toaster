@@ -5,6 +5,7 @@ import Header from './molecules/Header'
 import NextNProgress from 'nextjs-progressbar'
 import { color, media } from '../styles'
 import Menu from './molecules/Menu'
+import { AnimatePresence, motion } from 'framer-motion'
 
 
 type Props = {
@@ -20,8 +21,11 @@ const Layout = ({ children}: Props) => {
       /> */}
         <Menu width={MenuWidth}/>
         
-
-        {children}
+        <AnimatePresence>
+          
+            {children}
+          
+        </AnimatePresence>
         
       
     </Wrapper>

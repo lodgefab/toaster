@@ -3,10 +3,15 @@ import ReactMarkdown from "react-markdown";
 import Head from "next/head";
 import NotionService from "../../services/notion-service";
 import Recipe from "../../components/organisms/Recipe";
+import { motion, MotionConfig } from "framer-motion";
 
 const Post = ({markdown, post}: InferGetStaticPropsType<typeof getStaticProps>) => {
     return (
-        <>
+        <motion.div
+            initial={{ opacity: 0, y:50 }}
+            animate={{ opacity: 1, y:0 }}
+            exit={{ opacity: 0, y:50 }}
+        >
             <Head>
                 <title>{post.title}</title>
                 <meta name={"description"} title={"description"} content={post.description}/>
@@ -18,7 +23,7 @@ const Post = ({markdown, post}: InferGetStaticPropsType<typeof getStaticProps>) 
                 <ReactMarkdown>{markdown}</ReactMarkdown>
             </Recipe>
 
-        </>
+        </motion.div>
     )
 }
 

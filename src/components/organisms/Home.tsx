@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
+import { motion } from "framer-motion";
 import { InferGetServerSidePropsType, NextPage } from "next";
+import { useRouter } from "next/router";
 import { BlogPost } from "../../../@types/schema";
 import NotionService from "../../services/notion-service";
 import { color, font, media } from "../../styles";
@@ -13,7 +15,9 @@ type Props = {
 
 export const Home: React.VFC<Props> = ({posts})=>{
     return(
-        <div id='homeView'>
+        <Container 
+            id='homeView'            
+        >
                 <Title id="recipe">Recipe</Title>
                 <CardGrid>
                     {posts.map((post: BlogPost) => (
@@ -30,13 +34,15 @@ export const Home: React.VFC<Props> = ({posts})=>{
                 <Map></Map>
                 <Title id={"people"}>People</Title>
                 <Map></Map>
-        </div>
+        </Container>
     )
 }
 
 
 
+const Container = styled(motion.div)`
 
+`
 
 const Title= styled.h1`
         margin:64px 0 32px 0;
