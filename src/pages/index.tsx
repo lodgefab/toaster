@@ -11,7 +11,7 @@ import { Home } from "../components/organisms/Home";
 import { motion } from "framer-motion";
 
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export async function getServerSideProps() {
     const notionService = new NotionService();
     const posts = await notionService.getPublishedBlogPosts()
 
@@ -22,7 +22,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     }
 }
 
-const Page = ({posts}: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Page = ({posts}: InferGetStaticPropsType<typeof getServerSideProps>) => {
     const title = 'Toaster';
     const description = 'Toasterは料理のレシピをシェアするようにものづくりのノウハウをシェアし、市民の手でできるものづくりの範囲を広げていく活動です'
 
