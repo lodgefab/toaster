@@ -21,7 +21,7 @@ const Layout = ({ children}: Props) => {
       /> */}
         <Menu width={MenuWidth}/>
         
-        <AnimatePresence>
+        <AnimatePresence exitBeforeEnter>
           
             {children}
           
