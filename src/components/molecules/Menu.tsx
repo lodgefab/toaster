@@ -23,10 +23,7 @@ const Menu:React.VFC<Props> = ({width})  => {
         variantA:{width:'0%', transition: { duration: 0.1 }},
         variantB:{width: ['0%', '20%', '40%', '60%', '80%', '100%']}
     }
-    const menu = {
-        variantA:{x:width*-1, y:0},
-        variantB:{x:width*-1, y:[0,-10,0]}
-    }
+    
 
     const handleStart = (url: string) => {
         if (url !== router.pathname) {
@@ -54,10 +51,6 @@ const Menu:React.VFC<Props> = ({width})  => {
     return (
         <Container 
             width={width} 
-            variants={menu}
-            initial={'variantB'}
-            animate={loading?'variantA':'variantB'}
-            transition={{duration: .4, times: [0.3, 0.6, 1]}}
         >
             <Link href={"/"} passHref><Logo>🍞 Toaster</Logo></Link>
             <MenuUL>

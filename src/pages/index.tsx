@@ -26,11 +26,14 @@ const Page = ({posts}: InferGetStaticPropsType<typeof getServerSideProps>) => {
     const title = 'Toaster';
     const description = 'Toasterは料理のレシピをシェアするようにものづくりのノウハウをシェアし、市民の手でできるものづくりの範囲を広げていく活動です'
 
+    
+
     return (
         <motion.div
             initial={{ opacity: 0, y:50 }}
             animate={{ opacity: 1, y:0 }}
             exit={{ opacity: 0, y:50 }}
+            key='home'
         >
             <Head>
                 <title>{title}</title>

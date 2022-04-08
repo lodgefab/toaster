@@ -4,8 +4,9 @@ import { css, Global } from '@emotion/react';
 import emotionReset from 'emotion-reset';
 import Layout from '../components/Layout';
 import { color } from '../styles';
+import { AnimatePresence } from 'framer-motion';
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps, router }: AppProps) {
   return (
     <>
         
@@ -39,7 +40,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         `}
       />
       <Layout>
-        <Component {...pageProps} />
+        <AnimatePresence>
+          <Component {...pageProps} key={router.route} />
+        </AnimatePresence>
       </Layout>
     </>
   )

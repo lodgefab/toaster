@@ -11,6 +11,7 @@ const Post = ({markdown, post}: InferGetStaticPropsType<typeof getStaticProps>) 
             initial={{ opacity: 0, y:50 }}
             animate={{ opacity: 1, y:0 }}
             exit={{ opacity: 0, y:50 }}
+            key='item'
         >
             <Head>
                 <title>{post.title}</title>
