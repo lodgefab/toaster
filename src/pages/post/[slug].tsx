@@ -6,10 +6,16 @@ import Recipe from "../../components/organisms/Recipe";
 import { motion, MotionConfig } from "framer-motion";
 
 const Post = ({markdown, post}: InferGetStaticPropsType<typeof getStaticProps>) => {
+    const fadeInUp = {
+        initial:{
+
+        }
+    }
+    
     return (
         <motion.div
-            initial={{ opacity: 0, y:128 }}
-            animate={{ opacity: 1, y:64 }}
+            initial='initial'
+            animate='animate'
             exit={{ opacity: 0}}
         >
             <Head>

@@ -15,13 +15,19 @@ type Props = {
 
 
 export const Home: React.VFC<Props> = ({posts})=>{
-
+    const stagger ={
+        animate:{
+            transition:{
+                staggerChildren:0.1
+            }
+        }
+    }
     return(
         <Container 
             id='homeView'            
         >
                 <Title id="recipe">Recipe</Title>
-                <CardGrid>
+                <CardGrid variants={stagger}>
                     {posts.map((post: BlogPost) => (
                         <BlogCard key={post.id} post={post}/>
                     ))}
@@ -52,7 +58,7 @@ const Title= styled.h1`
         ${font.h2};
         color:${color.content.dark};
 `
-const CardGrid = styled.div`
+const CardGrid = styled(motion.div)`
         margin:0 auto;
         display: grid;
         grid-template-columns:1fr 1fr 1fr;
