@@ -8,8 +8,8 @@ import { motion, MotionConfig } from "framer-motion";
 const Post = ({markdown, post}: InferGetStaticPropsType<typeof getStaticProps>) => {
     return (
         <motion.div
-            initial={{ opacity: 0, y:50 }}
-            animate={{ opacity: 1, y:0 }}
+            initial={{ opacity: 0, y:128 }}
+            animate={{ opacity: 1, y:64 }}
             exit={{ opacity: 0}}
         >
             <Head>
