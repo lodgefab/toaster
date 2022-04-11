@@ -30,10 +30,9 @@ const Page = ({posts}: InferGetStaticPropsType<typeof getServerSideProps>) => {
 
     return (
         <motion.div
-            initial={{ opacity: 0, y:50 }}
-            animate={{ opacity: 1, y:0 }}
+            initial={{ opacity: 0, y:128 }}
+            animate={{ opacity: 1, y:64 }}
             exit={{ opacity: 0 }}
-            key='home'
         >
             <Head>
                 <title>{title}</title>

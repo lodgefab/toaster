@@ -1,6 +1,7 @@
 import {FunctionComponent, ReactNode} from "react";
 import styled from '@emotion/styled'
 import { motion } from "framer-motion";
+import { color } from "../../styles";
 
 type Props = {
     children?: ReactNode
@@ -24,4 +25,6 @@ const Wrapper = styled(motion.article)`
     max-width:640px;
     margin:0 auto;
     text-align: left;
+    border: 1px solid ${color.content.dark};
+    padding:64px;
 `

@@ -39,13 +39,15 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({post}) => {
                 <Link href={`/post/${post.slug}`}  passHref>
                     <Contents>
                         <RecipeTitle>{post.title}</RecipeTitle>
+                        <Date>{dayjs(post.date).format('LL')}</Date>
                         <Image src={post.cover} alt="" variants={img}  />
-                        <HashTag>{dayjs(post.date).format('LL')}</HashTag>
+                        <HashTag>
                             {
                                 post.tags.map(tag => (
                                     <span key={tag.id}>#{tag.name}</span>
                                 ))
                             }
+                        </HashTag>
                     </Contents>
                 </Link>
                 {/* <GithubCorner/> */}
@@ -102,8 +104,18 @@ const RecipeTitle = styled.h3`
     border-top: solid 1px ${color.content.dark};
     border-bottom: solid 1px ${color.content.dark};
 `
+const Date = styled.p`
+    ${font.body2};
+    color:${color.content.dark};
+    text-align: center;
+`
 
 const HashTag = styled.p`
     ${font.subtitle2};
     color:${color.content.dark};
+    position:absolute;
+    left:-60px;
+    bottom:0px;
+    transform: rotate(90deg);
+    transform-origin: center right;
 `
