@@ -24,6 +24,7 @@ const Header:React.VFC<Props> = ({height})  => {
         variantB:{width: ['0%', '20%', '40%', '60%', '80%', '100%']}
     }
     
+    
 
     const handleStart = (url: string) => {
         if (url !== router.pathname) {
@@ -69,20 +70,26 @@ const HeaderLinkItem: React.FC<{ destination: string, label:string }> = ({ desti
     // トップページではページ内スクロールとして機能し、トップページ以外ではページ遷移として機能する
 
     const { pathname } = useRouter()
-
+    const menu = {
+        visible: { y: 0 },
+        hidden: { y: 12 },
+    }
   // トップページではページ内スクロールとして機能し、トップページ以外ではページ遷移として機能する
     return (
         <>
         {pathname === '/' && (
-            
-            <HeaderLI initial = {{ y: 0 }} whileHover={{ y: -10 }}>
-                <Scroll to={destination} smooth={true} duration={600}>{label}</Scroll>
-            </HeaderLI>
+            <LiWrap>
+                <HeaderLI variants={menu} initial='hidden' whileHover='visible'>
+                    <Scroll to={destination} smooth={true} duration={600}>{label}</Scroll>
+                </HeaderLI>
+            </LiWrap>
         )}
         {pathname !== '/' && (
-            <Link href={`/?to=${destination}`} passHref={true}>
-                <HeaderLI initial = {{ y: 0 }} whileHover={{ y: -10 }}>{label}</HeaderLI>
-            </Link>
+            <LiWrap>    
+                <Link href={`/?to=${destination}`} passHref={true}>
+                    <HeaderLI variants={menu} initial='hidden' whileHover='visible'>{label}</HeaderLI>
+                </Link>
+            </LiWrap>
         )}
         </>
     )
@@ -116,10 +123,17 @@ const HeaderUL = styled.ul`
 const HeaderLI = styled(motion.li)`
     ${font.subtitle1};
     color:${color.content.dark};
-    margin:0px 16px;
-    padding:16px 0;
+    padding:8px 0;
     cursor:pointer;
 `
+
+const LiWrap = styled.div`
+    height:32px;
+    overflow: hidden;
+    border-bottom: solid 1px ${color.content.dark};
+    margin:0px 16px;
+`
+
 const Handle = styled(motion.div)`
     position: absolute;
     top:0;
