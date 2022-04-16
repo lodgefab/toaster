@@ -71,7 +71,6 @@ export default class NotionService {
         markdown = this.n2m.toMarkdownString(mdBlocks);
         //Date 型を string に変換しています。これをしないと下記のようなエラーが発生します。
         post = JSON.parse(JSON.stringify(NotionService.pageToPostTransformer(page)));
-        console.log(markdown)
         return {
             post,
             markdown
@@ -80,7 +79,6 @@ export default class NotionService {
 
     private static pageToPostTransformer(page: any): BlogPost {
         let cover = page.cover;
-        console.log(cover)
         switch (cover.type) {
             case 'file':
                 cover = page.cover.file.url

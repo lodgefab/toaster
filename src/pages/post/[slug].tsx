@@ -6,11 +6,6 @@ import Recipe from "../../components/organisms/Recipe";
 import { motion, MotionConfig } from "framer-motion";
 
 const Post = ({markdown, post}: InferGetStaticPropsType<typeof getStaticProps>) => {
-    const fadeInUp = {
-        initial:{
-
-        }
-    }
     
     return (
         <motion.div
