@@ -55,10 +55,10 @@ const Header:React.VFC<Props> = ({height})  => {
         >
             <Link href={"/"} passHref><Logo>🍞 Toaster</Logo></Link>
             <HeaderUL>
-                <HeaderLinkItem destination={"recipe"} label={"Recipe"}/>
-                <HeaderLinkItem destination={"projects"} label={"Projects"}/>
-                <HeaderLinkItem destination={"studio"} label={"Studio"}/>
-                <HeaderLinkItem destination={"people"} label={"People"}/>
+                <HeaderLinkItem destination={"recipe"} label={"Recipe"} height={height}/>
+                <HeaderLinkItem destination={"projects"} label={"Projects"} height={height}/>
+                <HeaderLinkItem destination={"studio"} label={"Studio"} height={height}/>
+                <HeaderLinkItem destination={"people"} label={"People"} height={height}/>
             </HeaderUL>
         </Container>
     );
@@ -66,13 +66,17 @@ const Header:React.VFC<Props> = ({height})  => {
 
 export default Header;
 
-const HeaderLinkItem: React.FC<{ destination: string, label:string }> = ({ destination, label }) => {
+const HeaderLinkItem: React.FC<{ destination: string, label:string, height:number }> = ({ destination, label, height }) => {
     // トップページではページ内スクロールとして機能し、トップページ以外ではページ遷移として機能する
 
     const { pathname } = useRouter()
     const menu = {
         visible: { y: 0 },
-        hidden: { y: 12 },
+        hidden: { 
+            y: 12 ,
+            transitions:{
+                duration:0.2
+            }},
     }
   // トップページではページ内スクロールとして機能し、トップページ以外ではページ遷移として機能する
     return (
@@ -80,7 +84,7 @@ const HeaderLinkItem: React.FC<{ destination: string, label:string }> = ({ desti
         {pathname === '/' && (
             <LiWrap>
                 <HeaderLI variants={menu} initial='hidden' whileHover='visible'>
-                    <Scroll to={destination} smooth={true} duration={600}>{label}</Scroll>
+                    <Scroll to={destination} smooth={true} duration={600} offset={-1*height}>{label}</Scroll>
                 </HeaderLI>
             </LiWrap>
         )}
