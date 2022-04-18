@@ -4,7 +4,7 @@ import {BlogPost} from "../../../@types/schema";
 import dayjs from 'dayjs'
 import styled from '@emotion/styled'
 import { color, font, zIndex } from "../../styles";
-import { GithubCorner } from "../Atoms/GithubCorner";
+import { GithubCorner } from "../atoms/GithubCorner";
 import { motion } from "framer-motion";
 import Image from "next/image";
 

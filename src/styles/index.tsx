@@ -43,9 +43,9 @@ export const font = {
     body2:
       'font-weight: 400; font-size: 14px; line-height: 1.3;',
     article1:
-      'font-weight: 400; font-size: 16px; line-height: 2.0;',
+      'font-weight: 400; font-size: 16px; line-height: 1.5;',
     article2:
-      'font-weight: 400; font-size: 14px; line-height: 2.0;',
+      'font-weight: 400; font-size: 14px; line-height: 1.5;',
     button:
       'font-weight: 700; font-size: 14px; line-height: 1.5;',
     caption:
