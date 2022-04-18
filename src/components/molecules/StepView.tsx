@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import {FunctionComponent, Suspense, useEffect, useRef, useState} from "react";
 import { Canvas, useFrame, useLoader} from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import dynamic from "next/dynamic";
 
 type Props = {
     height: number
@@ -27,15 +26,26 @@ function Box(props: JSX.IntrinsicElements['mesh']) {
     )
 }
 
+const Model = () => {
+    const gltf = useLoader(GLTFLoader, "/models/toaster.glb");
+    return (
+        
+            <primitive object={gltf.scene} scale={1} />
+        );
+    };
+
 
 const StepView:React.VFC<Props> = ({height})  => {
     
     return(
             <Canvas>
-                <ambientLight />
-                <pointLight position={[10, 10, 10]} />
-                <Box position={[-1.2, 0, 0]} />
-                <Box position={[1.2, 0, 0]} />
+                <Suspense fallback={null}>
+                    <ambientLight />
+                    <pointLight position={[10, 10, 10]} />
+                    <Box position={[-1.2, 0, 0]} />
+                    <Box position={[1.2, 0, 0]} />
+                    <Model/>
+                </Suspense>
             </Canvas>
     )
 }
