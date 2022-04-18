@@ -2,6 +2,8 @@ import styled from "@emotion/styled";
 import {FunctionComponent, Suspense, useEffect, useRef, useState} from "react";
 import { Canvas, useFrame, useLoader} from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { Edges, Html, OrbitControls, Stage, useGLTF } from "@react-three/drei";
+import Model from "../../../public/models/Toaster";
 
 type Props = {
     height: number
@@ -26,25 +28,30 @@ function Box(props: JSX.IntrinsicElements['mesh']) {
     )
 }
 
-const Model = () => {
-    const gltf = useLoader(GLTFLoader, "/models/toaster.glb");
-    return (
-        
-            <primitive object={gltf.scene} scale={1} />
-        );
-    };
 
+
+const Loader = () => {
+    return(
+        <Html>Loading...</Html>
+    )
+};
 
 const StepView:React.VFC<Props> = ({height})  => {
     
     return(
             <Canvas>
-                <Suspense fallback={null}>
+                <Suspense fallback={<Loader/>}>
                     <ambientLight />
-                    <pointLight position={[10, 10, 10]} />
-                    <Box position={[-1.2, 0, 0]} />
-                    <Box position={[1.2, 0, 0]} />
-                    <Model/>
+                    {/* <pointLight position={[10, 10, 10]} /> */}
+                    <Stage contactShadow={{ blur: 1024, opacity: .5 }}>
+                        <Box position={[-1.2, 0, 0]} />
+                        <Box position={[1.2, 0, 0]} />
+                        <Model>
+                            <meshStandardMaterial transparent attach='material'/>
+                            <Edges />
+                        </Model>
+                    </Stage>
+                    <OrbitControls />
                 </Suspense>
             </Canvas>
     )
