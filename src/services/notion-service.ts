@@ -29,7 +29,6 @@ export default class NotionService {
                 }
             ]
         });
-
         return response.results.map(res => {
             //Date 型を string に変換しています。これをしないと下記のようなエラーが発生します。
             return JSON.parse(JSON.stringify(NotionService.pageToPostTransformer(res)));
@@ -90,7 +89,7 @@ export default class NotionService {
                 // Add default cover image if you want...
                 cover = ''
         }
-
+        console.log(page.properties)
         return {
             id: page.id,
             cover: cover,
@@ -98,7 +97,8 @@ export default class NotionService {
             tags: page.properties.Tags.multi_select,
             description: page.properties.Description.rich_text[0].plain_text,
             date: page.properties.Updated.last_edited_time,
-            slug: page.properties.Slug.formula.string
+            slug: page.properties.Slug.formula.string,
+            version: page.properties.Versions.formula.string
         }
     }
 }

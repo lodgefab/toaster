@@ -13,6 +13,7 @@ export type BlogPost = {
     tags: Tag[];
     description: string;
     date: string
+    version: string
 }
 
 export type PostPage = {

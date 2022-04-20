@@ -20,8 +20,11 @@ const Post = ({markdown, post}: InferGetStaticPropsType<typeof getStaticProps>) 
                 <meta name={"og:description"} title={"og:description"} content={post.description}/>
                 <meta name={"og:image"} title={"og:image"} content={post.cover}/>
             </Head>
-            <Recipe>
-                <ReactMarkdown>{markdown}</ReactMarkdown>
+            <Recipe
+                title={post.title}
+                version={post.version}
+                markdown={markdown}
+            >
             </Recipe>
 
         </motion.div>

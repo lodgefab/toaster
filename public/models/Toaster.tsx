@@ -25,22 +25,32 @@ type GLTFResult = GLTF & {
 export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group>()
   const { nodes, materials } = useGLTF('/models/toaster-transformed.glb') as GLTFResult
+  
   return (
     <group ref={group} {...props} dispose={null}>
       <group rotation={[Math.PI, 0, Math.PI]}>
-        <mesh geometry={nodes.Cube006.geometry}  >
-          
-        </mesh>
-        <mesh geometry={nodes.Cube006_1.geometry} >
-          <meshStandardMaterial transparent attach='material'/>
+        <mesh 
+          geometry={nodes.Cube006.geometry}  
+        >
+          <meshStandardMaterial transparent/>
           <Edges />
         </mesh>
-        <mesh geometry={nodes.Cube006_2.geometry} >
-        <meshStandardMaterial transparent attach='material'/>
+        <mesh 
+          geometry={nodes.Cube006_1.geometry} 
+        >
+          <meshStandardMaterial transparent/>
           <Edges />
         </mesh>
-        <mesh geometry={nodes.Cube006_3.geometry} >
-        <meshStandardMaterial transparent attach='material'/>
+        <mesh 
+          geometry={nodes.Cube006_2.geometry} 
+        >
+          <meshStandardMaterial transparent/>
+          <Edges />
+        </mesh>
+        <mesh 
+          geometry={nodes.Cube006_3.geometry} 
+        >
+          <meshStandardMaterial transparent/>
           <Edges />
         </mesh>
       </group>

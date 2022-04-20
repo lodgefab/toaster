@@ -4,6 +4,7 @@ import { Canvas, useFrame, useLoader} from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { Edges, Html, OrbitControls, Stage, useGLTF } from "@react-three/drei";
 import Model from "../../../public/models/Toaster";
+import { OrthographicCamera } from '@react-three/drei'
 
 type Props = {
     height: number
@@ -40,18 +41,16 @@ const StepView:React.VFC<Props> = ({height})  => {
     
     return(
             <Canvas>
+                <OrthographicCamera makeDefault zoom={40}/>
                 <Suspense fallback={<Loader/>}>
                     <ambientLight />
                     {/* <pointLight position={[10, 10, 10]} /> */}
                     <Stage contactShadow={{ blur: 1024, opacity: .5 }}>
-                        <Box position={[-1.2, 0, 0]} />
-                        <Box position={[1.2, 0, 0]} />
-                        <Model>
-                            <meshStandardMaterial transparent attach='material'/>
-                            <Edges />
-                        </Model>
+                        {/* <Box position={[-1.2, 0, 0]} />
+                        <Box position={[1.2, 0, 0]} /> */}
+                        <Model/>
                     </Stage>
-                    <OrbitControls />
+                    <OrbitControls target={[0,0,0]} enablePan={false} />
                 </Suspense>
             </Canvas>
     )
