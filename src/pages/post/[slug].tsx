@@ -3,6 +3,7 @@ import Head from "next/head";
 import NotionService from "../../services/notion-service";
 import Recipe from "../../components/organisms/Recipe";
 import { motion, MotionConfig } from "framer-motion";
+import ReactMarkdown from "react-markdown";
 
 const Post = ({markdown, post}: InferGetStaticPropsType<typeof getStaticProps>) => {
     
@@ -22,9 +23,8 @@ const Post = ({markdown, post}: InferGetStaticPropsType<typeof getStaticProps>) 
             <Recipe
                 title={post.title}
                 version={post.version}
-                markdown={markdown}
                 model={post.model}
-            />
+            ><ReactMarkdown>{markdown}</ReactMarkdown></Recipe>
 
         </motion.div>
     )

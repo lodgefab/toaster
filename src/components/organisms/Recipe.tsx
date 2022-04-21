@@ -4,12 +4,11 @@ import { motion } from "framer-motion";
 import { color, font, media, zIndex } from "../../styles";
 import StepView from "../molecules/ModelView";
 import Image from 'next/image'
-import ReactMarkdown from "react-markdown";
-import { css } from "@emotion/react";
+
 
 
 type Props = {
-    markdown: ReactNode
+    children: ReactNode
     title:string
     version:string
     model:string
@@ -18,7 +17,12 @@ type Props = {
 const leftColumnWidth = 320
 
 
-const Recipe: React.VFC<Props> = ({markdown, title, version, model}) => {
+const Recipe: React.FC<Props> = ({
+        children, 
+        title, 
+        version, 
+        model
+    }) => {
     const [isOn, setIsOn] = useState(false);
     const toggleSwitch = () => setIsOn(!isOn);
     return (
@@ -40,11 +44,11 @@ const Recipe: React.VFC<Props> = ({markdown, title, version, model}) => {
             </WrapperLeft>
             <WrapperRight width={leftColumnWidth}>
                 <Title>{title}<br/><Version>{"v"+version}</Version></Title>
-                {markdown&&(
+                
                     <MarkdownStyle>
-                        <ReactMarkdown>(markdown)</ReactMarkdown>
+                        {children}
                     </MarkdownStyle>
-                )}
+                
             </WrapperRight>
         </Contents>
     );
