@@ -93,7 +93,7 @@ export default class NotionService {
 
 
 
-        console.log(page.properties)
+        // console.log(page.properties)
         return {
             id: page.id,
             cover: cover,

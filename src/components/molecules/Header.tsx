@@ -1,7 +1,6 @@
 import {FunctionComponent, useEffect, useState} from "react";
 import styled from '@emotion/styled'
 import { color, font, zIndex } from "../../styles";
-import { GithubCorner } from "../atoms/GithubCorner";
 import  { Link as Scroll} from "react-scroll";
 import { motion } from "framer-motion"
 import { useRouter } from 'next/router';
