@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { color, font, media, zIndex } from "../../styles";
 import StepView from "../molecules/ModelView";
 import Image from 'next/image'
+import Link from "next/link";
 
 
 
@@ -16,6 +17,21 @@ type Props = {
 
 const leftColumnWidth = 320
 
+const turnIn = {
+    initial:{
+        scale:0,
+        rotate:0
+    },
+    animate:{
+        scale:1,
+        rotate:180,
+        transition:{
+            duration:0.6,
+            delay:1.8
+        }
+    }
+    
+}
 
 const Recipe: React.FC<Props> = ({
         children, 
@@ -27,6 +43,7 @@ const Recipe: React.FC<Props> = ({
     const toggleSwitch = () => setIsOn(!isOn);
     return (
         <Contents>
+            
             <WrapperLeft width={leftColumnWidth}>
                 {model&&(
                     <ThreeDView height={leftColumnWidth}>
@@ -43,6 +60,11 @@ const Recipe: React.FC<Props> = ({
 
             </WrapperLeft>
             <WrapperRight width={leftColumnWidth}>
+                <Link href="/" passHref>
+                    <CloseBtn
+                        variants={turnIn}
+                    />
+                </Link>
                 <Title>{title}<br/><Version>{"v"+version}</Version></Title>
                 
                     <MarkdownStyle>
@@ -57,6 +79,7 @@ const Recipe: React.FC<Props> = ({
 export default Recipe;
 
 const Contents = styled.div`
+    position: relative;
     display: grid;
     gap:32px;
     grid-template-columns: 1fr auto;
@@ -67,6 +90,39 @@ const Contents = styled.div`
     `}
 `
 
+const CloseBtn = styled(motion.div)`
+    position: absolute;
+    top: calc((44px + 16px) * -1);
+    left:50%;
+    width:44px;
+    height:44px;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: ${color.content.dark};
+    transform: translate(-50%,0);
+    &:before{
+        content:'';
+        display: block;
+        width:70%;
+        height:1px;
+        background-color: ${color.background.white};
+        position: absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+    &:after{
+        content:'';
+        display: block;
+        width:70%;
+        height:1px;
+        background-color: ${color.background.white};
+        position: absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%, -50%) rotate(-45deg);
+    }
+`
 
 const WrapperLeft = styled.div`
         position:fixed;
