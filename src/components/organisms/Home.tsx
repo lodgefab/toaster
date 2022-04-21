@@ -49,7 +49,7 @@ export const Home: React.VFC<Props> = ({posts})=>{
 
 
 const Container = styled(motion.div)`
-
+    margin:0 0 128px 0;
 `
 
 const Title= styled.h1`

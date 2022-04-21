@@ -26,11 +26,20 @@ const turnIn = {
         scale:1,
         rotate:180,
         transition:{
-            duration:0.6,
-            delay:1.8
+            type: 'spring',
+            duration: 1.2,
+            bounce:0.5,
+            delay:1.2
         }
     }
-    
+}
+const scaling= {
+    initial:{
+        scale:1
+    },
+    whileHover:{
+        scale:1.1
+    }
 }
 
 const Recipe: React.FC<Props> = ({
@@ -61,9 +70,17 @@ const Recipe: React.FC<Props> = ({
             </WrapperLeft>
             <WrapperRight width={leftColumnWidth}>
                 <Link href="/" passHref>
-                    <CloseBtn
-                        variants={turnIn}
-                    />
+                    <CloseBtnWrap
+                        variants={scaling}
+                        initial={'initial'}
+                        whileHover={'whileHover'}
+                    >
+                        <CloseBtn
+                            variants={turnIn}
+                            initial={'initial'}
+                            animate={'animate'}
+                        />
+                    </CloseBtnWrap>
                 </Link>
                 <Title>{title}<br/><Version>{"v"+version}</Version></Title>
                 
@@ -89,23 +106,26 @@ const Contents = styled.div`
         grid-template-rows: 1fr auto;
     `}
 `
-
-const CloseBtn = styled(motion.div)`
+const CloseBtnWrap = styled(motion.div)`
     position: absolute;
     top: calc((44px + 16px) * -1);
     left:50%;
+    transform: translate(-50%,0);
     width:44px;
     height:44px;
+`
+const CloseBtn = styled(motion.div)`
+    width:100%;
+    height:100%;
     cursor: pointer;
     border-radius: 50%;
-    background-color: ${color.content.dark};
-    transform: translate(-50%,0);
+    border: solid 1px ${color.content.dark};
     &:before{
         content:'';
         display: block;
         width:70%;
         height:1px;
-        background-color: ${color.background.white};
+        background-color: ${color.content.dark};
         position: absolute;
         top:50%;
         left:50%;
@@ -116,7 +136,7 @@ const CloseBtn = styled(motion.div)`
         display: block;
         width:70%;
         height:1px;
-        background-color: ${color.background.white};
+        background-color: ${color.content.dark};
         position: absolute;
         top:50%;
         left:50%;
