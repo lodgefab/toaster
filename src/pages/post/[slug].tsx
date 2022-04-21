@@ -24,6 +24,7 @@ const Post = ({markdown, post}: InferGetStaticPropsType<typeof getStaticProps>) 
                 title={post.title}
                 version={post.version}
                 markdown={markdown}
+                model={post.model}
             >
             </Recipe>
 

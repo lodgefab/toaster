@@ -14,6 +14,7 @@ export type BlogPost = {
     description: string;
     date: string
     version: string
+    model: string
 }
 
 export type PostPage = {

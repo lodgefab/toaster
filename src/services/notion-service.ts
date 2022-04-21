@@ -1,6 +1,7 @@
 import {Client} from "@notionhq/client";
 import {BlogPost, PostPage} from "../../@types/schema";
 import {NotionToMarkdown} from "notion-to-md";
+import Model from "../../public/models/Toaster";
 
 export default class NotionService {
     client: Client
@@ -89,6 +90,9 @@ export default class NotionService {
                 // Add default cover image if you want...
                 cover = ''
         }
+
+
+
         console.log(page.properties)
         return {
             id: page.id,
@@ -98,7 +102,8 @@ export default class NotionService {
             description: page.properties.Description.rich_text[0].plain_text,
             date: page.properties.Updated.last_edited_time,
             slug: page.properties.Slug.formula.string,
-            version: page.properties.Versions.formula.string
+            version: page.properties.Versions.formula.string,
+            model: page.properties.Model.rich_text[0]?.plain_text
         }
     }
 }
