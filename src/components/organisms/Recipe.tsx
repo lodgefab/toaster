@@ -9,7 +9,7 @@ import { css } from "@emotion/react";
 
 
 type Props = {
-    markdown?: ReactNode
+    markdown: ReactNode
     title:string
     version:string
     model:string
@@ -18,10 +18,9 @@ type Props = {
 const leftColumnWidth = 320
 
 
-const Recipe: FunctionComponent = ({ markdown, title, version, model }: Props) => {
+const Recipe: React.VFC<Props> = ({markdown, title, version, model}) => {
     const [isOn, setIsOn] = useState(false);
     const toggleSwitch = () => setIsOn(!isOn);
-    console.log(model)
     return (
         <Contents>
             <WrapperLeft width={leftColumnWidth}>
@@ -37,13 +36,15 @@ const Recipe: FunctionComponent = ({ markdown, title, version, model }: Props) =
                         ><Image src={isOn?'/icons/shrink.svg':'/icons/expand.svg'} width={24} height={24} alt={'expand or shrink'}/></Switch>
                     </ThreeDView>
                 )}
+
             </WrapperLeft>
             <WrapperRight width={leftColumnWidth}>
                 <Title>{title}<br/><Version>{"v"+version}</Version></Title>
-                
-                <MarkdownStyle>
-                    <ReactMarkdown>{markdown}</ReactMarkdown>
-                </MarkdownStyle>
+                {markdown&&(
+                    <MarkdownStyle>
+                        <ReactMarkdown>(markdown)</ReactMarkdown>
+                    </MarkdownStyle>
+                )}
             </WrapperRight>
         </Contents>
     );
@@ -56,12 +57,22 @@ const Contents = styled.div`
     gap:32px;
     grid-template-columns: 1fr auto;
     margin: 128px 0 128px;
+    ${media.sp`
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr auto;
+    `}
 `
 
 
 const WrapperLeft = styled.div`
         position:fixed;
         width:${(props: { width: number; }) => props.width}px;  
+        display: flex;
+        flex-direction: column;
+        ${media.sp`
+            position:relative;
+            width:100%;
+        `}
 `
 const WrapperRight = styled(motion.article)<{width:number}>`
     position: relative;
@@ -72,7 +83,9 @@ const WrapperRight = styled(motion.article)<{width:number}>`
     border: 1px solid ${color.content.dark};
     padding:64px;
     color:${color.content.dark};
-    
+    ${media.sp`
+        margin:0;
+    `}
     
 `
 

@@ -1,5 +1,4 @@
 import {GetStaticProps, InferGetStaticPropsType} from "next";
-import ReactMarkdown from "react-markdown";
 import Head from "next/head";
 import NotionService from "../../services/notion-service";
 import Recipe from "../../components/organisms/Recipe";
@@ -25,8 +24,7 @@ const Post = ({markdown, post}: InferGetStaticPropsType<typeof getStaticProps>) 
                 version={post.version}
                 markdown={markdown}
                 model={post.model}
-            >
-            </Recipe>
+            />
 
         </motion.div>
     )
