@@ -24,6 +24,7 @@ const Post = ({markdown, post}: InferGetStaticPropsType<typeof getStaticProps>) 
                 title={post.title}
                 version={post.version}
                 model={post.model}
+                resource={post.resource}
             ><ReactMarkdown>{markdown}</ReactMarkdown></Recipe>
 
         </motion.div>

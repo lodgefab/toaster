@@ -13,6 +13,7 @@ type Props = {
     title:string
     version:string
     model:string
+    resource:Resource[]
 }
 
 const leftColumnWidth = 320
@@ -29,7 +30,7 @@ const turnIn = {
             type: 'spring',
             duration: 1.2,
             bounce:0.5,
-            delay:1.2
+            delay:1.8
         }
     }
 }
@@ -46,7 +47,8 @@ const Recipe: React.FC<Props> = ({
         children, 
         title, 
         version, 
-        model
+        model,
+        resource
     }) => {
     const [isOn, setIsOn] = useState(false);
     const toggleSwitch = () => setIsOn(!isOn);
@@ -66,6 +68,12 @@ const Recipe: React.FC<Props> = ({
                         ><Image src={isOn?'/icons/shrink.svg':'/icons/expand.svg'} width={24} height={24} alt={'expand or shrink'}/></Switch>
                     </ThreeDView>
                 )}
+                {resource&&(
+                        resource.map(resource => (
+                            <Resource key={resource.id} href={resource.href} target={'_blank'}>{resource.plain_text}</Resource>
+                        ))
+                )}
+                {resource&&<FinalChain>Certified on <span><a href='https://final-aim.com/final-chain-beta-launch' target={'_blank'} rel="noreferrer">Final Chain</a></span></FinalChain>}
 
             </WrapperLeft>
             <WrapperRight width={leftColumnWidth}>
@@ -119,13 +127,13 @@ const CloseBtn = styled(motion.div)`
     height:100%;
     cursor: pointer;
     border-radius: 50%;
-    border: solid 1px ${color.content.dark};
+    background-color: ${color.content.dark};
     &:before{
         content:'';
         display: block;
         width:70%;
         height:1px;
-        background-color: ${color.content.dark};
+        background-color: ${color.background.white};
         position: absolute;
         top:50%;
         left:50%;
@@ -136,7 +144,7 @@ const CloseBtn = styled(motion.div)`
         display: block;
         width:70%;
         height:1px;
-        background-color: ${color.content.dark};
+        background-color: ${color.background.white};
         position: absolute;
         top:50%;
         left:50%;
@@ -253,4 +261,60 @@ const CanvasWrapper = styled(motion.div)`
         height:100vh;
     }
     
+`
+const Resource = styled.a`
+    display: inline-flex;
+    align-items: center;
+    text-decoration: underline;
+    padding: 8px 8px 8px 0;
+    
+    &:hover{
+        text-decoration: none;
+    }
+    &:before{
+        content:'';
+        display: inline-block;
+        width:24px;
+        height:24px;
+        margin: 0 4px 0 0;
+        background-image: url('/icons/document.svg');
+        background-size: contain;   
+    }
+    &:after{
+        content:'';
+        display: inline-block;
+        width:16px;
+        height:16px;
+        margin: 0 0px 0 auto;
+        background-image: url('/icons/external.svg');
+        background-size: contain;   
+    }
+
+`
+
+const FinalChain = styled.p`
+    ${font.body2};
+    margin-top:8px;
+    display: inline-flex;
+    align-items: center;
+    span{
+        display: flex;
+        padding: 4px 8px;
+        margin: 0 0 0 8px;
+        background-color: #e0e0e0;
+        border-radius: 16px;
+    }
+    a{
+        display: inline-flex;
+        align-items: center;
+    }
+    a:before{
+        content:'';
+        display: inline-block;
+        width:16px;
+        height:16px;
+        margin: 0 4px 0 0;
+        background-image: url('/icons/link.svg');
+        background-size: contain;   
+    }
 `

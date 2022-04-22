@@ -5,6 +5,11 @@ export type Tag = {
     name: string
 }
 
+export type Resource = {
+    name: string
+    url: string
+}
+
 export type BlogPost = {
     id: string;
     slug: string;
@@ -15,6 +20,7 @@ export type BlogPost = {
     date: string
     version: string
     model: string
+    resource: Resource[]
 }
 
 export type PostPage = {

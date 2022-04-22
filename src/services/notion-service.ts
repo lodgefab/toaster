@@ -90,7 +90,7 @@ export default class NotionService {
                 // Add default cover image if you want...
                 cover = ''
         }
-
+        console.log(page.properties)
 
 
         // console.log(page.properties)
@@ -103,7 +103,8 @@ export default class NotionService {
             date: page.properties.Updated.last_edited_time,
             slug: page.properties.Slug.formula.string,
             version: page.properties.Versions.formula.string,
-            model: page.properties.Model.rich_text[0]?.plain_text
+            model: page.properties.Model.rich_text[0]?.plain_text,
+            resource: page.properties.Resources.rich_text,
         }
     }
 }
