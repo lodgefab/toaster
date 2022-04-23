@@ -7,13 +7,13 @@ import { color, font, zIndex } from "../../styles";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-type BlogCardProps = {
+type RecipeCardProps = {
     post: BlogPost
 }
 const localizedFormat = require('dayjs/plugin/localizedFormat');
 dayjs.extend(localizedFormat)
 
-const BlogCard: FunctionComponent<BlogCardProps> = ({post}) => {
+const RecipeCard: FunctionComponent<RecipeCardProps> = ({post}) => {
     const parent = {
         variantA: { },
         variantB: { }
@@ -63,7 +63,6 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({post}) => {
                     <Link href={`/post/${post.slug}`}  passHref>
                         <Contents>
                             <RecipeTitle>{post.title}</RecipeTitle>
-                            <Date>{dayjs(post.date).format('LL')}</Date>
                             <ImageWrap variants={img}>
                                 <Image src={post.cover} alt="" layout={"fill"} objectFit={"cover"} loading={"eager"} priority={true} unoptimized={false}/>
                             </ImageWrap>
@@ -83,13 +82,14 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({post}) => {
     );
 };
 
-export default BlogCard;
+export default RecipeCard;
 
 const Card = styled(motion.div)`
     display:flex;
     flex-direction: column;
     max-width:320px;
     width:100%;
+    height:100%;
     position: relative;
 /*     
     :before{
@@ -133,11 +133,7 @@ const RecipeTitle = styled.h3`
     border-top: solid 1px ${color.content.dark};
     border-bottom: solid 1px ${color.content.dark};
 `
-const Date = styled.p`
-    ${font.body2};
-    color:${color.content.dark};
-    text-align: center;
-`
+
 
 const HashTag = styled.p`
     ${font.subtitle2};

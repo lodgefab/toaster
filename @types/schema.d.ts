@@ -27,3 +27,13 @@ export type PostPage = {
     post: BlogPost,
     markdown: string
 }
+
+export type ProjectPost = {
+    id: string;
+    slug: string;
+    cover: string;
+    title: string;
+    tags: Tag[];
+    description: string;
+    date: string
+}

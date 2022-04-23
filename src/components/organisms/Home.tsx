@@ -3,18 +3,20 @@ import { motion } from "framer-motion";
 import { InferGetServerSidePropsType, NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { BlogPost } from "../../../@types/schema";
+import { BlogPost, ProjectPost } from "../../../@types/schema";
 import NotionService from "../../services/notion-service";
 import { color, font, media } from "../../styles";
-import BlogCard from "../molecules/BlogCard";
+import RecipeCard from "../molecules/RecipeCard";
+import ProjectCard from "../molecules/ProjectCard";
 
 
 type Props = {
-    posts:BlogPost[]
+    blogPosts:BlogPost[],
+    projectPosts:ProjectPost[]
 }
 
 
-export const Home: React.VFC<Props> = ({posts})=>{
+export const Home: React.VFC<Props> = ({blogPosts, projectPosts})=>{
     const stagger ={
         animate:{
             transition:{
@@ -27,17 +29,18 @@ export const Home: React.VFC<Props> = ({posts})=>{
             id='homeView'            
         >
                 <Title id="recipe">Recipe</Title>
-                <CardGrid variants={stagger}>
-                    {posts.map((post: BlogPost) => (
-                        <BlogCard key={post.id} post={post}/>
+                <RecipeGrid variants={stagger}>
+                    
+                    {blogPosts.map((post: BlogPost) => (
+                        <RecipeCard key={post.id} post={post}/>
                     ))}
-                </CardGrid>
+                </RecipeGrid>
                 <Title id={"projects"}>Projects</Title>
-                <CardGrid>
-                    {posts.map((post: BlogPost) => (
-                        <BlogCard key={post.id} post={post}/>
+                <ProjectGrid>
+                    {projectPosts.map((post: ProjectPost) => (
+                        <ProjectCard key={post.id} post={post}/>
                     ))}
-                </CardGrid>
+                </ProjectGrid>
                 <Title id={"studio"}>Studio</Title>
                 <Map></Map>
                 <Title id={"people"}>People</Title>
@@ -58,11 +61,24 @@ const Title= styled.h1`
         ${font.h2};
         color:${color.content.dark};
 `
-const CardGrid = styled(motion.div)`
+const RecipeGrid = styled(motion.div)`
         margin:0 auto;
         display: grid;
         grid-template-columns:1fr 1fr 1fr;
         gap:32px;
+        width:100%;
+        ${media.md`
+            grid-template-columns:1fr 1fr;
+        `}
+        ${media.sp`
+            grid-template-columns:1fr;
+        `}
+`
+const ProjectGrid = styled(motion.div)`
+        margin:0 auto;
+        display: grid;
+        grid-template-columns:1fr 1fr 1fr;
+        gap:2px;
         width:100%;
         ${media.md`
             grid-template-columns:1fr 1fr;

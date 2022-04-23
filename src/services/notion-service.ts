@@ -1,5 +1,5 @@
 import {Client} from "@notionhq/client";
-import {BlogPost, PostPage} from "../../@types/schema";
+import {BlogPost, PostPage, ProjectPost} from "../../@types/schema";
 import {NotionToMarkdown} from "notion-to-md";
 import Model from "../../public/models/Toaster";
 
@@ -107,4 +107,97 @@ export default class NotionService {
             resource: page.properties.Resources.rich_text,
         }
     }
+
+    async getPublishedProjectPosts(): Promise<ProjectPost[]> {
+        const database = process.env.NOTION_PROJECT_DATABASE_ID ?? '';
+        // list project posts
+        const response = await this.client.databases.query({
+            database_id: database,
+            filter: {
+                property: 'Published',
+                checkbox: {
+                    equals: true
+                }
+            },
+            sorts: [
+                {
+                    property: 'Updated',
+                    direction: 'descending'
+                }
+            ]
+        });
+        return response.results.map(res => {
+            //Date 型を string に変換しています。これをしないと下記のようなエラーが発生します。
+            return JSON.parse(JSON.stringify(NotionService.pageToProjectPostTransformer(res)));
+        })
+    }
+
+    async getSingleProjectPost(slug: string): Promise<PostPage> {
+        let post, markdown
+
+        const database = process.env.NOTION_PROJECT_DATABASE_ID ?? '';
+        // list of project posts
+        const response = await this.client.databases.query({
+            database_id: database,
+            filter: {
+                property: 'Slug',
+                formula: {
+                    string: {
+                        equals: slug // slug
+                    }
+                },
+                // add option for tags in the future
+            },
+            sorts: [
+                {
+                    property: 'Updated',
+                    direction: 'descending'
+                }
+            ]
+        });
+
+        if (!response.results[0]) {
+            throw 'No results available'
+        }
+
+        // grab page from notion
+        const page = response.results[0];
+
+        const mdBlocks = await this.n2m.pageToMarkdown(page.id)
+        markdown = this.n2m.toMarkdownString(mdBlocks);
+        //Date 型を string に変換しています。これをしないと下記のようなエラーが発生します。
+        post = JSON.parse(JSON.stringify(NotionService.pageToProjectPostTransformer(page)));
+        return {
+            post,
+            markdown
+        }
+    }
+
+    private static pageToProjectPostTransformer(page: any): ProjectPost {
+        let cover = page.cover;
+        switch (cover.type) {
+            case 'file':
+                cover = page.cover.file.url
+                break;
+            case 'external':
+                cover = page.cover.external.url;
+                break;
+            default:
+                // Add default cover image if you want...
+                cover = ''
+        }
+
+
+        // console.log(page.properties)
+        return {
+            id: page.id,
+            cover: cover,
+            title: page.properties.Name.title[0].plain_text,
+            tags: page.properties.Tags.multi_select,
+            description: page.properties.Description.rich_text[0].plain_text,
+            date: page.properties.Updated.last_edited_time,
+            slug: page.properties.Slug.formula.string,
+        }
+    }
+    
 }

@@ -95,3 +95,23 @@ export const zIndex = {
     ev15: 15, //Dialog, OverLayコンテンツ
   },
 } as const
+
+const easing =[.6, -0.05, .01, .99]
+export const motionConfig = {
+  
+  fadeInUp : {
+    initial:{
+        y:60,
+        opacity:0
+    },
+    animate:{
+        y:0,
+        opacity:1,
+        transition:{
+            duration:0.6,
+            ease:easing
+        }
+    },
+
+}
+}

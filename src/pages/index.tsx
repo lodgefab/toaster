@@ -2,7 +2,7 @@ import {GetServerSideProps, GetStaticProps, InferGetStaticPropsType} from "next"
 import Head from "next/head";
 import {BlogPost} from "../../@types/schema";
 import NotionService from "../services/notion-service";
-import BlogCard from "../components/molecules/BlogCard";
+import RecipeCard from "../components/molecules/RecipeCard";
 import styled from "@emotion/styled";
 import Footer from "../components/molecules/Footer";
 import Layout from "../components/Layout";
@@ -13,16 +13,18 @@ import { motion } from "framer-motion";
 
 export async function getServerSideProps() {
     const notionService = new NotionService();
-    const posts = await notionService.getPublishedBlogPosts()
+    const blogPosts = await notionService.getPublishedBlogPosts()
+    const projectPosts = await notionService.getPublishedProjectPosts()
 
     return {
         props: {
-            posts
+            blogPosts,
+            projectPosts
         },
     }
 }
 
-const Page = ({posts}: InferGetStaticPropsType<typeof getServerSideProps>) => {
+const Page = ({blogPosts, projectPosts}: InferGetStaticPropsType<typeof getServerSideProps>) => {
     const title = 'Toaster';
     const description = 'Toasterは料理のレシピをシェアするようにものづくりのノウハウをシェアし、市民の手でできるものづくりの範囲を広げていく活動です'
 
@@ -41,7 +43,7 @@ const Page = ({posts}: InferGetStaticPropsType<typeof getServerSideProps>) => {
                 <meta name={"og:description"} title={"og:description"} content={title}/>
             </Head>
 
-            <Home posts={posts} ></Home>
+            <Home blogPosts={blogPosts} projectPosts={projectPosts} ></Home>
         </motion.div>
     )
 };
