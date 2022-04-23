@@ -108,6 +108,7 @@ const BG = styled(motion.div)`
     height:100%;
     position: absolute;
     border:solid 1px ${color.content.dark};
+    background-image: repeating-linear-gradient(-45deg, transparent, transparent 4px, rgba(0, 0, 0, 0.87) 4px, rgba(0, 0, 0, 0.87) 6px )
 `
 
 
