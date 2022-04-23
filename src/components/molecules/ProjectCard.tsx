@@ -35,7 +35,7 @@ const ProjectCard: FunctionComponent<ProjectCardProps> = ({post}) => {
     }
     const img = {
         variantA: { scale:1},
-        variantB: { scale:1.05 }
+        variantB: { scale:1.1 }
     }
 
 
@@ -52,7 +52,9 @@ const ProjectCard: FunctionComponent<ProjectCardProps> = ({post}) => {
                     >
                         
                         
-                                <ImageWrap>
+                                <ImageWrap
+                                    variants={img}
+                                >
                                     <Image src={post.cover} alt="" layout={"fill"} objectFit={"cover"} loading={"eager"} priority={true} unoptimized={false}/>
                                 </ImageWrap>
                         <BG  variants={bg} ></BG>
@@ -79,6 +81,7 @@ const Card = styled(motion.a)`
     width:100%;
     height:100%;
     position: relative;
+    overflow: hidden;
 /*     
     :before{
         content: '';
