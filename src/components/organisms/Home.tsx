@@ -92,6 +92,8 @@ export const Home: React.VFC<Props> = ({blogPosts, projectPosts})=>{
                     ))}
                 </ProjectGrid>
                 <Title id={"studio"}>Studio</Title>
+                    
+                <StudioGrid>
                     <SlideWrap>
                         <AnimatePresence initial={false} custom={direction}>
                             <motion.img
@@ -121,16 +123,21 @@ export const Home: React.VFC<Props> = ({blogPosts, projectPosts})=>{
                             />
                         </AnimatePresence>
                     </SlideWrap>
-                <StudioGrid>
-                    {/* <Image src={'/images/studio_othro.png'} alt={''} width={600} height={450}/> */}
-                    <StudioDesc>光造形3Dプリンタ[Form2] 1台、​熱溶解積層方式3Dプリンタ[Ender3] 2台、CO2レーザーカッター[Trotec]、CNCミリングマシン1台[KitMill BT200]、家庭用射出成型機[INARI F06]、その他一般工具</StudioDesc>
-                    <StudioGallery>
+                    <StudioDesc>
+                        Toasterは、紀尾井町17Fに位置するLODGEのFabスペースを拠点に活動しています
+                        <br/><br/>
+                        機材：
+                        <br/>
+                        光造形3Dプリンタ[Form2] 1台、​熱溶解積層方式3Dプリンタ[Ender3] 2台、CO2レーザーカッター[Trotec]、CNCミリングマシン1台[KitMill BT200]、家庭用射出成型機[INARI F06]、その他一般工具
+                    </StudioDesc>
+                    <ThumbnailGrid>
                         {galleyImages.map((value,index) => (
-                            <StudioGalleryImg src ={value} key={index} onHoverStart={()=>setPage([index,1])}/>
+                            <StudioGalleryImg src ={value} key={index} onHoverStart={()=>setPage([index,1])} isSelected={index==imageIndex?true:false} onClick={()=>setPage([index,1])}/>
                         ))}
                         
-                    </StudioGallery>
+                    </ThumbnailGrid>
                 </StudioGrid>
+
                 <Title id={"people"}>People</Title>
                 <StudioGrid></StudioGrid>
         </Container>
@@ -178,24 +185,14 @@ const ProjectGrid = styled(motion.div)`
 
 const StudioGrid = styled.div`
     display: grid;
-    grid-template-columns:3fr 1fr;
+    grid-template-rows:auto 1fr;
+    grid-template-columns:2.5fr 1fr;
+    gap:16px;
     width:100%;
-`
-const StudioDesc = styled.p`
-    ${font.body2};
-    color:${color.content.dark};
-`
-const StudioGallery = styled.div`
-    width:100%;
-    display: grid;
-    grid-template-columns:1fr 1fr 1fr;
-    gap:2px;
-`
-const StudioGalleryImg = styled(motion.img)`
-    width:100px;
-    height:auto;
 `
 const SlideWrap = styled.div`
+    grid-row: 1 / 3;
+    grid-column: 1/2;
     overflow: hidden;
     position: relative;
     display: flex;
@@ -207,4 +204,25 @@ const SlideWrap = styled.div`
         position: absolute;
         max-width:100%;
     }
+`
+const StudioDesc = styled.p`
+    grid-row: 2/3;
+    grid-column: 2/3;
+    ${font.body2};
+    color:${color.content.dark};
+`
+const ThumbnailGrid = styled.div`
+    grid-row: 1/2;
+    grid-column: 2/3;
+    width:100%;
+    display: grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:2px;
+`
+const StudioGalleryImg = styled(motion.img)<{isSelected:boolean}>`
+    width:100%;
+    height:auto;
+    cursor:pointer;
+    box-sizing:border-box;
+    border:${(props)=>props.isSelected? `solid 1px ${color.content.dark}`:`none`};
 `
