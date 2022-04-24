@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { InferGetServerSidePropsType, NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { BlogPost, ProjectPost } from "../../../@types/schema";
+import { BlogPost, People, ProjectPost } from "../../../@types/schema";
 import NotionService from "../../services/notion-service";
 import { color, font, media } from "../../styles";
 import RecipeCard from "../molecules/RecipeCard";
@@ -14,11 +14,12 @@ import { wrap } from "popmotion";
 
 type Props = {
     blogPosts:BlogPost[],
-    projectPosts:ProjectPost[]
+    projectPosts:ProjectPost[],
+    people:People[]
 }
 
 
-export const Home: React.VFC<Props> = ({blogPosts, projectPosts})=>{
+export const Home: React.VFC<Props> = ({blogPosts, projectPosts, people})=>{
     const stagger ={
         animate:{
             transition:{
@@ -139,7 +140,13 @@ export const Home: React.VFC<Props> = ({blogPosts, projectPosts})=>{
                 </StudioGrid>
 
                 <Title id={"people"}>People</Title>
-                <StudioGrid></StudioGrid>
+                <PeopleGrid>
+                    {people.map((value,index) => (
+                        <PeopleItem key={index}>
+                            <></>
+                        </PeopleItem>
+                    ))}
+                </PeopleGrid>
         </Container>
     )
 }
@@ -189,10 +196,20 @@ const StudioGrid = styled.div`
     grid-template-columns:2.5fr 1fr;
     gap:16px;
     width:100%;
+    ${media.sp`
+        /* grid-template-rows:auto 1fr; */
+        grid-template-columns:1fr;
+    `}
 `
 const SlideWrap = styled.div`
-    grid-row: 1 / 3;
-    grid-column: 1/2;
+    ${media.lg`    
+        grid-row: 1 / 3;
+        grid-column: 1/2;
+    `}
+    ${media.md`    
+        grid-row: 1 / 3;
+        grid-column: 1/2;
+    `}
     overflow: hidden;
     position: relative;
     display: flex;
@@ -206,14 +223,28 @@ const SlideWrap = styled.div`
     }
 `
 const StudioDesc = styled.p`
-    grid-row: 2/3;
-    grid-column: 2/3;
+    ${media.lg`    
+        grid-row: 2/3;
+        grid-column: 2/3;
+    `}
+    ${media.md`    
+        grid-row: 2/3;
+        grid-column: 2/3;
+    `}
+    
     ${font.body2};
     color:${color.content.dark};
 `
 const ThumbnailGrid = styled.div`
-    grid-row: 1/2;
-    grid-column: 2/3;
+    ${media.lg`    
+        grid-row: 1/2;
+        grid-column: 2/3;
+    `}
+    ${media.md`    
+        grid-row: 1/2;
+        grid-column: 2/3;
+    `}
+    
     width:100%;
     display: grid;
     grid-template-columns:1fr 1fr 1fr;
@@ -225,4 +256,12 @@ const StudioGalleryImg = styled(motion.img)<{isSelected:boolean}>`
     cursor:pointer;
     box-sizing:border-box;
     border:${(props)=>props.isSelected? `solid 1px ${color.content.dark}`:`none`};
+`
+const PeopleGrid = styled.div`
+    display: grid;
+    grid-template-columns:1fr 1fr;
+
+`
+const PeopleItem = styled.div`
+    
 `

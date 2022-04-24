@@ -37,3 +37,12 @@ export type ProjectPost = {
     description: string;
     date: string
 }
+
+export type People = {
+    name: string;
+    english: string;
+    description: string;
+    twitter: string;
+    instagram: string;
+    github: string;
+}
