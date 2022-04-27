@@ -5,6 +5,7 @@ import { color, font, media, zIndex } from "../../styles";
 import StepView from "../molecules/ModelView";
 import Image from 'next/image'
 import Link from "next/link";
+import { Resource } from "../../../@types/schema";
 
 
 
@@ -69,8 +70,8 @@ const Recipe: React.FC<Props> = ({
                     </ThreeDView>
                 )}
                 {resource&&(
-                        resource.map(resource => (
-                            <Resource key={resource.id} href={resource.href} target={'_blank'}>{resource.plain_text}</Resource>
+                        resource.map((resource, index) => (
+                            <Resource key={index} href={resource.url} target={'_blank'}>{resource.name}</Resource>
                         ))
                 )}
                 {resource&&<FinalChain>Certified on <span><a href='https://final-aim.com/final-chain-beta-launch' target={'_blank'} rel="noreferrer">Final Chain</a></span></FinalChain>}

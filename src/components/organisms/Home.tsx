@@ -15,11 +15,11 @@ import { wrap } from "popmotion";
 type Props = {
     blogPosts:BlogPost[],
     projectPosts:ProjectPost[],
-    people:People[]
+    // people:People[]
 }
 
 
-export const Home: React.VFC<Props> = ({blogPosts, projectPosts, people})=>{
+export const Home: React.VFC<Props> = ({blogPosts, projectPosts})=>{
     const stagger ={
         animate:{
             transition:{
@@ -139,14 +139,14 @@ export const Home: React.VFC<Props> = ({blogPosts, projectPosts, people})=>{
                     </ThumbnailGrid>
                 </StudioGrid>
 
-                <Title id={"people"}>People</Title>
+                {/* <Title id={"people"}>People</Title>
                 <PeopleGrid>
                     {people.map((value,index) => (
                         <PeopleItem key={index}>
                             <></>
                         </PeopleItem>
                     ))}
-                </PeopleGrid>
+                </PeopleGrid> */}
         </Container>
     )
 }

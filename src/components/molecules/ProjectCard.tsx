@@ -21,17 +21,23 @@ const ProjectCard: FunctionComponent<ProjectCardProps> = ({post}) => {
 
     const bg = {
         variantA: { opacity:0},
-        variantB: { opacity:1 },
-        transition: {
-            duration:0.2
-        }
+        variantB: { 
+            opacity:1 ,
+            transition: {
+                duration:0.2
+            }
+        },
+        
     }
     const title = {
         variantA: { opacity:0},
-        variantB: { opacity:1 },
-        transition: {
-            duration:0.2
-        }
+        variantB: { 
+            opacity:1 ,
+            transition: {
+                duration:0.2
+            }
+        },
+        
     }
     const img = {
         variantA: { scale:1},
