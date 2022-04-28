@@ -25,7 +25,7 @@ export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('/models/gacha.glb') as GLTFResult
   return (
     <group ref={group} {...props} dispose={null}>
-      <group rotation={[Math.PI / 2, 0, 0]} scale={0.5} >
+      <group rotation={[Math.PI / 2, 0, 0]} scale={0.3} >
         <mesh geometry={nodes.gacha_1.geometry} >
           <meshStandardMaterial transparent/>
           <Edges />

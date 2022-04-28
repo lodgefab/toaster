@@ -71,7 +71,7 @@ const Recipe: React.FC<Props> = ({
                 )}
                 {resource&&(
                         resource.map((resource, index) => (
-                            <Resource key={index} href={resource.url} target={'_blank'}>{resource.name}</Resource>
+                            <Resource key={index} href={resource.href} target={'_blank'}>{resource.plain_text}</Resource>
                         ))
                 )}
                 {resource&&<FinalChain>Certified on <span><a href='https://final-aim.com/final-chain-beta-launch' target={'_blank'} rel="noreferrer">Final Chain</a></span></FinalChain>}

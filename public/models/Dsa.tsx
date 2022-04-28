@@ -21,7 +21,7 @@ export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('/models/dsa.glb') as GLTFResult
   return (
     <group ref={group} {...props} dispose={null}>
-      <mesh geometry={nodes.dsa.geometry}  rotation={[Math.PI / 2, 0, 0]}scale={0.5} >
+      <mesh geometry={nodes.dsa.geometry}  rotation={[Math.PI / 2, 0, 0]}scale={1} >
         <meshStandardMaterial transparent/>
         <Edges />
       </mesh>

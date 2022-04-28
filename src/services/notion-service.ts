@@ -90,7 +90,7 @@ export default class NotionService {
                 // Add default cover image if you want...
                 cover = ''
         }
-        console.log(page.properties)
+        // console.log(page.properties.Resources.rich_text)
 
 
         // console.log(page.properties)

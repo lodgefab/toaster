@@ -6,8 +6,8 @@ export type Tag = {
 }
 
 export type Resource = {
-    name: string
-    url: string
+    plain_text: string
+    href: string
 }
 
 export type BlogPost = {
