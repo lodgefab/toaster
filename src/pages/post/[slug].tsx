@@ -4,6 +4,8 @@ import NotionService from "../../services/notion-service";
 import Recipe from "../../components/organisms/Recipe";
 import { motion, MotionConfig } from "framer-motion";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from 'remark-gfm'
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
 
 const Post = ({markdown, post}: InferGetStaticPropsType<typeof getStaticProps>) => {
     
@@ -25,7 +27,13 @@ const Post = ({markdown, post}: InferGetStaticPropsType<typeof getStaticProps>) 
                 version={post.version}
                 model={post.model}
                 resource={post.resource}
-            ><ReactMarkdown>{markdown}</ReactMarkdown></Recipe>
+            >
+                <ReactMarkdown 
+                    remarkPlugins={[remarkGfm]}
+                >
+                        {markdown}
+                </ReactMarkdown>
+            </Recipe>
 
         </motion.div>
     )
