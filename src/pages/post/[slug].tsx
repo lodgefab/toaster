@@ -5,10 +5,42 @@ import Recipe from "../../components/organisms/Recipe";
 import { motion, MotionConfig } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm'
-import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
+import { ReactNode } from "react";
+// import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton, TwitterTweetEmbed, TwitterMomentShare, TwitterDMButton, TwitterVideoEmbed, TwitterOnAirButton } from 'react-twitter-embed';
+
+interface VideoProps {
+    src?: string;
+}
+interface AnchorProps {
+    href?: string;
+    children?:ReactNode;
+}
+
 
 const Post = ({markdown, post}: InferGetStaticPropsType<typeof getStaticProps>) => {
-    
+    const components = {
+        video: ({ src }: VideoProps) =>{
+            return <video src={src} />
+        } ,
+        a: ({href, children}:AnchorProps)=>{
+            const isYoutube = href?href.includes('youtube'):null
+            const isTwitter = href?href.includes('twitter'):null
+            const createYouTubeEmbedLink =(url:string) =>{
+                return url.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
+            }
+            const trimTwitterID =(url:string) =>{
+                return url.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
+            }
+            if(isYoutube&&href){
+                const embedLink = createYouTubeEmbedLink(href)
+                return <iframe width="510" height="315" src={embedLink} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+            }else if(isTwitter){
+                return <a href={href} >{children}</a>
+            }else{
+                return <a href={href} >{children}</a>
+            }
+        }
+    };
     return (
         <motion.div
             initial='initial'
@@ -30,6 +62,7 @@ const Post = ({markdown, post}: InferGetStaticPropsType<typeof getStaticProps>) 
             >
                 <ReactMarkdown 
                     remarkPlugins={[remarkGfm]}
+                    components={components}
                 >
                         {markdown}
                 </ReactMarkdown>
