@@ -140,8 +140,8 @@ const HashTag = styled.p`
     ${font.subtitle2};
     color:${color.content.dark};
     position:absolute;
-    left:-60px;
+    left:0px;
     bottom:0px;
-    transform: rotate(90deg);
-    transform-origin: center right;
+    transform-origin: right bottom;
+    transform: rotate(90deg) translate(-8px,60px);
 `

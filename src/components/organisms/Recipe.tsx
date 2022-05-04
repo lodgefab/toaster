@@ -64,9 +64,11 @@ const Recipe: React.FC<Props> = ({
                         >
                             <StepView model={model}></StepView>
                         </CanvasWrapper>
-                        <Switch
+                        {/* <Switch
                             onClick={toggleSwitch}
-                        ><Image src={isOn?'/icons/shrink.svg':'/icons/expand.svg'} width={24} height={24} alt={'expand or shrink'}/></Switch>
+                        >
+                            <Image src={isOn?'/icons/shrink.svg':'/icons/expand.svg'} width={24} height={24} alt={'expand or shrink'}/>
+                        </Switch> */}
                     </ThreeDView>
                 )}
                 {resource&&(
