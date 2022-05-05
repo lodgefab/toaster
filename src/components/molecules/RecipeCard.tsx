@@ -137,11 +137,12 @@ const RecipeTitle = styled.h3`
 
 
 const HashTag = styled.p`
+    text-align: left;
     ${font.subtitle2};
     color:${color.content.dark};
     position:absolute;
     left:0px;
     bottom:0px;
-    transform-origin: right bottom;
-    transform: rotate(90deg) translate(-8px,60px);
+    transform-origin: left bottom;
+    transform: rotate(90deg) translate(-110%, -8px);
 `
