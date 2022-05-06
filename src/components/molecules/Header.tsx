@@ -207,6 +207,7 @@ const LiWrap = styled.div`
     ${media.mdsp`
         border:0px;
         overflow:visible;
+        margin:0px;
     `}
 `
 const LiAnimationWrap = styled(motion.div)`
@@ -218,7 +219,7 @@ const SPMenu = styled(motion.div)`
     width:32px;
     height:32px;
     padding:6px;
-    background-image: url('/icons/document.svg');
+    background-image: url('/icons/handle.svg');
     background-size: contain;
     background-position: center;
 `
