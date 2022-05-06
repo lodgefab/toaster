@@ -155,6 +155,9 @@ export const Home: React.VFC<Props> = ({blogPosts, projectPosts})=>{
 
 const Container = styled(motion.div)`
     margin:0 0 128px 0;
+    ${media.mdsp`
+        padding:0 32px;
+    `}
 `
 
 const Title= styled.h1`
@@ -215,8 +218,14 @@ const SlideWrap = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width:800px;
-    height:450px;
+    ${media.lg`
+        width:800px;
+        height:450px;
+    `}
+    ${media.mdsp`
+        width:100%;
+        height:450px;
+    `}
     img{
         position: absolute;
         max-width:100%;
