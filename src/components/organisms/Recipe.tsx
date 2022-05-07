@@ -6,6 +6,7 @@ import StepView from "../molecules/ModelView";
 import Image from 'next/image'
 import Link from "next/link";
 import { Resource } from "../../../@types/schema";
+import { useMedia } from "../../utils/useMedia";
 
 
 
@@ -53,32 +54,17 @@ const Recipe: React.FC<Props> = ({
     }) => {
     const [isOn, setIsOn] = useState(false);
     const toggleSwitch = () => setIsOn(!isOn);
+    const isMobile = useMedia().isMobile
     return (
         <Contents>
-            
-            <WrapperLeft width={leftColumnWidth}>
-                {model&&(
-                    <ThreeDView height={leftColumnWidth}>
-                        <CanvasWrapper
-                            data-ison={isOn} 
-                        >
-                            <StepView model={model}></StepView>
-                        </CanvasWrapper>
-                        {/* <Switch
-                            onClick={toggleSwitch}
-                        >
-                            <Image src={isOn?'/icons/shrink.svg':'/icons/expand.svg'} width={24} height={24} alt={'expand or shrink'}/>
-                        </Switch> */}
-                    </ThreeDView>
-                )}
-                {resource&&(
-                        resource.map((resource, index) => (
-                            <Resource key={index} href={resource.href} target={'_blank'}>{resource.plain_text}</Resource>
-                        ))
-                )}
-                {resource&&<FinalChain>Certified on <span><a href='https://final-aim.com/final-chain-beta-launch' target={'_blank'} rel="noreferrer">Final Chain</a></span></FinalChain>}
-
-            </WrapperLeft>
+            {!isMobile&&(
+                <WrapperLeftComponent 
+                    width={leftColumnWidth} 
+                    model={model} 
+                    resource={resource} 
+                    isOn={isOn}
+                />
+            )}
             <WrapperRight width={leftColumnWidth}>
                 <Link href="/" passHref>
                     <CloseBtnWrap
@@ -94,10 +80,17 @@ const Recipe: React.FC<Props> = ({
                     </CloseBtnWrap>
                 </Link>
                 <Title>{title}<br/><Version>{"v"+version}</Version></Title>
-                
-                    <MarkdownStyle>
-                        {children}
-                    </MarkdownStyle>
+                {isMobile&&(
+                    <WrapperLeftComponent 
+                        width={leftColumnWidth} 
+                        model={model} 
+                        resource={resource} 
+                        isOn={isOn}                        
+                    />
+                )}
+                <MarkdownStyle>
+                    {children}
+                </MarkdownStyle>
                 
             </WrapperRight>
         </Contents>
@@ -105,6 +98,44 @@ const Recipe: React.FC<Props> = ({
 };
 
 export default Recipe;
+
+
+const WrapperLeftComponent: React.FC<{width:number, model:string, resource:Resource[], isOn:boolean}> = ({
+    width,
+    model,
+    resource,
+    isOn
+    }) => {
+    return(
+        <WrapperLeft width={width}>
+            {model&&(
+                <ThreeDView height={width}>
+                    <CanvasWrapper
+                        data-ison={isOn} 
+                    >
+                    <StepView model={model}></StepView>
+                    </CanvasWrapper>
+                        {/* <Switch
+                                onClick={toggleSwitch}
+                            >
+                            <Image src={isOn?'/icons/shrink.svg':'/icons/expand.svg'} width={24} height={24} alt={'expand or shrink'}/>
+                            </Switch> */}
+                </ThreeDView>
+            )}
+            
+            
+            {resource&&(
+                    resource.map((resource, index) => (
+                        <Resource key={index} href={resource.href} target={'_blank'}>{resource.plain_text}</Resource>
+                    ))
+            )}
+            
+            {resource&&<FinalChain>Certified on <span><a href='https://final-aim.com/final-chain-beta-launch' target={'_blank'} rel="noreferrer">Final Chain</a></span></FinalChain>}
+        </WrapperLeft>
+    )    
+}
+
+
 
 const Contents = styled.div`
     position: relative;
@@ -116,6 +147,9 @@ const Contents = styled.div`
         grid-template-columns: 1fr;
         grid-template-rows: 1fr auto;
     `}
+    ${media.mdsp`
+        margin: 0;
+    `}
 `
 const CloseBtnWrap = styled(motion.div)`
     position: absolute;
@@ -124,6 +158,10 @@ const CloseBtnWrap = styled(motion.div)`
     transform: translate(-50%,0);
     width:44px;
     height:44px;
+    ${media.mdsp`
+        top: 0;
+        left:calc(50% - 22px);
+    `}
 `
 const CloseBtn = styled(motion.div)`
     width:100%;
@@ -160,9 +198,10 @@ const WrapperLeft = styled.div`
         width:${(props: { width: number; }) => props.width}px;  
         display: flex;
         flex-direction: column;
-        ${media.sp`
+        ${media.mdsp`
             position:relative;
             width:100%;
+            margin:0 0 32px;
         `}
 `
 const WrapperRight = styled(motion.article)<{width:number}>`
@@ -174,8 +213,10 @@ const WrapperRight = styled(motion.article)<{width:number}>`
     border: 1px solid ${color.content.dark};
     padding:64px;
     color:${color.content.dark};
-    ${media.sp`
+    ${media.mdsp`
         margin:0;
+        border:0px;
+        padding:64px 32px;
     `}
     
 `
@@ -192,24 +233,37 @@ const MarkdownStyle = styled.div`
         ${font.h2};
         margin:2em 0 0;
         padding:3px 0;
+        ${media.mdsp`
+            ${font.h3};
+        `}
     }
     h2{
         ${font.h3};
         margin:1.4em 0 0;
         padding:3px 0;
+        ${media.mdsp`
+            ${font.subtitle1};
+        `}
     }
     h3{
         ${font.subtitle1};
         margin:1em 0 0;
         padding:3px 0;
+        ${media.mdsp`
+            ${font.subtitle2};
+        `}
     }
     p{
         ${font.article1};
         padding:3px 0;
+        ${media.mdsp`
+            ${font.article2};
+        `}
     }
     a{
         text-decoration: underline;
     }
+    
 `
 
 const Title = styled.h1`
@@ -220,6 +274,11 @@ const Title = styled.h1`
     box-sizing: border-box;
     border-top:1px solid ${color.content.middle};
     border-bottom:1px solid ${color.content.middle};
+    ${media.mdsp`
+        ${font.h3};
+        padding:16px 0;
+        margin:0 0 32px 0;
+    `}
 `
 
 const Version = styled.span`
@@ -265,33 +324,38 @@ const CanvasWrapper = styled(motion.div)`
     }
     
 `
-const Resource = styled.a`
-    display: inline-flex;
-    align-items: center;
-    text-decoration: underline;
-    padding: 8px 8px 8px 0;
+const ResourceWrap = styled.div`
     
+    width:100%;
+    overflow-x: auto;
+    ${media.mdsp`
+        flex-direction: row;
+    `}
+
+`
+const Resource = styled.a`
+    display: inline-block;
+    align-items: center;
+    text-decoration: none;
+    padding: 4px 12px 4px 12px;
+    margin: 0 0 8px 0;
+    border:1px solid ${color.content.light};
+    border-radius: 16px;;
     &:hover{
         text-decoration: none;
     }
     &:before{
         content:'';
         display: inline-block;
-        width:24px;
-        height:24px;
-        margin: 0 4px 0 0;
-        background-image: url('/icons/document.svg');
-        background-size: contain;   
-    }
-    &:after{
-        content:'';
-        display: inline-block;
         width:16px;
         height:16px;
-        margin: 0 0px 0 auto;
-        background-image: url('/icons/external.svg');
-        background-size: contain;   
+        margin: 0 4px 0 0;
+        background-image: url('/icons/document.svg');
+        background-size: contain; 
     }
+    
+    
+    
 
 `
 

@@ -110,6 +110,7 @@ const HeaderLinkItem: React.FC<{ destination: string, label:string, height:numbe
 
   // トップページではページ内スクロールとして機能し、トップページ以外ではページ遷移として機能する
     return (
+        //" Expected server HTML to contain a matching <div> in <div>." warning が出てるのでメディクエリを使った方法を考える
         isMobile?(
             <LiAnimationWrap variants={spMenu} animate={isSPMenuOpen?'animate':'initial'}>
             {pathname === '/' && (

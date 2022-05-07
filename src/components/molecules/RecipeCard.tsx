@@ -3,7 +3,7 @@ import Link from "next/link";
 import {BlogPost} from "../../../@types/schema";
 import dayjs from 'dayjs'
 import styled from '@emotion/styled'
-import { color, font, zIndex } from "../../styles";
+import { color, font, media, zIndex } from "../../styles";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
@@ -91,6 +91,9 @@ const Card = styled(motion.div)`
     width:100%;
     height:100%;
     position: relative;
+    ${media.mdsp`
+        max-width:100%;
+    `}
 /*     
     :before{
         content: '';

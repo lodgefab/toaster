@@ -84,6 +84,9 @@ const Contents = styled.div`
         grid-template-columns: 1fr;
         grid-template-rows: 1fr auto;
     `}
+    ${media.mdsp`
+        margin: 0;
+    `}
 `
 const CloseBtnWrap = styled(motion.div)`
     position: absolute;

@@ -6,6 +6,7 @@ import { motion, MotionConfig } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm'
 import { ReactNode } from "react";
+import styled from "@emotion/styled";
 // import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton, TwitterTweetEmbed, TwitterMomentShare, TwitterDMButton, TwitterVideoEmbed, TwitterOnAirButton } from 'react-twitter-embed';
 
 interface VideoProps {
@@ -33,7 +34,11 @@ const Post = ({markdown, post}: InferGetStaticPropsType<typeof getStaticProps>) 
             }
             if(isYoutube&&href){
                 const embedLink = createYouTubeEmbedLink(href)
-                return <iframe width="510" height="315" src={embedLink} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                return (
+                    <YouTubeWrap>
+                        <iframe style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}} width="510" height="315" src={embedLink} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                    </YouTubeWrap>
+                )
             }else if(isTwitter){
                 return <a href={href} >{children}</a>
             }else{
@@ -41,6 +46,17 @@ const Post = ({markdown, post}: InferGetStaticPropsType<typeof getStaticProps>) 
             }
         }
     };
+    const YouTubeWrap = styled.span`
+        display: block;
+        position: relative;
+        width: 100%;
+        &:before{
+            content:"";
+            display: block;
+            padding-top: 75%; /* 高さを幅の75%に固定 */
+        }
+    `
+
     return (
         <motion.div
             initial='initial'
