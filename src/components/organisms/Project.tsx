@@ -11,6 +11,7 @@ import Link from "next/link";
 type Props = {
     children: ReactNode
     title:string
+    description:string
 }
 
 const leftColumnWidth = 320
@@ -42,7 +43,8 @@ const scaling= {
 
 const Project: React.FC<Props> = ({
         children, 
-        title
+        title,
+        description
     }) => {
     const [isOn, setIsOn] = useState(false);
     const toggleSwitch = () => setIsOn(!isOn);
@@ -62,7 +64,10 @@ const Project: React.FC<Props> = ({
                         />
                     </CloseBtnWrap>
                 </Link>
-                <Title>{title}</Title>
+                <Title>{title}
+                    <br/>
+                    <span>{description}</span>
+                </Title>
                     <MarkdownStyle>
                         {children}
                     </MarkdownStyle>
@@ -95,6 +100,12 @@ const CloseBtnWrap = styled(motion.div)`
     transform: translate(-50%,0);
     width:44px;
     height:44px;
+    ${media.mdsp`
+        top: -16px;
+        left: calc(50% - 16px);
+        width:32px;
+        height:32px;
+    `}
 `
 const CloseBtn = styled(motion.div)`
     width:100%;
@@ -144,8 +155,10 @@ const WrapperRight = styled(motion.article)`
     border: 1px solid ${color.content.dark};
     padding:64px;
     color:${color.content.dark};
-    ${media.sp`
+    ${media.mdsp`
         margin:0;
+        border:0px;
+        padding:32px;
     `}
     
 `
@@ -157,25 +170,41 @@ const MarkdownStyle = styled.div`
     img{
         width:100%;
         height:auto;
+        ${media.mdsp`
+            width:100vw;
+            margin:0 -32px 0;
+        `}
     }
     h1{
         ${font.h2};
         margin:2em 0 0;
         padding:3px 0;
+        ${media.mdsp`
+            ${font.h3};
+        `}
     }
     h2{
         ${font.h3};
         margin:1.4em 0 0;
         padding:3px 0;
+        ${media.mdsp`
+            ${font.subtitle1};
+        `}
     }
     h3{
         ${font.subtitle1};
         margin:1em 0 0;
         padding:3px 0;
+        ${media.mdsp`
+            ${font.subtitle2};
+        `}
     }
     p{
         ${font.article1};
         padding:3px 0;
+        ${media.mdsp`
+            ${font.article2};
+        `}
     }
     a{
         text-decoration: underline;
@@ -190,6 +219,18 @@ const Title = styled.h1`
     box-sizing: border-box;
     border-top:1px solid ${color.content.middle};
     border-bottom:1px solid ${color.content.middle};
+    ${media.mdsp`
+        ${font.h3};
+        margin:0 0 32px 0;
+        padding:16px 0;
+    `}
+    span{
+        margin:16px 0 0 0;
+        ${font.body1};
+        ${media.mdsp`
+            ${font.body2};
+        `}
+    }
 `
 
 const Version = styled.span`

@@ -22,6 +22,7 @@ const Post = ({markdown, post}: InferGetStaticPropsType<typeof getStaticProps>) 
             </Head>
             <Project
                 title={post.title}
+                description={post.description}
             ><ReactMarkdown>{markdown}</ReactMarkdown></Project>
 
         </motion.div>

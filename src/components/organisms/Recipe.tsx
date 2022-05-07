@@ -123,12 +123,13 @@ const WrapperLeftComponent: React.FC<{width:number, model:string, resource:Resou
                 </ThreeDView>
             )}
             
-            
+            <ResourceWrap>
             {resource&&(
                     resource.map((resource, index) => (
                         <Resource key={index} href={resource.href} target={'_blank'}>{resource.plain_text}</Resource>
                     ))
             )}
+            </ResourceWrap>
             
             {resource&&<FinalChain>Certified on <span><a href='https://final-aim.com/final-chain-beta-launch' target={'_blank'} rel="noreferrer">Final Chain</a></span></FinalChain>}
         </WrapperLeft>
@@ -159,8 +160,10 @@ const CloseBtnWrap = styled(motion.div)`
     width:44px;
     height:44px;
     ${media.mdsp`
-        top: 0;
-        left:calc(50% - 22px);
+        top: -16px;
+        left:calc(50% - 16px);
+        width:32px;
+        height:32px;
     `}
 `
 const CloseBtn = styled(motion.div)`
@@ -216,7 +219,7 @@ const WrapperRight = styled(motion.article)<{width:number}>`
     ${media.mdsp`
         margin:0;
         border:0px;
-        padding:64px 32px;
+        padding:32px 32px;
     `}
     
 `

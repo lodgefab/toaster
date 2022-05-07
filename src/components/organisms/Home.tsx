@@ -133,7 +133,7 @@ export const Home: React.VFC<Props> = ({blogPosts, projectPosts})=>{
                     </StudioDesc>
                     <ThumbnailGrid>
                         {galleyImages.map((value,index) => (
-                            <StudioGalleryImg src ={value} key={index} onHoverStart={()=>setPage([index,1])} isselected={index==imageIndex?true:false} onClick={()=>setPage([index,1])}/>
+                            <StudioGalleryImg src ={value} key={index} onHoverStart={()=>setPage([index,1])} isSelected={index==imageIndex?true:false} onClick={()=>setPage([index,1])}/>
                         ))}
                         
                     </ThumbnailGrid>
@@ -263,12 +263,12 @@ const ThumbnailGrid = styled.div`
     grid-template-columns:1fr 1fr 1fr;
     gap:2px;
 `
-const StudioGalleryImg = styled(motion.img)<{isselected:boolean}>`
+const StudioGalleryImg = styled(motion.img)<{isSelected:boolean}>`
     width:100%;
     height:auto;
     cursor:pointer;
     box-sizing:border-box;
-    border:${(props)=>props.isselected? `solid 1px ${color.content.dark}`:`none`};
+    border:${(props)=>props.isSelected? `solid 1px ${color.content.dark}`:`none`};
 `
 const PeopleGrid = styled.div`
     display: grid;
