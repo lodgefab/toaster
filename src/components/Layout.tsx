@@ -32,7 +32,7 @@ export default Layout
 
 const Wrapper = styled.div`
     position: relative;
-    height:100vh;
+    /* height:100vh; */
     max-width:1040px;
     margin:0 auto;
     

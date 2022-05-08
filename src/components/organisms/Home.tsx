@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { BlogPost, People, ProjectPost } from "../../../@types/schema";
 import NotionService from "../../services/notion-service";
-import { color, font, media } from "../../styles";
+import { color, font, media, zIndex } from "../../styles";
 import RecipeCard from "../molecules/RecipeCard";
 import ProjectCard from "../molecules/ProjectCard";
 import Image from 'next/image'
@@ -79,20 +79,20 @@ export const Home: React.VFC<Props> = ({blogPosts, projectPosts})=>{
         <Container 
             id='homeView'            
         >
-                <Title id="recipe">Recipe</Title>
+                <RecipeTitle id="recipe"><span>Recipe</span></RecipeTitle>
                 <RecipeGrid variants={stagger}>
                     
                     {blogPosts.map((post: BlogPost) => (
                         <RecipeCard key={post.id} post={post}/>
                     ))}
                 </RecipeGrid>
-                <Title id={"projects"}>Projects</Title>
+                <Title id={"projects"}><span>Projects</span></Title>
                 <ProjectGrid>
                     {projectPosts.map((post: ProjectPost) => (
                         <ProjectCard key={post.id} post={post}/>
                     ))}
                 </ProjectGrid>
-                <Title id={"studio"}>Studio</Title>
+                <Title id={"studio"}><span>Studio</span></Title>
                     
                 <StudioGrid>
                     <SlideWrap>
@@ -154,17 +154,56 @@ export const Home: React.VFC<Props> = ({blogPosts, projectPosts})=>{
 
 
 const Container = styled(motion.div)`
-    margin:0 0 128px 0;
+    margin:64px 0 128px 0;
     ${media.mdsp`
         padding:0 32px;
+        margin:32px 0 64px 0;
     `}
 `
 
 const Title= styled.h1`
-        margin:64px 0 32px 0;
+        display: inline-block;
+        position: relative;
+        margin:128px 0 64px 0;
+        padding:8px 32px;
         text-align: left;
-        ${font.h2};
-        color:${color.content.dark};
+        ${font.h1};
+        color:${color.background.base};
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: ${color.content.dark};
+        /* z-index:${zIndex.elevation.ev5}; */
+        span{
+            position: relative;
+            z-index:${zIndex.elevation.ev5};
+        }
+        &:after{
+            content:'';
+            display: block;
+            position: absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            height:100%;
+            width:100%;
+            border:0.5px solid ${color.content.dark};
+            background-color: ${color.background.base};
+            /* z-index:${zIndex.base}; */
+        }
+        &:before{
+            content:'';
+            display: block;
+            position: absolute;
+            bottom:-8px;
+            left:-8px;
+            height:100%;
+            width:100%;
+            /* border:0.5px solid ${color.content.dark} */
+            background-image: url('/icons/grid.svg');
+            /* z-index:${zIndex.effect}; */
+        }
+`
+const RecipeTitle = styled(Title)`
+    margin:0px 0 64px 0;
 `
 const RecipeGrid = styled(motion.div)`
         margin:0 auto;
@@ -256,6 +295,9 @@ const ThumbnailGrid = styled.div`
     ${media.md`    
         grid-row: 1/2;
         grid-column: 2/3;
+    `}
+    ${media.sp`
+        grid-row: 2/3;
     `}
     
     width:100%;
