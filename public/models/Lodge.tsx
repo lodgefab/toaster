@@ -6,6 +6,7 @@ import * as THREE from "three";
 import React, { useRef } from "react";
 import { Edges, useGLTF } from "@react-three/drei";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
+import { useFrame } from "@react-three/fiber";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -227,6 +228,12 @@ type GLTFResult = GLTF & {
 export default function Model(props: JSX.IntrinsicElements["group"]) {
   const group = useRef<THREE.Group>();
   const { nodes, materials } = useGLTF("models//lodge.glb") as unknown as GLTFResult;
+  useFrame((state) => {
+    const t = state.clock.getElapsedTime()
+    
+    group.current?.rotation.set(0.1 + Math.cos(t / 4.5) / 10, Math.sin(t / 4) / 4, 0.3 - (1 + Math.sin(t / 4)) / 8)
+    group.current!.position.y = (1 + Math.sin(t * 2)) / 10
+  })
   return (
     <group ref={group} {...props} dispose={null}>
       <group position={[-3.3, 1.3, 2]} rotation={[0, Math.PI / 2, 0]} scale={0}>
