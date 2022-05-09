@@ -10,6 +10,7 @@ import RecipeCard from "../molecules/RecipeCard";
 import ProjectCard from "../molecules/ProjectCard";
 import Image from 'next/image'
 import { wrap } from "popmotion";
+import HeroView from "../molecules/HeroView";
 
 
 type Props = {
@@ -50,12 +51,12 @@ export const Home: React.VFC<Props> = ({blogPosts, projectPosts})=>{
     }
 
     const galleyImages = [
-        '/images/studio001.jpeg',
-        '/images/studio002.jpeg',
-        '/images/studio003.jpeg',
-        '/images/studio004.jpeg',
-        '/images/studio005.jpeg',
-        '/images/studio006.jpeg',
+        '/images/studio001.jpg',
+        '/images/studio002.jpg',
+        '/images/studio003.jpg',
+        '/images/studio004.jpg',
+        '/images/studio005.jpg',
+        '/images/studio006.jpg',
     ]
 
     const swipeConfidenceThreshold = 10000;
@@ -78,8 +79,16 @@ export const Home: React.VFC<Props> = ({blogPosts, projectPosts})=>{
     return(
         <Container 
             id='homeView'            
-        >
-                <RecipeTitle id="recipe"><span>Recipe</span></RecipeTitle>
+        >       <Hero>
+                    <HeroLeft>
+                        <HeroTitle><span>LODGE</span><br/>Toaster</HeroTitle>
+                        <HeroDescription>『LODGE Toaster』は、ヤフー社内のオープンコラボレーションハブ・LODGE内のfabスペースに日々持ち込まれる実験プロジェクトや社内外のパートナーとの共同プロジェクトの中で得られた知見や副産物を「レシピ」として公開し、オープンソースで発信していく取り組みです。</HeroDescription>
+                    </HeroLeft>
+                    <HeroRight>
+                        <HeroView model={'Lodge'}></HeroView>
+                    </HeroRight>
+                </Hero>
+                <Title id="recipe"><span>Recipe</span></Title>
                 <RecipeGrid variants={stagger}>
                     
                     {blogPosts.map((post: BlogPost) => (
@@ -160,6 +169,28 @@ const Container = styled(motion.div)`
         margin:32px 0 64px 0;
     `}
 `
+const Hero = styled.div`
+    display: grid;
+    grid-template-rows:auto 1fr;
+    grid-template-columns:1fr 3fr;
+    gap:16px;
+    width:100%;
+`
+const HeroLeft = styled.div``
+const HeroTitle = styled.h1`
+    ${font.h1};
+    span{
+        ${font.subtitle2};
+    }
+`
+const HeroDescription = styled.p`
+    ${font.article1};
+`
+
+const HeroRight = styled.div`
+    height: 640px;
+`
+
 
 const Title= styled.h1`
         display: inline-block;
