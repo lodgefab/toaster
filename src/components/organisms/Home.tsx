@@ -85,7 +85,7 @@ export const Home: React.VFC<Props> = ({blogPosts, projectPosts})=>{
                         <HeroDescription>『LODGE Toaster』は、ヤフー社内のオープンコラボレーションハブ・LODGE内のfabスペースに日々持ち込まれる実験プロジェクトや社内外のパートナーとの共同プロジェクトの中で得られた知見や副産物を「レシピ」として公開し、オープンソースで発信していく取り組みです。</HeroDescription>
                     </HeroLeft>
                     <HeroRight>
-                        <HeroView model={'Hero002'}></HeroView>
+                        <HeroView model={'Hero003'}></HeroView>
                     </HeroRight>
                 </Hero>
                 <Title id="recipe"><span>Recipe</span></Title>
@@ -170,13 +170,26 @@ const Container = styled(motion.div)`
     `}
 `
 const Hero = styled.div`
+    position: relative;
     display: grid;
     grid-template-rows:auto 1fr;
-    grid-template-columns:1fr 3fr;
+    grid-template-columns:1fr 2fr;
     gap:16px;
     width:100%;
+    ${media.mdsp`
+        margin:0 -32px;
+        width:100vw;
+    `}
 `
-const HeroLeft = styled.div``
+const HeroLeft = styled.div`
+    ${media.mdsp`
+        
+        position:absolute;
+        left:32px;
+        right:32px;
+        bottom:0;
+    `}
+`
 const HeroTitle = styled.h1`
     ${font.h1};
     span{
@@ -189,6 +202,10 @@ const HeroDescription = styled.p`
 
 const HeroRight = styled.div`
     height: 480px;
+    ${media.mdsp`
+        width:100vw;
+        height:80vh;
+    `}
 `
 
 
