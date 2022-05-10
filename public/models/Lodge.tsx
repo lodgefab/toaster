@@ -227,824 +227,574 @@ type GLTFResult = GLTF & {
 
 export default function Model(props: JSX.IntrinsicElements["group"]) {
   const group = useRef<THREE.Group>();
-  const { nodes, materials } = useGLTF("models//lodge.glb") as unknown as GLTFResult;
+  const { nodes, materials } = useGLTF(
+    "models//lodge.glb"
+  ) as unknown as GLTFResult;
   useFrame((state) => {
-    const t = state.clock.getElapsedTime()
-    
-    group.current?.rotation.set(0.1 + Math.cos(t / 4.5) / 10, Math.sin(t / 4) / 4, 0.3 - (1 + Math.sin(t / 4)) / 8)
-    group.current!.position.y = (1 + Math.sin(t * 2)) / 10
-  })
+    const t = state.clock.getElapsedTime();
+
+    group.current?.rotation.set(
+      0.1 + Math.cos(t / 4.5) / 10,
+      Math.sin(t / 4) / 4,
+      0.3 - (1 + Math.sin(t / 4)) / 8
+    );
+    group.current!.position.y = (1 + Math.sin(t * 2)) / 10;
+  });
   return (
     <group ref={group} {...props} dispose={null}>
       <group position={[-3.3, 1.3, 2]} rotation={[0, Math.PI / 2, 0]} scale={0}>
-        <mesh
-          geometry={nodes.Fillet3.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet3.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet3_2.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet3_2.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet3_3.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet3_3.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet3_4.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet3_4.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Cut-Extrude2_4"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Cut-Extrude2_4"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Cut-Extrude2_5"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Cut-Extrude2_5"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Cut-Extrude2_6"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Cut-Extrude2_6"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Cut-Extrude2_7"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Cut-Extrude2_7"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_103.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_103.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_105.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_105.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_107.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_107.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_93.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_93.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Object_1.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Object_1.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Object_2.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Object_2.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Boss-Extrude1_6"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Boss-Extrude1_6"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet1_5.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet1_5.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Cut-Extrude1"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Cut-Extrude1"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Object_3.geometry}
-        />
+        <mesh geometry={nodes.Object_3.geometry} />
       </group>
       <group position={[-3.3, 1.3, 2]} rotation={[0, Math.PI / 2, 0]} scale={0}>
-        <mesh
-          geometry={nodes["????????_??????2"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["????????_??????2"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["??????????7"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["??????????7"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Boss-Extrude1"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Boss-Extrude1"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Boss-Extrude17"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Boss-Extrude17"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Boss-Extrude1_4"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Boss-Extrude1_4"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Boss-Extrude1_5"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Boss-Extrude1_5"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Boss-Extrude1_7"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Boss-Extrude1_7"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Chamfer1_8.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Chamfer1_8.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Chamfer2.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Chamfer2.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Cut-Extrude27"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Cut-Extrude27"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Cut-Extrude3_2"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Cut-Extrude3_2"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Cut-Extrude4"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Cut-Extrude4"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Cut-Extrude7_2"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Cut-Extrude7_2"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet1_2.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet1_2.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet1_3.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet1_3.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet1_4.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet1_4.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet1_6.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet1_6.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet2.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet2.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet4.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet4.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet4_2.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet4_2.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_122.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_122.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_123.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_123.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_28.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_28.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_31.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_31.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_70.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_70.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Marquardt_19011103step3.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Marquardt_19011103step3.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Marquardt_19011103step_2.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Marquardt_19011103step_2.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Marquardt_19011103step_3.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Marquardt_19011103step_3.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_136.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_136.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_137.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_137.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_14.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_14.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_7.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_7.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_74.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_74.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_81.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_81.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_83.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_83.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_90.geometry}
-        />
+        <mesh geometry={nodes.Imported1_90.geometry} />
       </group>
       <group position={[-3.3, 1.3, 2]} rotation={[0, Math.PI / 2, 0]} scale={0}>
-        <mesh
-          geometry={nodes["Boss-Extrude6"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Boss-Extrude6"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Chamfer2_3.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Chamfer2_3.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Cut-Extrude3"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Cut-Extrude3"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Cut-Extrude5"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Cut-Extrude5"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Cut-Extrude7"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Cut-Extrude7"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet1.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet1.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet2_2.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet2_2.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet6_2.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet6_2.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_85.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_85.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_89.geometry}
-        />
+        <mesh geometry={nodes.Imported1_89.geometry} />
       </group>
       <group position={[-4.4, 1.3, 2]} rotation={[0, Math.PI / 2, 0]} scale={0}>
-        <mesh
-          geometry={nodes.Fillet3001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet3001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet3_2001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet3_2001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet3_3001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet3_3001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet3_4001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet3_4001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Cut-Extrude2_4001"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Cut-Extrude2_4001"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Cut-Extrude2_5001"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Cut-Extrude2_5001"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Cut-Extrude2_6001"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Cut-Extrude2_6001"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Cut-Extrude2_7001"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Cut-Extrude2_7001"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_103001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_103001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_105001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_105001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_107001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_107001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_93001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_93001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Object_1001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Object_1001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Object_2001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Object_2001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Boss-Extrude1_6001"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Boss-Extrude1_6001"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet1_5001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet1_5001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Cut-Extrude1001"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Cut-Extrude1001"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Object_3001.geometry}
-        />
+        <mesh geometry={nodes.Object_3001.geometry} />
       </group>
       <group position={[-4.4, 1.3, 2]} rotation={[0, Math.PI / 2, 0]} scale={0}>
-        <mesh
-          geometry={nodes["????????_??????2001"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["????????_??????2001"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["??????????7001"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["??????????7001"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Boss-Extrude1001"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Boss-Extrude1001"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Boss-Extrude17001"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Boss-Extrude17001"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Boss-Extrude1_4001"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Boss-Extrude1_4001"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Boss-Extrude1_5001"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Boss-Extrude1_5001"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Boss-Extrude1_7001"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Boss-Extrude1_7001"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Chamfer1_8001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Chamfer1_8001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Chamfer2001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Chamfer2001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Cut-Extrude27001"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Cut-Extrude27001"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Cut-Extrude3_2001"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Cut-Extrude3_2001"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Cut-Extrude4001"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Cut-Extrude4001"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Cut-Extrude7_2001"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Cut-Extrude7_2001"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet1_2001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet1_2001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet1_3001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet1_3001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet1_4001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet1_4001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet1_6001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet1_6001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet2001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet2001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet4001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet4001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet4_2001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet4_2001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_122001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_122001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_123001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_123001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_28001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_28001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_31001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_31001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_70001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_70001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Marquardt_19011103step3001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Marquardt_19011103step3001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Marquardt_19011103step_2001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Marquardt_19011103step_2001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Marquardt_19011103step_3001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Marquardt_19011103step_3001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_136001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_136001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_137001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_137001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_14001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_14001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_7001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_7001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_74001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_74001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_81001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_81001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_83001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_83001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_90001.geometry}
-        />
+        <mesh geometry={nodes.Imported1_90001.geometry} />
       </group>
       <group position={[-4.4, 1.3, 2]} rotation={[0, Math.PI / 2, 0]} scale={0}>
-        <mesh
-          geometry={nodes["Boss-Extrude6001"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Boss-Extrude6001"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Chamfer2_3001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Chamfer2_3001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Cut-Extrude3001"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Cut-Extrude3001"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Cut-Extrude5001"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Cut-Extrude5001"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes["Cut-Extrude7001"].geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes["Cut-Extrude7001"].geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet1001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet1001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet2_2001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet2_2001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Fillet6_2001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Fillet6_2001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_85001.geometry}
-        >
-          <meshStandardMaterial transparent/>
+        <mesh geometry={nodes.Imported1_85001.geometry}>
+          <meshStandardMaterial transparent />
           <Edges />
         </mesh>
-        <mesh
-          geometry={nodes.Imported1_89001.geometry}
-        />
+        <mesh geometry={nodes.Imported1_89001.geometry} />
       </group>
       <mesh
         geometry={nodes.Cube015.geometry}
         position={[-2.8, 1.1, -2.2]}
         scale={[1.1, 0.5, 0.7]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Cube000.geometry}
         position={[-2.8, 1.1, -2.2]}
         scale={[1.1, 0.5, 0.7]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Cube016.geometry}
         position={[-2.8, 0.3, -2.2]}
         scale={[1.1, 0.6, 0.7]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Cube017.geometry}
         position={[-2.8, 1.1, -2.2]}
         scale={[1.1, 0.5, 0.7]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Cube001.geometry}
         position={[-2.8, 1.1, -2.2]}
         scale={[1.1, 0.5, 0.7]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Cube002.geometry}
         position={[-2.8, 1.1, -2.2]}
         scale={[1.1, 0.5, 0.7]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Cylinder.geometry}
@@ -1052,32 +802,32 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
         rotation={[0.6, 0, 0]}
         scale={[0.1, 0, 0.1]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Cube003.geometry}
         position={[-2.8, 0.7, -2.2]}
         scale={[1.1, 0.1, 0.7]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Cube004.geometry}
         position={[-2.8, 0.9, -2]}
         scale={[0.5, 0, 0.4]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Cube005.geometry}
         position={[-2.8, 0.8, -2]}
         scale={[0.4, 0.1, 0.3]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Cube006.geometry}
@@ -1085,80 +835,80 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
         rotation={[Math.PI / 2, 0, 0]}
         scale={[0.9, 0, 0.4]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Cube007.geometry}
         position={[-3.1, 0.8, -2.3]}
         scale={[0, 0.1, 0.1]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Cube008.geometry}
         position={[-3.2, 0.8, -2.3]}
         scale={[0, 0.1, 0.1]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Cube009.geometry}
         position={[-3.2, 0.8, -2.3]}
         scale={[0, 0.1, 0.1]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Cube010.geometry}
         position={[-3.3, 0.8, -2.3]}
         scale={[0, 0.1, 0.1]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Cube011.geometry}
         position={[-3.4, 0.8, -2.3]}
         scale={[0, 0.1, 0.1]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Cube012.geometry}
         position={[-3.4, 0.8, -2.3]}
         scale={[0, 0.1, 0.1]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Cube013.geometry}
         position={[-3.8, 1.1, -2.2]}
         scale={[1.1, 0.5, 0.7]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Cube014.geometry}
         position={[-2.8, 1.1, -2.2]}
         scale={[1.1, 0.5, 0.7]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Plotter_001.geometry}
         position={[3.8, 0, -2.1]}
         rotation={[Math.PI / 2, 0, 0]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.leg.geometry}
@@ -1166,8 +916,8 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
         rotation={[-Math.PI / 2, 0, 0]}
         scale={[0, 0.8, 0.1]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.leg003.geometry}
@@ -1175,32 +925,32 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
         rotation={[-Math.PI / 2, 0, 0]}
         scale={[0, 0.8, 0.1]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.leg001.geometry}
         position={[-2, 0.2, -2.2]}
         scale={[0, 0.2, 0.1]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.leg002.geometry}
         position={[-0.8, 0.2, -2.2]}
         scale={[0, 0.2, 0.1]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.leg_body.geometry}
         position={[-1.4, 0.2, -2.2]}
         scale={[1.1, 0.2, 0.1]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.caster.geometry}
@@ -1208,8 +958,8 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
         rotation={[0, 0, -Math.PI / 2]}
         scale={[0, 0, 0]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.caster001.geometry}
@@ -1217,8 +967,8 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
         rotation={[0, 0, -Math.PI / 2]}
         scale={[0, 0, 0]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.vaster.geometry}
@@ -1226,8 +976,8 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
         rotation={[0, 0, -Math.PI / 2]}
         scale={[0, 0, 0]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.vaster001.geometry}
@@ -1235,16 +985,16 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
         rotation={[0, 0, -Math.PI / 2]}
         scale={[0, 0, 0]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.body.geometry}
         position={[-1.4, 0.7, -2.2]}
         scale={[1, 0.6, 0.7]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.button.geometry}
@@ -1252,144 +1002,144 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
         rotation={[Math.PI / 2, 1.4, -Math.PI / 2]}
         scale={[0.1, 0, 0.1]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.cap.geometry}
         position={[-1.4, 1.1, -2.2]}
         scale={[0.9, 0, 0.8]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.front.geometry}
         position={[-1.4, 0.7, -2.2]}
         scale={[1, 0.6, 0.7]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.body001.geometry}
         position={[-1.4, 0.7, -2.2]}
         scale={[1, 0.6, 0.7]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.table.geometry}
         position={[-1.4, 0.7, -2.2]}
         scale={[0.8, 0, 0.6]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Plane.geometry}
         position={[0, -0.1, 0]}
         scale={[6.2, 3.8, 3.2]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.pole.geometry}
         position={[6.1, 1.2, 3.1]}
         scale={[0.1, 1.5, 0.1]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.pole001.geometry}
         position={[6.1, 1.2, -3.1]}
         scale={[0.1, 1.5, 0.1]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.pole002.geometry}
         position={[3, 1.2, 3.1]}
         scale={[0.1, 1.5, 0.1]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.pole003.geometry}
         position={[3, 1.2, -3.1]}
         scale={[0.1, 1.5, 0.1]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.pole004.geometry}
         position={[0, 1.2, 3.1]}
         scale={[0.1, 1.5, 0.1]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.pole005.geometry}
         position={[0, 1.2, -3.1]}
         scale={[0.1, 1.5, 0.1]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.pole006.geometry}
         position={[-3.1, 1.2, 3.1]}
         scale={[0.1, 1.5, 0.1]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.pole007.geometry}
         position={[-3.1, 1.2, -3.1]}
         scale={[0.1, 1.5, 0.1]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.pole008.geometry}
         position={[-6.1, 1.2, 3.1]}
         scale={[0.1, 1.5, 0.1]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.pole009.geometry}
         position={[-6.1, 1.2, -3.1]}
         scale={[0.1, 1.5, 0.1]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Cube.geometry}
         position={[0, 1.2, -3.2]}
         scale={[7.2, 1.5, 0]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Cube018.geometry}
         position={[0, 1.2, 3.1]}
         scale={[7.2, 1.5, 0]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Cube019.geometry}
@@ -1397,8 +1147,8 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
         rotation={[0, Math.PI / 2, 0]}
         scale={[3.7, 1.5, 0]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Cube020.geometry}
@@ -1406,52 +1156,40 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
         rotation={[0, Math.PI / 2, 0]}
         scale={[3.7, 1.5, 0]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
-      <mesh
-        geometry={nodes.Cube021.geometry}
-        position={[1.1, 0.3, -2]}
-      >
-          <meshStandardMaterial transparent/>
-          <Edges />
+      <mesh geometry={nodes.Cube021.geometry} position={[1.1, 0.3, -2]}>
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
-      <mesh
-        geometry={nodes.Cylinder001.geometry}
-        position={[1.9, 0.3, -1.2]}
-      >
-          <meshStandardMaterial transparent/>
-          <Edges />
+      <mesh geometry={nodes.Cylinder001.geometry} position={[1.9, 0.3, -1.2]}>
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
-      <mesh
-        geometry={nodes.Cube023.geometry}
-        position={[-3.3, 1.3, 1.9]}
-      >
-          <meshStandardMaterial transparent/>
-          <Edges />
+      <mesh geometry={nodes.Cube023.geometry} position={[-3.3, 1.3, 1.9]}>
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Cube024.geometry}
         position={[1.6, 0.3, 1.2]}
         scale={[1.6, 1, 1.6]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Cylinder002.geometry}
         position={[3, 0.3, 2.5]}
         scale={[1.6, 1, 1.6]}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
-      <mesh
-        geometry={nodes.Cube022.geometry}
-        position={[-4.9, 1.4, -0.5]}
-      >
-          <meshStandardMaterial transparent/>
-          <Edges />
+      <mesh geometry={nodes.Cube022.geometry} position={[-4.9, 1.4, -0.5]}>
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Mesh_0.geometry}
@@ -1459,8 +1197,8 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
         rotation={[Math.PI / 2, 0, 0]}
         scale={0.1}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
       <mesh
         geometry={nodes.Mesh_1.geometry}
@@ -1468,27 +1206,18 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
         rotation={[Math.PI / 2, 0, 0]}
         scale={0.1}
       >
-          <meshStandardMaterial transparent/>
-          <Edges />
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
-      <mesh
-        geometry={nodes["Boss-Extrude21"].geometry}
-        position={[0, 0, -0.5]}
-      >
-          <meshStandardMaterial transparent/>
-          <Edges />
+      <mesh geometry={nodes["Boss-Extrude21"].geometry} position={[0, 0, -0.5]}>
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
-      <mesh
-        geometry={nodes.Fillet12.geometry}
-        position={[0, 0, -0.5]}
-      >
-          <meshStandardMaterial transparent/>
-          <Edges />
+      <mesh geometry={nodes.Fillet12.geometry} position={[0, 0, -0.5]}>
+        <meshStandardMaterial transparent />
+        <Edges />
       </mesh>
-      <mesh
-        geometry={nodes.Thread1.geometry}
-        position={[0, 0, -0.5]}
-      />
+      <mesh geometry={nodes.Thread1.geometry} position={[0, 0, -0.5]} />
     </group>
   );
 }

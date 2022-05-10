@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next export"
+    "export": "next export",
+    "format:fix": "prettier --write \"./src/**/*.{ts,tsx}\" \"./public/models/*.{ts,tsx}\""
   },
   "dependencies": {
     "@emotion/css": "^11.7.1",
@@ -28,6 +29,7 @@
     "nextjs-progressbar": "^0.0.14",
     "notion-to-md": "^2.3.2",
     "popmotion": "^11.0.3",
+    "prettier": "^2.6.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-markdown": "^8.0.0",

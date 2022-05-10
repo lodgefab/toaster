@@ -8,6 +8,7 @@ import { Edges, Html, useGLTF } from "@react-three/drei";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { useFrame } from "@react-three/fiber";
 import { motion } from "framer-motion-3d";
+import { useCursor } from "../../src/utils/useCursor";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -25,51 +26,47 @@ type GLTFResult = GLTF & {
 };
 
 export default function Model(props: JSX.IntrinsicElements["group"]) {
-    const group = useRef<THREE.Group>();
-    const { nodes, materials } = useGLTF("/models/hero003.glb") as unknown as GLTFResult;
-    const [isUp, setUp] = useState(false)
-    const toastVariants = {
-        variantUp:{
-            y:0.4,
-            transition:{
-                damping:100
-            }
-        },
-        variantDown:{y:-0.2},
-        
-    }
-    const handleVariants = {
-        variantUp:{y:0.2},
-        variantDown:{y:-0.2}
-    }
+  const group = useRef<THREE.Group>();
+  const { nodes, materials } = useGLTF(
+    "/models/hero003.glb"
+  ) as unknown as GLTFResult;
+  const [isUp, setUp] = useState(false);
+  const toastVariants = {
+    variantUp: {
+      y: 0.4,
+      transition: {
+        damping: 100,
+      },
+    },
+    variantDown: { y: -0.2 },
+  };
+  const handleVariants = {
+    variantUp: { y: 0.2 },
+    variantDown: { y: -0.2 },
+  };
 
   useFrame((state) => {
-    const t = state.clock.getElapsedTime()
+    const t = state.clock.getElapsedTime();
     //Hole Animation
-    group.current?.rotation.set(0, Math.sin(t / 4) / 4, 0.3 - (1 + Math.sin(t / 4)) / 8)
-    group.current!.position.y = (1 + Math.sin(t * 2)) / 10
+    group.current?.rotation.set(
+      0,
+      Math.sin(t / 4) / 4,
+      0.3 - (1 + Math.sin(t / 4)) / 8
+    );
+    group.current!.position.y = (1 + Math.sin(t * 2)) / 10;
     //Toast Animation
+  });
 
-  })
-  
   return (
     <group ref={group} {...props} dispose={null}>
       <group position={[0, 0.21, 0]}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001.geometry}
-        >
-            <meshStandardMaterial transparent/>
-            <Edges/>
+        <mesh castShadow receiveShadow geometry={nodes.Cube001.geometry}>
+          <meshStandardMaterial transparent />
+          <Edges />
         </mesh>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_1.geometry}
-        >
-            <meshStandardMaterial transparent/>
-            <Edges/>
+        <mesh castShadow receiveShadow geometry={nodes.Cube001_1.geometry}>
+          <meshStandardMaterial transparent />
+          <Edges />
         </mesh>
       </group>
       <motion.mesh
@@ -78,41 +75,47 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
         geometry={nodes.handle.geometry}
         position={[0.55, -0.09, 0]}
         onClick={() => {
-            setUp(!isUp)
+          setUp(!isUp);
         }}
         variants={handleVariants}
-        animate={isUp?'variantUp':'variantDown'}
+        animate={isUp ? "variantUp" : "variantDown"}
+        {...useCursor()}
       >
-          <meshStandardMaterial transparent/>
-            <Edges/>
+        <meshStandardMaterial transparent />
+        <Edges />
       </motion.mesh>
-      <motion.group position={[0, -0.09, 0.17]} variants={toastVariants} animate={isUp?'variantUp':'variantDown'}>
+      <motion.group
+        position={[0, -0.09, 0.17]}
+        variants={toastVariants}
+        animate={isUp ? "variantUp" : "variantDown"}
+      >
         <motion.mesh
           castShadow
           receiveShadow
           geometry={nodes.Cube004.geometry}
           material={materials.bread_plain}
         >
-            {/* <Html
-                style={{
-                transition: 'all 0.2s',
-                opacity: 1,
-                transform: `scale(1)`
-                }}
-                distanceFactor={4}
-                position={[0, 2, 0.1]}
-                transform
-                occlude>
-                <span>Size</span>
-            </Html> */}
+          <Html
+            style={{
+              transition: "all 0.2s",
+              opacity: 1,
+              transform: `scale(1)`,
+            }}
+            distanceFactor={4}
+            position={[0, 2, 0.1]}
+            transform
+            occlude
+          >
+            <span>Size</span>
+          </Html>
         </motion.mesh>
         <motion.mesh
           castShadow
           receiveShadow
           geometry={nodes.Cube004_1.geometry}
         >
-            <meshStandardMaterial transparent/>
-            <Edges/>
+          <meshStandardMaterial transparent />
+          <Edges />
         </motion.mesh>
       </motion.group>
     </group>
