@@ -22,6 +22,7 @@
     "dayjs": "^1.10.8",
     "emotion-reset": "^3.0.1",
     "framer-motion": "^6.2.9",
+    "framer-motion-3d": "^6.3.3",
     "import": "^0.0.6",
     "next": "12.1.0",
     "nextjs-progressbar": "^0.0.14",
