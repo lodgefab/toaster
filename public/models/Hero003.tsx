@@ -9,6 +9,7 @@ import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { useFrame } from "@react-three/fiber";
 import { motion } from "framer-motion-3d";
 import { useCursor } from "../../src/utils/useCursor";
+import {spring} from '../../src/styles'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -31,6 +32,7 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
     "/models/hero003.glb"
   ) as unknown as GLTFResult;
   const [isUp, setUp] = useState(false);
+  
   const toastVariants = {
     variantUp: {
       y: 0.4,
@@ -80,14 +82,17 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
         variants={handleVariants}
         animate={isUp ? "variantUp" : "variantDown"}
         {...useCursor()}
+        transition={{ ...spring, damping: 100}}
       >
         <meshStandardMaterial transparent />
         <Edges />
       </motion.mesh>
+      {/* Toast */}
       <motion.group
         position={[0, -0.09, 0.17]}
         variants={toastVariants}
         animate={isUp ? "variantUp" : "variantDown"}
+        transition={{ ...spring, damping: 100}}
       >
         <motion.mesh
           castShadow

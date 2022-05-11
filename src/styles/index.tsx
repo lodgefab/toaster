@@ -101,3 +101,11 @@ export const motionConfig = {
     },
   },
 };
+
+export const spring = {
+  type: "spring",
+  mass: 5,
+  stiffness: 2000,
+  damping: 100,
+  restDelta: 0.0001
+}
