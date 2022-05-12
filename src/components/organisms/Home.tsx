@@ -28,15 +28,15 @@ export const Home: React.VFC<Props> = ({ blogPosts, projectPosts }) => {
   const letterUp= {
     initial: {
       y: 8,
-      opacity: 0,
+      color:'#eeeeee'
       
     },
     animate: {
       y: [8,-8,0],
-      color:['#ffd942f7','#fdcb66ed','#333333'],
-      opacity: [0,1,1],
+      color:['#eeeeee','#fdcb66ed','#333333'],
       transition:{
-        duration:0.4,
+        duration:0.2,
+        time:[0,.2,1],
         spring,
       }
     }
@@ -44,13 +44,11 @@ export const Home: React.VFC<Props> = ({ blogPosts, projectPosts }) => {
   const descUp= {
     initial: {
       y: 8,
-      opacity: 0,
-      
+      color:'#eeeeee'
     },
     animate: {
       y: 0,
-      color:['#ffd942f7','#fdcb66ed','#333333'],
-      opacity: 1,
+      color:['#eeeeee','#fdcb66ed','#333333'],
       transition:{
         duration:0.8,
         delay:1,
@@ -279,7 +277,7 @@ const HeroLeft = styled.div`
   `}
   ${media.mdsp`
             width:100vw;
-            height:40vh;
+            height:50vh;
         `}
 `;
 

@@ -62,7 +62,7 @@ export default function Model(props: JSX.IntrinsicElements["group"], isReady: bo
   useEffect(()=>{
     const load = setTimeout(() => {
       sequence()
-    }, 0 * 1000);
+    }, 0.1 * 1000);
   },[])
 
   // Toast Popup アニメーション
@@ -85,7 +85,7 @@ export default function Model(props: JSX.IntrinsicElements["group"], isReady: bo
   return (
     <group ref={group} {...props} dispose={null} >
       <motion.group 
-        animate={initAnimation}
+        animate={{rotateY:6.5}}
         transition={{ ...spring, mass:10, damping: 500}}
       >
         {/* Body */}
