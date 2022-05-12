@@ -14,44 +14,60 @@ import {
   Edges,
   Html,
   OrbitControls,
+  PresentationControls,
   Stage,
   useGLTF,
+  useProgress,
 } from "@react-three/drei";
 import { OrthographicCamera } from "@react-three/drei";
 import dynamic from "next/dynamic";
-import THREE from "three";
+import * as THREE from "three";
+import { MotionConfig } from "framer-motion";
 
 type Props = {
   model: string;
+  isReady:boolean
 };
 
 const Loader = () => {
-  return <Html>Loading...</Html>;
+  const { active, progress, errors, item, loaded, total } = useProgress()
+  return <Html center>{progress} % loaded</Html>
 };
 
-const HeroView: React.VFC<Props> = ({ model }) => {
-  // const Model = dynamic(() => import( `../../../public/models/${model}.tsx`))
+const HeroView: React.VFC<Props> = ({ model, isReady }) => {
   const Model = lazy(() => import(`../../../public/models/${model}.tsx`));
+
   return (
-    <Canvas
-      camera={{ position: [80, 80, 80], fov: 50 }}
-      orthographic={true}
-      dpr={[1, 2]}
-    >
-      <ambientLight />
-      <hemisphereLight
-        color="#eeeeee"
-        groundColor="#eeeeee"
-        position={[-7, 25, 13]}
-        intensity={1}
-      />
-      <Suspense fallback={<Loader />}>
-        <Bounds fit clip margin={1.2}>
-          <Model />
-        </Bounds>
-      </Suspense>
-      {/* <OrthographicCamera zoom={1}/> */}
-    </Canvas>
+      <Canvas
+        camera={{ position: [0, 40, 80], fov: 80 }}
+        orthographic={true}
+        dpr={[1, 2]}
+      >
+        {/* <Zoom/> */}
+        <ambientLight />
+        <hemisphereLight
+          color="#eeeeee"
+          groundColor="#eeeeee"
+          position={[-7, 25, 13]}
+          intensity={1}
+        />
+        <Suspense fallback={<Loader />}>
+          <PresentationControls
+            global
+            rotation={[0, -Math.PI / 4, 0]}
+            polar={[0, Math.PI / 4]}
+            azimuth={[-Math.PI / 4, Math.PI / 4]}
+            cursor={false} 
+            snap={true}
+          >
+            <Bounds fit clip margin={1.2}>
+              <Model isReady={isReady}/>
+            </Bounds>
+            
+          </PresentationControls>
+        </Suspense>
+        {/* <OrthographicCamera zoom={1}/> */}
+      </Canvas>
   );
 };
 

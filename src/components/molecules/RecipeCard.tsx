@@ -3,7 +3,7 @@ import Link from "next/link";
 import { BlogPost } from "../../../@types/schema";
 import dayjs from "dayjs";
 import styled from "@emotion/styled";
-import { color, font, media, zIndex } from "../../styles";
+import { color, font, media, zIndex, motionConfig } from "../../styles";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
@@ -28,27 +28,11 @@ const RecipeCard: FunctionComponent<RecipeCardProps> = ({ post }) => {
     variantB: { scale: 1.05 },
   };
 
-  const easing = [0.6, -0.05, 0.01, 0.99];
 
-  const fadeInUp = {
-    initial: {
-      y: 60,
-      opacity: 0,
-    },
-    animate: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: easing,
-      },
-    },
-    variantA: {},
-    variantB: {},
-  };
+
 
   return (
-    <motion.div variants={fadeInUp}>
+    <motion.div variants={motionConfig.fadeInUp}>
       <Card variants={parent} initial="variantA" whileHover="variantB">
         <BG variants={bg}></BG>
         <Link href={`/post/${post.slug}`} passHref>

@@ -84,7 +84,14 @@ export const zIndex = {
   },
 } as const;
 
-const easing = [0.6, -0.05, 0.01, 0.99];
+export const easing = [0.6, -0.05, 0.01, 0.99];
+export const spring = {
+  type: "spring",
+  mass: 5,
+  stiffness: 2000,
+  damping: 100,
+  restDelta: 0.0001,
+};
 export const motionConfig = {
   fadeInUp: {
     initial: {
@@ -102,10 +109,4 @@ export const motionConfig = {
   },
 };
 
-export const spring = {
-  type: "spring",
-  mass: 5,
-  stiffness: 2000,
-  damping: 100,
-  restDelta: 0.0001
-}
+

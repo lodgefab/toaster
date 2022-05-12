@@ -1,14 +1,10 @@
 import styled from "@emotion/styled";
-import { AnimatePresence, motion } from "framer-motion";
-import { InferGetServerSidePropsType, NextPage } from "next";
-import { useRouter } from "next/router";
+import { AnimatePresence, motion, useCycle } from "framer-motion";
 import { useEffect, useState } from "react";
 import { BlogPost, People, ProjectPost } from "../../../@types/schema";
-import NotionService from "../../services/notion-service";
-import { color, font, media, zIndex } from "../../styles";
+import { color, font, media, motionConfig, zIndex, spring, easing } from "../../styles";
 import RecipeCard from "../molecules/RecipeCard";
 import ProjectCard from "../molecules/ProjectCard";
-import Image from "next/image";
 import { wrap } from "popmotion";
 import HeroView from "../molecules/HeroView";
 
@@ -20,13 +16,48 @@ type Props = {
 
 export const Home: React.VFC<Props> = ({ blogPosts, projectPosts }) => {
   const stagger = {
-    animate: {
+    animate: (i: number) => ({
       transition: {
         staggerChildren: 0.1,
+        delayChildren:i
       },
-    },
+    }),
   };
-
+  
+  const [isReady, toggleReady] = useState(false);
+  const letterUp= {
+    initial: {
+      y: 8,
+      opacity: 0,
+      
+    },
+    animate: {
+      y: [8,-8,0],
+      color:['#ffd942f7','#fdcb66ed','#333333'],
+      opacity: [0,1,1],
+      transition:{
+        duration:0.4,
+        spring,
+      }
+    }
+  }
+  const descUp= {
+    initial: {
+      y: 8,
+      opacity: 0,
+      
+    },
+    animate: {
+      y: 0,
+      color:['#ffd942f7','#fdcb66ed','#333333'],
+      opacity: 1,
+      transition:{
+        duration:0.8,
+        delay:1,
+        easing
+      }
+    }
+  }
   const studioGalleryVariants = {
     enter: (direction: number) => {
       return {
@@ -73,30 +104,44 @@ export const Home: React.VFC<Props> = ({ blogPosts, projectPosts }) => {
   const paginate = (newDirection: number) => {
     setPage([page + newDirection, newDirection]);
   };
+  
+
+  useEffect(()=>{
+    const load = setTimeout(() => {
+      toggleReady(true)
+    }, 1 * 1000);
+  },[])
+
+
 
   return (
     <Container id="homeView">
-      {" "}
       <Hero>
         <HeroLeft>
-          <HeroTitle>
-            <span>LODGE</span>
-            <br />
-            Toaster
+          <HeroView model={"Hero003"} isReady={isReady}></HeroView>
+        </HeroLeft>
+        <HeroRight animate={isReady ? "animate" : "initial"} initial={'initial'}>
+          <HeroTitle variants={stagger} custom={0}>
+            <Character variants={letterUp}>T</Character>
+            <Character variants={letterUp}>o</Character>
+            <Character variants={letterUp}>a</Character>
+            <Character variants={letterUp}>s</Character>
+            <Character variants={letterUp}>t</Character>
+            <Character variants={letterUp}>e</Character>
+            <Character variants={letterUp}>r</Character>
           </HeroTitle>
-          <HeroDescription>
+          <HeroDescription onClick={()=>{toggleReady(!isReady)}} variants={descUp}>
             『LODGE
             Toaster』は、ヤフー社内のオープンコラボレーションハブ・LODGE内のfabスペースに日々持ち込まれる実験プロジェクトや社内外のパートナーとの共同プロジェクトの中で得られた知見や副産物を「レシピ」として公開し、オープンソースで発信していく取り組みです。
           </HeroDescription>
-        </HeroLeft>
-        <HeroRight>
-          <HeroView model={"Hero003"}></HeroView>
         </HeroRight>
       </Hero>
-      <Title id="recipe">
-        <span>Recipe</span>
-      </Title>
-      <RecipeGrid variants={stagger}>
+      <motion.div variants={stagger} custom={1} animate={isReady ? "animate" : "initial"} initial={'initial'}>
+        <Title id="recipe" variants={motionConfig.fadeInUp}>
+          <span>Recipe</span>
+        </Title>
+      </motion.div>
+      <RecipeGrid variants={stagger} custom={1.2} animate={isReady ? "animate" : "initial"} initial={'initial'}>
         {blogPosts.map((post: BlogPost) => (
           <RecipeCard key={post.id} post={post} />
         ))}
@@ -177,52 +222,68 @@ export const Home: React.VFC<Props> = ({ blogPosts, projectPosts }) => {
 };
 
 const Container = styled(motion.div)`
-  margin: 64px 0 128px 0;
+  margin: 0px 0 128px 0;
   ${media.mdsp`
             padding:0 32px;
-            margin:32px 0 64px 0;
+            margin:0px 0 64px 0;
         `}
 `;
 const Hero = styled.div`
   position: relative;
-  display: grid;
-  grid-template-rows: auto 1fr;
-  grid-template-columns: 1fr 2fr;
-  gap: 16px;
   width: 100%;
   ${media.mdsp`
             margin:0 -32px;
             width:100vw;
         `}
 `;
-const HeroLeft = styled.div`
+const HeroRight = styled(motion.div)`
+  position:absolute;
+  top:50%;
+  left:0;
+  transform:translate(0,-50%);
+  width:30vw;
   ${media.mdsp`
+      position:relative;
+            width:100%;
+            padding:0 32px 32px 32px;
             
-            position:absolute;
-            left:32px;
-            right:32px;
-            bottom:0;
+            
+            transform:none;
         `}
 `;
-const HeroTitle = styled.h1`
-  ${font.h1};
-  span {
-    ${font.subtitle2};
-  }
+const HeroTitle = styled(motion.h1)`
+  margin:0 0 16px 0;
 `;
-const HeroDescription = styled.p`
+const Character = styled(motion.span)`
+  display  :inline-block ;
+  ${font.h1};
+  ${media.mdsp`
+    /* ${font.h2}; */
+  `}
+`
+
+
+
+const HeroDescription = styled(motion.p)`
   ${font.article1};
+  ${media.mdsp`
+    ${font.article2};
+  `}
 `;
 
-const HeroRight = styled.div`
+const HeroLeft = styled.div`
   height: 480px;
+  box-sizing: border-box;
+  ${media.lg`
+    padding:0 0 0 30vw;
+  `}
   ${media.mdsp`
             width:100vw;
-            height:80vh;
+            height:40vh;
         `}
 `;
 
-const Title = styled.h1`
+const Title = styled(motion.h1)`
   display: inline-block;
   position: relative;
   margin: 128px 0 64px 0;

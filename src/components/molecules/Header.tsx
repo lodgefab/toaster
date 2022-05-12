@@ -94,12 +94,12 @@ const Header: React.VFC<Props> = ({ height }) => {
           height={height}
           isSPMenuOpen={isSPMenuOpen}
         />
-        <HeaderLinkItem
+        {/* <HeaderLinkItem
           destination={"people"}
           label={"People"}
           height={height}
           isSPMenuOpen={isSPMenuOpen}
-        />
+        /> */}
       </HeaderUL>
     </Container>
   );
