@@ -105,9 +105,7 @@ export const Home: React.VFC<Props> = ({ blogPosts, projectPosts }) => {
   
 
   useEffect(()=>{
-    const load = setTimeout(() => {
-      toggleReady(true)
-    }, 1 * 1000);
+    toggleReady(true)
   },[])
 
 
@@ -119,7 +117,7 @@ export const Home: React.VFC<Props> = ({ blogPosts, projectPosts }) => {
           <HeroView model={"Hero003"} isReady={isReady}></HeroView>
         </HeroLeft>
         <HeroRight animate={isReady ? "animate" : "initial"} initial={'initial'}>
-          <HeroTitle variants={stagger} custom={0}>
+          <HeroTitle variants={stagger} custom={1}>
             <Character variants={letterUp}>T</Character>
             <Character variants={letterUp}>o</Character>
             <Character variants={letterUp}>a</Character>
@@ -128,17 +126,19 @@ export const Home: React.VFC<Props> = ({ blogPosts, projectPosts }) => {
             <Character variants={letterUp}>e</Character>
             <Character variants={letterUp}>r</Character>
           </HeroTitle>
-          <HeroDescription variants={descUp}>
-            『LODGE Toaster』は、<br/>ヤフー社内のオープンコラボレーションハブ・LODGE内のfabスペースに日々持ち込まれる実験プロジェクトや社内外のパートナーとの共同プロジェクトの中で得られた知見や副産物を「レシピ」として公開し、オープンソースで発信していく取り組みです。
-          </HeroDescription>
+          <motion.div variants={stagger} custom={2}>
+            <HeroDescription variants={descUp}>
+              『LODGE Toaster』は、<br/>ヤフー社内のオープンコラボレーションハブ・LODGE内のfabスペースに日々持ち込まれる実験プロジェクトや社内外のパートナーとの共同プロジェクトの中で得られた知見や副産物を「レシピ」として公開し、オープンソースで発信していく取り組みです。
+            </HeroDescription>
+          </motion.div>
         </HeroRight>
       </Hero>
-      <motion.div variants={stagger} custom={1} animate={isReady ? "animate" : "initial"} initial={'initial'}>
+      <motion.div variants={stagger} custom={2} animate={isReady ? "animate" : "initial"} initial={'initial'}>
         <Title id="recipe" variants={motionConfig.fadeInUp}>
           <span>Recipe</span>
         </Title>
       </motion.div>
-      <RecipeGrid variants={stagger} custom={1.2} animate={isReady ? "animate" : "initial"} initial={'initial'}>
+      <RecipeGrid variants={stagger} custom={2.2} animate={isReady ? "animate" : "initial"} initial={'initial'}>
         {blogPosts.map((post: BlogPost) => (
           <RecipeCard key={post.id} post={post} />
         ))}
