@@ -63,7 +63,7 @@ const HeroView: React.VFC<Props> = ({ model, isReady }) => {
             <Bounds fit clip margin={1.2}>
               <Model isReady={isReady}/>
             </Bounds>
-            
+            <gridHelper args={[10, 40, '#aaaaaa', '#cccccc']} position={[-0.25, -1.2, 0]} rotation={[0, 0, 0]} />
           </PresentationControls>
         </Suspense>
         {/* <OrthographicCamera zoom={1}/> */}

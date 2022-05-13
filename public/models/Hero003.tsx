@@ -82,7 +82,7 @@ export default function Model(props: JSX.IntrinsicElements["group"], isReady: bo
   return (
     <group ref={group} {...props} dispose={null} >
       <motion.group 
-        animate={{rotateY:6.5}}
+        animate={{rotateY:6.3}}
         transition={{ ...spring, mass:10, damping: 500}}
       >
         {/* Body */}
@@ -165,7 +165,6 @@ export default function Model(props: JSX.IntrinsicElements["group"], isReady: bo
           </motion.mesh>
         </motion.group>
       </motion.group>
-      {/* <gridHelper args={[10, 40, '#aaaaaa', '#cccccc']} position={[-0.25, 0, 0]} rotation={[0, 0, Math.PI / 2]} /> */}
     </group>
   );
 }

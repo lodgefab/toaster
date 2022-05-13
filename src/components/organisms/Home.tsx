@@ -33,9 +33,9 @@ export const Home: React.VFC<Props> = ({ blogPosts, projectPosts }) => {
     },
     animate: {
       y: [8,-8,0],
-      color:['#eeeeee','#fdcb66ed','#333333'],
+      color:['#eeeeee','#d19724ec','#333333'],
       transition:{
-        duration:0.2,
+        duration:0.5,
         time:[0,.2,1],
         spring,
       }
@@ -48,7 +48,7 @@ export const Home: React.VFC<Props> = ({ blogPosts, projectPosts }) => {
     },
     animate: {
       y: 0,
-      color:['#eeeeee','#fdcb66ed','#333333'],
+      color:['#eeeeee','#d19724ec','#333333'],
       transition:{
         duration:0.8,
         delay:1,
@@ -125,6 +125,7 @@ export const Home: React.VFC<Props> = ({ blogPosts, projectPosts }) => {
             <Character variants={letterUp}>t</Character>
             <Character variants={letterUp}>e</Character>
             <Character variants={letterUp}>r</Character>
+            
           </HeroTitle>
           <motion.div variants={stagger} custom={2}>
             <HeroDescription variants={descUp}>
@@ -242,6 +243,7 @@ const HeroRight = styled(motion.div)`
 `;
 const HeroTitle = styled(motion.h1)`
   margin:0 0 16px 0;
+  overflow: hidden;
 `;
 const Character = styled(motion.span)`
   display  :inline-block ;
