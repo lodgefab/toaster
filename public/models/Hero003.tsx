@@ -9,8 +9,9 @@ import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { useFrame } from "@react-three/fiber";
 import { motion } from "framer-motion-3d";
 import { useCursor } from "../../src/utils/useCursor";
-import {spring} from '../../src/styles'
-import { useAnimation } from "framer-motion";
+import {color, spring} from '../../src/styles'
+import { useAnimation, useCycle } from "framer-motion";
+import styled from "@emotion/styled";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -50,7 +51,8 @@ export default function Model(props: JSX.IntrinsicElements["group"], isReady: bo
 
 
   
-  
+  //Toastに表示するimageのpath
+  const [path, cyclePath] = useCycle('/images/recipe001.png', '/images/recipe002.png')
   
   // 読み込み後アニメーション
   const initAnimation = useAnimation();
@@ -69,8 +71,13 @@ export default function Model(props: JSX.IntrinsicElements["group"], isReady: bo
   useEffect(() => {
 
     const timer = setTimeout(() => {
-      isReady && setUp(!isUp)
-    }, 4 * 1000);
+      !isUp && cyclePath()
+      setTimeout(() => {
+        isReady && (
+          setUp(!isUp) 
+        )
+      }, 1*1000)
+    }, 3 * 1000);
     return () => {
       clearTimeout(timer);
     };
@@ -140,13 +147,19 @@ export default function Model(props: JSX.IntrinsicElements["group"], isReady: bo
                 transition: "all 0.2s",
                 opacity: 1,
                 transform: `scale(1)`,
+                width: 110,
+                height: 116,
+                padding: 0
               }}
               distanceFactor={4}
-              position={[0, 2, 0.1]}
+              position={[0, 1.3, 0.1]}
               transform
               occlude
             >
-              <span>Recipe</span>
+              <ToasterWrap>
+                <ToasterRecipe src={path} alt={'image'}/>
+                
+              </ToasterWrap>
             </Html>
             <meshStandardMaterial transparent />
             <Edges />
@@ -168,3 +181,29 @@ export default function Model(props: JSX.IntrinsicElements["group"], isReady: bo
 }
 
 useGLTF.preload("/models/hero003.glb");
+
+
+const ToasterWrap = styled.div`
+  display: flex;
+  flex-direction: row;
+`
+const ToasterRecipe = styled.img`
+  object-fit: contain;
+  width:100%;
+  height:100%;
+`
+const ToasterText = styled.ul`
+  width: 20%;
+  li{
+    width:100%;
+    height:2px;
+    background-color: #999;
+    margin: 0 0 4px;
+  }
+`
+
+const ToasterImage = styled.div`
+  border:0.5px solid ${color.content.dark};
+  width:100%;
+  height:24px;
+` 

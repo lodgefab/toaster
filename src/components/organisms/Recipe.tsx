@@ -130,14 +130,14 @@ const WrapperLeftComponent: React.FC<{
 
       {resource && (
         <FinalChain>
-          Certified on{" "}
+          Certified on
           <span>
             <a
               href="https://final-aim.com/final-chain-beta-launch"
               target={"_blank"}
               rel="noreferrer"
             >
-              Final Chain
+              final chain
             </a>
           </span>
         </FinalChain>
@@ -369,22 +369,25 @@ const FinalChain = styled.p`
   align-items: center;
   span {
     display: flex;
-    padding: 4px 8px;
+    padding: 4px 0px;
     margin: 0 0 0 8px;
-    background-color: #e0e0e0;
-    border-radius: 16px;
+
   }
   a {
     display: inline-flex;
-    align-items: center;
+    align-items:flex-start;
+    text-decoration: underline;
+    :hover{
+      text-decoration: none;
+    }
   }
-  a:before {
+  a:after {
     content: "";
     display: inline-block;
     width: 16px;
     height: 16px;
-    margin: 0 4px 0 0;
-    background-image: url("/icons/link.svg");
+    margin: 0 0px 0 4px;
+    background-image: url("/icons/external.svg");
     background-size: contain;
   }
 `;

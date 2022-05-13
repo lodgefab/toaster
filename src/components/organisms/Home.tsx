@@ -129,8 +129,7 @@ export const Home: React.VFC<Props> = ({ blogPosts, projectPosts }) => {
             <Character variants={letterUp}>r</Character>
           </HeroTitle>
           <HeroDescription variants={descUp}>
-            『LODGE
-            Toaster』は、ヤフー社内のオープンコラボレーションハブ・LODGE内のfabスペースに日々持ち込まれる実験プロジェクトや社内外のパートナーとの共同プロジェクトの中で得られた知見や副産物を「レシピ」として公開し、オープンソースで発信していく取り組みです。
+            『LODGE Toaster』は、<br/>ヤフー社内のオープンコラボレーションハブ・LODGE内のfabスペースに日々持ち込まれる実験プロジェクトや社内外のパートナーとの共同プロジェクトの中で得られた知見や副産物を「レシピ」として公開し、オープンソースで発信していく取り組みです。
           </HeroDescription>
         </HeroRight>
       </Hero>
@@ -207,14 +206,6 @@ export const Home: React.VFC<Props> = ({ blogPosts, projectPosts }) => {
           ))}
         </ThumbnailGrid>
       </StudioGrid>
-      {/* <Title id={"people"}>People</Title>
-                    <PeopleGrid>
-                        {people.map((value,index) => (
-                            <PeopleItem key={index}>
-                                <></>
-                            </PeopleItem>
-                        ))}
-                    </PeopleGrid> */}
     </Container>
   );
 };
