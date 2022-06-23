@@ -28,9 +28,6 @@ const RecipeCard: FunctionComponent<RecipeCardProps> = ({ post }) => {
     variantB: { scale: 1.05 },
   };
 
-
-
-
   return (
     <motion.div variants={motionConfig.fadeInUp}>
       <Card variants={parent} initial="variantA" whileHover="variantB">

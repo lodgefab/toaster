@@ -50,7 +50,6 @@ function MyApp({ Component, pageProps, router }: AppProps) {
               transform: rotate(10deg);
             }
           } ;
-          
         `}
       />
       <Layout>

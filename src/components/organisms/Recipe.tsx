@@ -371,13 +371,12 @@ const FinalChain = styled.p`
     display: flex;
     padding: 4px 0px;
     margin: 0 0 0 8px;
-
   }
   a {
     display: inline-flex;
-    align-items:flex-start;
+    align-items: flex-start;
     text-decoration: underline;
-    :hover{
+    :hover {
       text-decoration: none;
     }
   }
