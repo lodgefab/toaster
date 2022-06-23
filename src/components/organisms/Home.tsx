@@ -2,7 +2,15 @@ import styled from "@emotion/styled";
 import { AnimatePresence, motion, useCycle } from "framer-motion";
 import { useEffect, useState } from "react";
 import { BlogPost, People, ProjectPost } from "../../../@types/schema";
-import { color, font, media, motionConfig, zIndex, spring, easing } from "../../styles";
+import {
+  color,
+  font,
+  media,
+  motionConfig,
+  zIndex,
+  spring,
+  easing,
+} from "../../styles";
 import RecipeCard from "../molecules/RecipeCard";
 import ProjectCard from "../molecules/ProjectCard";
 import { wrap } from "popmotion";
@@ -19,43 +27,42 @@ export const Home: React.VFC<Props> = ({ blogPosts, projectPosts }) => {
     animate: (i: number) => ({
       transition: {
         staggerChildren: 0.1,
-        delayChildren:i
+        delayChildren: i,
       },
     }),
   };
-  
+
   const [isReady, toggleReady] = useState(false);
-  const letterUp= {
+  const letterUp = {
     initial: {
       y: 8,
-      color:'#eeeeee'
-      
+      color: "#eeeeee",
     },
     animate: {
-      y: [8,-8,0],
-      color:['#eeeeee','#d19724ec','#333333'],
-      transition:{
-        duration:0.5,
-        time:[0,.2,1],
+      y: [8, -8, 0],
+      color: ["#eeeeee", "#d19724ec", "#333333"],
+      transition: {
+        duration: 0.5,
+        time: [0, 0.2, 1],
         spring,
-      }
-    }
-  }
-  const descUp= {
+      },
+    },
+  };
+  const descUp = {
     initial: {
       y: 8,
-      color:'#eeeeee'
+      color: "#eeeeee",
     },
     animate: {
       y: 0,
-      color:['#eeeeee','#d19724ec','#333333'],
-      transition:{
-        duration:0.8,
-        delay:1,
-        easing
-      }
-    }
-  }
+      color: ["#eeeeee", "#d19724ec", "#333333"],
+      transition: {
+        duration: 0.8,
+        delay: 1,
+        easing,
+      },
+    },
+  };
   const studioGalleryVariants = {
     enter: (direction: number) => {
       return {
@@ -102,13 +109,10 @@ export const Home: React.VFC<Props> = ({ blogPosts, projectPosts }) => {
   const paginate = (newDirection: number) => {
     setPage([page + newDirection, newDirection]);
   };
-  
 
-  useEffect(()=>{
-    toggleReady(true)
-  },[])
-
-
+  useEffect(() => {
+    toggleReady(true);
+  }, []);
 
   return (
     <Container id="homeView">
@@ -116,7 +120,10 @@ export const Home: React.VFC<Props> = ({ blogPosts, projectPosts }) => {
         <HeroLeft>
           <HeroView model={"Hero003"} isReady={isReady}></HeroView>
         </HeroLeft>
-        <HeroRight animate={isReady ? "animate" : "initial"} initial={'initial'}>
+        <HeroRight
+          animate={isReady ? "animate" : "initial"}
+          initial={"initial"}
+        >
           <HeroTitle variants={stagger} custom={1}>
             <Character variants={letterUp}>T</Character>
             <Character variants={letterUp}>o</Character>
@@ -125,21 +132,32 @@ export const Home: React.VFC<Props> = ({ blogPosts, projectPosts }) => {
             <Character variants={letterUp}>t</Character>
             <Character variants={letterUp}>e</Character>
             <Character variants={letterUp}>r</Character>
-            
           </HeroTitle>
           <motion.div variants={stagger} custom={2}>
             <HeroDescription variants={descUp}>
-              『LODGE Toaster』は、<br/>ヤフー社内のオープンコラボレーションハブ・LODGE内のfabスペースに日々持ち込まれる実験プロジェクトや社内外のパートナーとの共同プロジェクトの中で得られた知見や副産物を「レシピ」として公開し、オープンソースで発信していく取り組みです。
+              『LODGE Toaster』は、
+              <br />
+              ヤフー社内のオープンコラボレーションハブ・LODGE内のfabスペースに日々持ち込まれる実験プロジェクトや社内外のパートナーとの共同プロジェクトの中で得られた知見や副産物を「レシピ」として公開し、オープンソースで発信していく取り組みです。
             </HeroDescription>
           </motion.div>
         </HeroRight>
       </Hero>
-      <motion.div variants={stagger} custom={2} animate={isReady ? "animate" : "initial"} initial={'initial'}>
+      <motion.div
+        variants={stagger}
+        custom={2}
+        animate={isReady ? "animate" : "initial"}
+        initial={"initial"}
+      >
         <Title id="recipe" variants={motionConfig.fadeInUp}>
           <span>Recipe</span>
         </Title>
       </motion.div>
-      <RecipeGrid variants={stagger} custom={2.2} animate={isReady ? "animate" : "initial"} initial={'initial'}>
+      <RecipeGrid
+        variants={stagger}
+        custom={2.2}
+        animate={isReady ? "animate" : "initial"}
+        initial={"initial"}
+      >
         {blogPosts.map((post: BlogPost) => (
           <RecipeCard key={post.id} post={post} />
         ))}
@@ -227,11 +245,11 @@ const Hero = styled.div`
         `}
 `;
 const HeroRight = styled(motion.div)`
-  position:absolute;
-  top:50%;
-  left:0;
-  transform:translate(0,-50%);
-  width:30vw;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
+  width: 30vw;
   ${media.mdsp`
       position:relative;
             width:100%;
@@ -242,18 +260,16 @@ const HeroRight = styled(motion.div)`
         `}
 `;
 const HeroTitle = styled(motion.h1)`
-  margin:0 0 16px 0;
+  margin: 0 0 16px 0;
   overflow: hidden;
 `;
 const Character = styled(motion.span)`
-  display  :inline-block ;
+  display: inline-block;
   ${font.h1};
   ${media.mdsp`
     /* ${font.h2}; */
   `}
-`
-
-
+`;
 
 const HeroDescription = styled(motion.p)`
   ${font.article1};
