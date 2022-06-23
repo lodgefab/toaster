@@ -55,6 +55,7 @@ const Mint = ({}: InferGetStaticPropsType<typeof getServerSideProps>) => {
 export default Mint;
 
 const IframeWrap = styled.div`
+  margin: 128px 0 0;
   iframe {
     width: 100%;
     ${media.sp`
