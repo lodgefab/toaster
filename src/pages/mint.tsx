@@ -3,7 +3,7 @@ import Head from "next/head";
 import NotionService from "../services/notion-service";
 import { motion } from "framer-motion";
 import styled from "@emotion/styled";
-import { media } from "../styles";
+import { font, media } from "../styles";
 
 export async function getServerSideProps() {
   const notionService = new NotionService();
@@ -39,9 +39,19 @@ const Mint = ({}: InferGetStaticPropsType<typeof getServerSideProps>) => {
           content={title}
         />
       </Head>
+      <Heading>ERC20</Heading>
       <IframeWrap>
         <iframe
           src="https://gateway.ipfscdn.io/ipfs/QmRPK2zjmkM8sodgCpyiCbLTvKGJwU3mWcwXwL2AWEBWym/token-drop.html?contract=0x5C8CA8C3A00C1Cd127018899Dd50D4C6E0174c2C&chainId=4&rpcUrl=https%3A%2F%2Feth-rinkeby.alchemyapi.io%2Fv2%2FGVwDpP4it_Zzl2xItZh9DsXW1GGAHexY&relayUrl=https%3A%2F%2Fapi.defender.openzeppelin.com%2Fautotasks%2F9bbfb5b4-478b-4686-aa2b-e4751c8cc361%2Fruns%2Fwebhook%2F38c8f056-c9f1-4f83-944e-b0cbd24ad3b8%2FAkqej5iqtiQjvToUPEs1BH"
+          width="600px"
+          height="600px"
+          frameBorder="0"
+        ></iframe>
+      </IframeWrap>
+      <Heading>ERC721</Heading>
+      <IframeWrap>
+        <iframe
+          src="https://gateway.ipfscdn.io/ipfs/QmRPK2zjmkM8sodgCpyiCbLTvKGJwU3mWcwXwL2AWEBWym/nft-drop.html?contract=0x783E3aeF7F9a388B6d7f8857e52D29F670fAAeB9&chainId=4&rpcUrl=https%3A%2F%2Feth-rinkeby.alchemyapi.io%2Fv2%2FGVwDpP4it_Zzl2xItZh9DsXW1GGAHexY&relayUrl=https%3A%2F%2Fapi.defender.openzeppelin.com%2Fautotasks%2F9bbfb5b4-478b-4686-aa2b-e4751c8cc361%2Fruns%2Fwebhook%2F38c8f056-c9f1-4f83-944e-b0cbd24ad3b8%2FAkqej5iqtiQjvToUPEs1BH"
           width="600px"
           height="600px"
           frameBorder="0"
@@ -52,6 +62,11 @@ const Mint = ({}: InferGetStaticPropsType<typeof getServerSideProps>) => {
 };
 
 export default Mint;
+
+const Heading = styled.h1`
+  ${font.h3};
+  margin: 32px 0 16px;
+`;
 
 const IframeWrap = styled.div`
   margin: 128px 0 0;
