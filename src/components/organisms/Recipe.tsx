@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Resource } from "../../../@types/schema";
 import { useMedia } from "../../utils/useMedia";
+import { getResources } from "../../utils/gtm";
 
 type Props = {
   children: ReactNode;
@@ -122,7 +123,12 @@ const WrapperLeftComponent: React.FC<{
       <ResourceWrap>
         {resource &&
           resource.map((resource, index) => (
-            <Resource key={index} href={resource.href} target={"_blank"}>
+            <Resource
+              key={index}
+              href={resource.href}
+              target={"_blank"}
+              onClick={() => getResources("get_resources_button")}
+            >
               {resource.plain_text}
             </Resource>
           ))}

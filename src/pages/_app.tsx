@@ -5,6 +5,10 @@ import emotionReset from "emotion-reset";
 import Layout from "../components/Layout";
 import { color } from "../styles";
 import { AnimatePresence } from "framer-motion";
+import GoogleTagManager, {
+  GoogleTagManagerId,
+} from "../components/molecules/GoogleTagManager";
+import { googleTagManagerId } from "../utils/gtm";
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   return (
@@ -51,6 +55,9 @@ function MyApp({ Component, pageProps, router }: AppProps) {
             }
           } ;
         `}
+      />
+      <GoogleTagManager
+        googleTagManagerId={googleTagManagerId as GoogleTagManagerId}
       />
       <Layout>
         <AnimatePresence>
