@@ -134,7 +134,7 @@ const WrapperLeftComponent: React.FC<{
           ))}
       </ResourceWrap>
 
-      {resource && (
+      {/* {resource && (
         <FinalChain>
           Certified on
           <span>
@@ -147,7 +147,7 @@ const WrapperLeftComponent: React.FC<{
             </a>
           </span>
         </FinalChain>
-      )}
+      )} */}
     </WrapperLeft>
   );
 };
