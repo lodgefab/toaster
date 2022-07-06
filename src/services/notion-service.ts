@@ -104,7 +104,7 @@ export default class NotionService {
       tags: page.properties.Tags.multi_select,
       description: page.properties.Description.rich_text[0].plain_text,
       date: page.properties.Updated.last_edited_time,
-      slug: page.properties.Slug.formula.string,
+      slug: page.properties.Slug.rich_text[0].plain_text,
       version: page.properties.Versions.formula.string,
       model: page.properties.Model.rich_text[0]?.plain_text,
       resource: page.properties.Resources.rich_text,
