@@ -295,30 +295,3 @@ const Resource = styled.a`
     background-size: contain;
   }
 `;
-
-const FinalChain = styled.p`
-  ${font.body2};
-  margin-top: 8px;
-  display: inline-flex;
-  align-items: center;
-  span {
-    display: flex;
-    padding: 4px 8px;
-    margin: 0 0 0 8px;
-    background-color: #e0e0e0;
-    border-radius: 16px;
-  }
-  a {
-    display: inline-flex;
-    align-items: center;
-  }
-  a:before {
-    content: "";
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin: 0 4px 0 0;
-    background-image: url("/icons/link.svg");
-    background-size: contain;
-  }
-`;
