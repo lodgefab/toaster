@@ -1,7 +1,7 @@
 import { FunctionComponent, ReactNode, useMemo, useState } from "react";
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
-import { color, font, media, zIndex } from "../../styles";
+import { color, curve, font, media, zIndex } from "../../styles";
 import StepView from "../molecules/ModelView";
 import Image from "next/image";
 import Link from "next/link";
@@ -369,16 +369,19 @@ const Resource = styled.a`
   display: inline-flex;
   align-items: center;
   text-decoration: none;
-  padding: 4px 12px 4px 12px;
+  padding: 4px 8px 4px 8px;
   margin: 0 0 8px 0;
-  border: 1px solid ${color.content.light};
-  border-radius: 16px;
+  border: 1px solid ${color.content.superLight};
+  color:${color.content.dark};
+  border-radius: 18px;
+  filter: brightness(1);
+  transition:${curve.button};
   span{
     ${font.body2};
   }
   &:hover {
     text-decoration: none;
-
+    filter: brightness(0.8);
   }
   &:before {
     content: "";

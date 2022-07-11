@@ -21,6 +21,7 @@ export const color = {
     dark: "rgba(0,0,0,.87)",
     middle: "rgba(0,0,0,.64)",
     light: "rgba(0, 0, 0, 0.38)",
+    superLight: "rgba(0, 0, 0, 0.18)",
     gray1: "#7A7A7A",
     black: "rgba(0, 0, 0, 1.0)",
   },
