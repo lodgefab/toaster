@@ -129,7 +129,7 @@ const WrapperLeftComponent: React.FC<{
               target={"_blank"}
               onClick={() => getResources("get_resources_button")}
             >
-              {resource.plain_text}
+              <span>{resource.plain_text}</span>
             </Resource>
           ))}
       </ResourceWrap>
@@ -281,6 +281,25 @@ const MarkdownStyle = styled.div`
   }
   a {
     text-decoration: underline;
+    font-weight: bold;
+    color:${color.secondary}
+  }
+  ul{
+    li{
+      position:relative;
+      &:before{
+        display: block;
+        content:'';
+        position:absolute;
+        top:50%;
+        left:-12px;
+        width:4px;
+        height:4px;
+        border-radius:2px;
+        background-color: ${color.content.dark};
+        transform:translate(0,-50%);
+      }
+    }
   }
 `;
 
@@ -347,23 +366,36 @@ const ResourceWrap = styled.div`
     `}
 `;
 const Resource = styled.a`
-  display: inline-block;
+  display: inline-flex;
   align-items: center;
   text-decoration: none;
   padding: 4px 12px 4px 12px;
   margin: 0 0 8px 0;
   border: 1px solid ${color.content.light};
   border-radius: 16px;
+  span{
+    ${font.body2};
+  }
   &:hover {
     text-decoration: none;
+
   }
   &:before {
     content: "";
     display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin: 0 8px 0 0;
+    background-image: url("/icons/github.svg");
+    background-size: contain;
+  }
+  &:after {
+    content: "";
+    display: inline-block;
     width: 16px;
     height: 16px;
-    margin: 0 4px 0 0;
-    background-image: url("/icons/document.svg");
+    margin: 0 0 0 8px;
+    background-image: url("/icons/external_circle.svg");
     background-size: contain;
   }
 `;

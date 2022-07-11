@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 
 export const color = {
   primary: "#f2c13a",
-  secondary: "#0997ba",
+  secondary: "#008892",
   subColor: {
     blue: "#3D98B8",
     orange: "#FF9575",
