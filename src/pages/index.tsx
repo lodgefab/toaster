@@ -33,7 +33,8 @@ const Page = ({
 }: InferGetStaticPropsType<typeof getServerSideProps>) => {
   const title = "Toaster";
   const description =
-    "Toasterは料理のレシピをシェアするようにものづくりのノウハウをシェアし、市民の手でできるものづくりの範囲を広げていく活動です";
+    "「日々の営みに根付くものづくり」をテーマに生活にインパクトを与えるモノづくりの手法を「レシピ」としてオープンソースで公開していきます。";
+  const ogimage = '/OGP.jpg'
 
   return (
     <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
@@ -48,7 +49,12 @@ const Page = ({
         <meta
           name={"og:description"}
           title={"og:description"}
-          content={title}
+          content={description}
+        />
+        <meta
+          name={"og:image"}
+          title={"og:image"}
+          content={ogimage}
         />
       </Head>
 
