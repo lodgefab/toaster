@@ -34,7 +34,7 @@ const Page = ({
   const title = "Toaster";
   const description =
     "「日々の営みに根付くものづくり」をテーマに生活にインパクトを与えるモノづくりの手法を「レシピ」としてオープンソースで公開していきます。";
-  const ogimage = '/public/images/OGP.jpg'
+  const ogimage = '/OGP.jpg'
 
   return (
     <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
