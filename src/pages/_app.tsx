@@ -9,8 +9,14 @@ import GoogleTagManager, {
   GoogleTagManagerId,
 } from "../components/molecules/GoogleTagManager";
 import { googleTagManagerId } from "../utils/gtm";
+import { NftContractProvider } from "../contexts/NFTContractProvider";
+import { ThirdwebProvider } from "@thirdweb-dev/react";
+
+const activeChainId: number = parseInt(`${process.env.NEXT_PUBLIC_CHAIN_ID}`)
 
 function MyApp({ Component, pageProps, router }: AppProps) {
+  // const chainId = ChainId.Goerli
+  
   return (
     <>
       <Global
@@ -59,11 +65,15 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       <GoogleTagManager
         googleTagManagerId={googleTagManagerId as GoogleTagManagerId}
       />
+      <ThirdwebProvider desiredChainId={activeChainId}>
+        <NftContractProvider>
       <Layout>
         <AnimatePresence>
           <Component {...pageProps} key={router.route} />
         </AnimatePresence>
       </Layout>
+      </NftContractProvider>
+      </ThirdwebProvider>
     </>
   );
 }

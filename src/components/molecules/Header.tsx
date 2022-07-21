@@ -6,16 +6,26 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useMedia } from "../../utils/useMedia";
+import PrimaryButton from "../atoms/PrimaryButton";
+import {useConnectWallet} from "../../hooks/useConnectWallet"
+import { useDisconnect } from "@thirdweb-dev/react";
 
 type Props = {
   height: number;
 };
+
+const truncate = (str: string, len: number) => {
+  return str.length <= len ? str : str.substr(0, len) + '...'
+}
 
 const Header: React.VFC<Props> = ({ height }) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [isSPMenuOpen, setSPMenuOpen] = useState(false);
   const isMobile = useMedia().isMobile;
+  const { address, connectWallet } = useConnectWallet()
+  const disconnectWallet = useDisconnect()
+  const [addressHovering, setAddressHovering] = useState(false)
 
   const spMenu = {
     variantA: { rotate: 0 },
@@ -62,6 +72,22 @@ const Header: React.VFC<Props> = ({ height }) => {
       <Link href={"/"} passHref>
         <Logo>🍞 Toaster</Logo>
       </Link>
+      
+        {address ? (
+        <div
+          onMouseEnter={() => setAddressHovering(true)}
+          onMouseLeave={() => setAddressHovering(false)}
+        >
+          {addressHovering ? (
+            
+            <PrimaryButton label={'Disconnect'} onClick={disconnectWallet}/>
+          ) : (
+              <PrimaryButton label={truncate(address, 14)} onClick={disconnectWallet}/>
+          )}
+        </div>
+      ) : (
+        <PrimaryButton label={'Connect'} onClick={connectWallet}/>
+      )}
       {isMobile && (
         <SPMenu
           onClick={() => {
