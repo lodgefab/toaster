@@ -281,6 +281,9 @@ const HeroDescription = styled(motion.p)`
 const HeroLeft = styled.div`
   height: 480px;
   box-sizing: border-box;
+  canvas{
+    touch-action: none;
+  }
   ${media.lg`
     padding:0 0 0 30vw;
   `}
