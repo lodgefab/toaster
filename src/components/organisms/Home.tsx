@@ -219,7 +219,7 @@ export const Home: React.VFC<Props> = ({ blogPosts, projectPosts }) => {
               src={value}
               key={index}
               onHoverStart={() => setPage([index, 1])}
-              isSelected={index == imageIndex ? true : false}
+              iscursor={index == imageIndex ? "true" : "false"}
               onClick={() => setPage([index, 1])}
             />
           ))}
@@ -434,13 +434,13 @@ const ThumbnailGrid = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   gap: 2px;
 `;
-const StudioGalleryImg = styled(motion.img)<{ isSelected: boolean }>`
+const StudioGalleryImg = styled(motion.img)<{ iscursor: string }>`
   width: 100%;
   height: auto;
   cursor: pointer;
   box-sizing: border-box;
   border: ${(props) =>
-    props.isSelected ? `solid 1px ${color.content.dark}` : `none`};
+    props.iscursor==="true" ? `solid 1px ${color.content.dark}` : `none`};
 `;
 const PeopleGrid = styled.div`
   display: grid;
