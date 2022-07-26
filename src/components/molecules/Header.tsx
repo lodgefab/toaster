@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useContext, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { color, font, media, zIndex } from "../../styles";
 import { Link as Scroll } from "react-scroll";
@@ -8,7 +8,10 @@ import Link from "next/link";
 import { useMedia } from "../../utils/useMedia";
 import PrimaryButton from "../atoms/PrimaryButton";
 import {useConnectWallet} from "../../hooks/useConnectWallet"
-import { useDisconnect } from "@thirdweb-dev/react";
+import { useClaimNFT, useDisconnect, useEditionDrop, useNetwork, useNetworkMismatch, useNFTs } from "@thirdweb-dev/react";
+import { BigNumber } from "ethers";
+import { NftContractContext } from "../../contexts/NFTContractProvider";
+import { Token } from "@thirdweb-dev/sdk";
 
 type Props = {
   height: number;
@@ -23,10 +26,31 @@ const Header: React.VFC<Props> = ({ height }) => {
   const [loading, setLoading] = useState(false);
   const [isSPMenuOpen, setSPMenuOpen] = useState(false);
   const isMobile = useMedia().isMobile;
+  // Connect/Disconecct Wallet
   const { address, connectWallet } = useConnectWallet()
   const disconnectWallet = useDisconnect()
   const [addressHovering, setAddressHovering] = useState(false)
 
+  // Network Detection
+  const networkMismatch = useNetworkMismatch();
+  const [, switchNetwork] = useNetwork();
+
+
+  // Connect to the Edition Drop contract
+  const editionDropContract = useEditionDrop(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS);
+
+  // Get all NFTs from the Edition Drop contract
+  const { data: nfts, isLoading } = useNFTs(editionDropContract);
+
+  // Claim an NFT (and update the nfts above)
+  const { mutate: claimNft, isLoading: claiming } = useClaimNFT(editionDropContract);
+
+
+  //load owned token from NFTContractProvider
+  const {ownedToasters, isContextLoading} = useContext(NftContractContext)
+
+  
+  
   const spMenu = {
     variantA: { rotate: 0 },
     variantB: { rotate: -90 },
@@ -67,6 +91,8 @@ const Header: React.VFC<Props> = ({ height }) => {
     };
   });
 
+  
+
   return (
     <Container height={height}>
       <Link href={"/"} passHref>
@@ -84,10 +110,22 @@ const Header: React.VFC<Props> = ({ height }) => {
           ) : (
               <PrimaryButton label={truncate(address, 14)} onClick={disconnectWallet}/>
           )}
+          <button
+            onClick={() =>
+              networkMismatch
+                  ? switchNetwork && switchNetwork(Number(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS))
+                  : claimNft({
+                      quantity: 1,
+                      tokenId: 0,
+                      to: address,
+                    })
+            }
+          >mint 1 token</button>
+          <p>🍞 :{!isContextLoading&&ownedToasters}</p>
         </div>
       ) : (
         <PrimaryButton label={'Connect'} onClick={connectWallet}/>
-      )}
+      )}      
       {isMobile && (
         <SPMenu
           onClick={() => {

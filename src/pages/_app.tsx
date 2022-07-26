@@ -15,7 +15,6 @@ import { ThirdwebProvider } from "@thirdweb-dev/react";
 const activeChainId: number = parseInt(`${process.env.NEXT_PUBLIC_CHAIN_ID}`)
 
 function MyApp({ Component, pageProps, router }: AppProps) {
-  // const chainId = ChainId.Goerli
   
   return (
     <>

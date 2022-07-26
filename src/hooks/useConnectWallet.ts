@@ -6,9 +6,11 @@ import {
   } from '@thirdweb-dev/react'
   
   export const useConnectWallet = () => {
+    // Wallet Connection
     const address = useAddress()
     const connectWithMetamask = useMetamask()
-  
+    
+    // NetworkDetection
     const [, switchNetwork] = useNetwork()
     const isOnWrongNetwork = useNetworkMismatch()
   

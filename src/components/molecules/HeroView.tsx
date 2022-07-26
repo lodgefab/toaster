@@ -3,6 +3,7 @@ import {
   FunctionComponent,
   lazy,
   Suspense,
+  useContext,
   useEffect,
   useRef,
   useState,
@@ -23,6 +24,7 @@ import { OrthographicCamera } from "@react-three/drei";
 import dynamic from "next/dynamic";
 import * as THREE from "three";
 import { MotionConfig } from "framer-motion";
+import { ThirdwebProvider } from "@thirdweb-dev/react";
 
 type Props = {
   model: string;
@@ -33,6 +35,9 @@ const Loader = () => {
   const { active, progress, errors, item, loaded, total } = useProgress();
   return <Html center>{progress} % loaded</Html>;
 };
+const activeChainId: number = parseInt(`${process.env.NEXT_PUBLIC_CHAIN_ID}`)
+
+
 
 const HeroView: React.VFC<Props> = ({ model, isReady }) => {
   const Model = lazy(() => import(`../../../public/models/${model}.tsx`));
@@ -44,6 +49,7 @@ const HeroView: React.VFC<Props> = ({ model, isReady }) => {
       dpr={[1, 2]}
     >
       {/* <Zoom/> */}
+      <ThirdwebProvider desiredChainId={activeChainId}>
       <ambientLight />
       <hemisphereLight
         color="#eeeeee"
@@ -62,6 +68,7 @@ const HeroView: React.VFC<Props> = ({ model, isReady }) => {
         >
           <Bounds fit clip margin={1.2}>
             <Model isReady={isReady} />
+            
           </Bounds>
           <gridHelper
             args={[10, 40, "#aaaaaa", "#cccccc"]}
@@ -71,6 +78,7 @@ const HeroView: React.VFC<Props> = ({ model, isReady }) => {
         </PresentationControls>
       </Suspense>
       {/* <OrthographicCamera zoom={1}/> */}
+      </ThirdwebProvider>
     </Canvas>
   );
 };
