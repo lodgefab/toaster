@@ -86,6 +86,20 @@ const Header: React.VFC<Props> = ({ height }) => {
     }
   };
 
+  const disconnectMenu = {
+    animate: {
+      y: 0,
+      opacity: 1,
+    },
+    initial: {
+      y: -8,
+      opacity: 0,
+      transitions: {
+        duration: 0.2,
+      },
+    }
+  }
+
   useEffect(() => {
     router.events.on("routeChangeStart", handleStart);
     router.events.on("routeChangeComplete", handleComplete);
@@ -99,40 +113,6 @@ const Header: React.VFC<Props> = ({ height }) => {
 
   return (
     <Container height={height}>
-      <Link href={"/"} passHref>
-        <Logo>🍞 Toaster</Logo>
-      </Link>
-
-      {address ? (
-        <WalletWrapper>
-          <WalletInfo
-            onClick={() => setIsShowDisconnectMenu(!isShowDisconnectMenu)}
-          >
-            👛:{truncate(address, 14)}
-            <DisconnectMenu onClick={disconnectWallet}>
-              Disconnect
-            </DisconnectMenu>
-          </WalletInfo>
-          <OwnedToaster>🍞 :{!isContextLoading && ownedToasters}</OwnedToaster>
-          <PrimaryButton
-            label={"MINT"}
-            onClick={() =>
-              networkMismatch
-                ? switchNetwork &&
-                  switchNetwork(
-                    Number(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS)
-                  )
-                : claimNft({
-                    quantity: 1,
-                    tokenId: 0,
-                    to: address,
-                  })
-            }
-          />
-        </WalletWrapper>
-      ) : (
-        <PrimaryButton label={"Connect"} onClick={connectWallet} />
-      )}
       {isMobile && (
         <SPMenu
           onClick={() => {
@@ -143,6 +123,9 @@ const Header: React.VFC<Props> = ({ height }) => {
           animate={isSPMenuOpen ? "variantB" : "variantA"}
         />
       )}
+      <Link href={"/"} passHref>
+        <Logo><span>🍞</span> Toaster</Logo>
+      </Link>
       <HeaderUL
         variants={stagger}
         animate={isSPMenuOpen ? "animate" : "initial"}
@@ -172,6 +155,48 @@ const Header: React.VFC<Props> = ({ height }) => {
           isSPMenuOpen={isSPMenuOpen}
         /> */}
       </HeaderUL>
+      {address ? (
+        <WalletWrapper>
+          <WalletInfo
+            onClick={() => setIsShowDisconnectMenu(!isShowDisconnectMenu)}
+          >
+            👛:{truncate(address, 4)}
+            <DisconnectMenu onClick={disconnectWallet} variants={disconnectMenu} animate={isShowDisconnectMenu ? "animate" : "initial"}>
+              Disconnect
+            </DisconnectMenu>
+          </WalletInfo>
+          <OwnedToaster>🍞 :{!isContextLoading && ownedToasters}</OwnedToaster>
+          {
+            networkMismatch?
+            (
+              <PrimaryButton
+                label={"Wrong Network"}
+                color={color.utils.error}
+                onClick={() =>
+                  switchNetwork && switchNetwork(
+                        Number(process.env.NEXT_PUBLIC_CHAIN_ID)
+                      )
+                }
+              />
+            ):(
+              <PrimaryButton
+            label={"MINT"}
+            onClick={() =>
+                claimNft({
+                    quantity: 1,
+                    tokenId: 0,
+                    to: address,
+                  })}
+            />
+            )
+          }
+          
+        </WalletWrapper>
+      ) : (
+        <PrimaryButton label={"Connect"} onClick={connectWallet} />
+      )}
+      
+      
     </Container>
   );
 };
@@ -272,9 +297,10 @@ const HeaderLinkItem: React.FC<{
 };
 
 const Container = styled(motion.div)<{ height: number }>`
-  display: flex;
+  display: grid;
+  grid-template-columns:auto auto auto;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   width: 100%;
   max-width: 1040px;
   height: ${(props) => props.height}px;
@@ -294,17 +320,25 @@ const Logo = styled.h1`
   cursor: pointer;
   ${media.mdsp`
         ${font.h3};
+        margin:0 0 0 16px;
     `}
+
 `;
 
 const HeaderUL = styled(motion.ul)`
   display: flex;
   flex-direction: row;
+  ${media.lg`
+    margin-bottom:24px;
+    justify-content: flex-end;
+    padding:0 32px 0 0;
+  `}
   ${media.mdsp`
         position:absolute;
         top:100%;
-        right:32px;
+        left:32px;
         flex-direction: column;
+        
     `}
 `;
 
@@ -347,15 +381,20 @@ const WalletWrapper = styled.div`
   align-items: center;
   gap: 16px;
 `;
-const WalletInfo = styled.p`
+const WalletInfo = styled.div`
   ${font.body2};
 `;
 const DisconnectMenu = styled(motion.p)`
   position: absolute;
-  bottom: -16px;
+  bottom: -24px;
   padding: 4px 12px;
-  margin: 0 0 8px 0;
+  border-radius: 16px;
+  border:1px solid ${color.utils.error};
+  cursor:pointer;
+  color:${color.utils.error};
+`;
+const OwnedToaster = styled.p`
+  padding: 8px 16px;
   background-color: #e0e0e0;
   border-radius: 16px;
 `;
-const OwnedToaster = styled.p``;
