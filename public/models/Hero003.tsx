@@ -15,6 +15,8 @@ import styled from "@emotion/styled";
 import { makeConsoleLogger } from "@notionhq/client/build/src/logging";
 import { useAddress } from "@thirdweb-dev/react";
 import { useConnectWallet } from "../../src/hooks/useConnectWallet";
+import { proxy, useSnapshot } from 'valtio'
+import { sceneState } from "../../src/utils/sceneState";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -34,13 +36,15 @@ type GLTFResult = GLTF & {
 export default function Model(
   props: JSX.IntrinsicElements["group"],
   isReady: boolean,
-  isConnected: boolean
 ) {
   const group = useRef<THREE.Group>();
   const { nodes, materials } = useGLTF(
     "/models/hero003.glb"
   ) as unknown as GLTFResult;
   const [isUp, setUp] = useState(false);
+  const { isConnected } = useSnapshot(sceneState)
+
+  
 
   const toastVariants = {
     variantUp: {
@@ -74,9 +78,6 @@ export default function Model(
       clearTimeout(timer);
     };
   }, [isUp]);
-
-  // const address = useAddress()
-  const { address, connectWallet } = useConnectWallet();
 
   // 浮遊アニメーション
   useFrame((state) => {
@@ -119,7 +120,7 @@ export default function Model(
           >
             <meshStandardMaterial
               transparent
-              color={address ? "white" : "black"}
+              color={isConnected ? "black" : "white"}
             />
             <Edges />
           </motion.mesh>

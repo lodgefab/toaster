@@ -40,7 +40,8 @@
     "react-syntax-highlighter": "^15.5.0",
     "react-twitter-embed": "^4.0.4",
     "remark-gfm": "^3.0.1",
-    "three": "^0.139.2"
+    "three": "^0.139.2",
+    "valtio": "^1.6.3"
   },
   "devDependencies": {
     "@types/node": "17.0.21",
