@@ -2,16 +2,16 @@ import styled from "@emotion/styled";
 import Link from "next/link";
 import { color, font, zIndex } from "../../styles";
 
-export const PrimaryButton = ({
-  label,
-  onClick,
-  ...otherProps
-}: {
+type Props = {
   label: string;
   onClick: () => void;
-}) => <Container onClick={onClick}>{label}</Container>;
+};
 
-// export default PrimaryButton;
+const PrimaryButton: React.VFC<Props> = ({ label, onClick }) => (
+  <Container onClick={onClick}>{label}</Container>
+);
+
+export default PrimaryButton;
 
 const Container = styled.button`
   cursor: pointer;

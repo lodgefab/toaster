@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useMedia } from "../../utils/useMedia";
-import {PrimaryButton} from "../atoms/PrimaryButton";
+import PrimaryButton from "../atoms/PrimaryButton";
 import { useConnectWallet } from "../../hooks/useConnectWallet";
 import {
   useClaimNFT,
@@ -129,7 +129,6 @@ const Header: React.VFC<Props> = ({ height }) => {
                   })
             }
           />
-          
         </WalletWrapper>
       ) : (
         <PrimaryButton label={"Connect"} onClick={connectWallet} />
@@ -346,7 +345,7 @@ const SPMenu = styled(motion.div)`
 const WalletWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap:16px;
+  gap: 16px;
 `;
 const WalletInfo = styled.p`
   ${font.body2};
@@ -359,6 +358,4 @@ const DisconnectMenu = styled(motion.p)`
   background-color: #e0e0e0;
   border-radius: 16px;
 `;
-const OwnedToaster = styled.p`
-  
-`
+const OwnedToaster = styled.p``;
