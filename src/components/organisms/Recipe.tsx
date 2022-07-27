@@ -282,22 +282,22 @@ const MarkdownStyle = styled.div`
   a {
     text-decoration: underline;
     font-weight: bold;
-    color:${color.secondary}
+    color: ${color.secondary};
   }
-  ul{
-    li{
-      position:relative;
-      &:before{
+  ul {
+    li {
+      position: relative;
+      &:before {
         display: block;
-        content:'';
-        position:absolute;
-        top:50%;
-        left:-12px;
-        width:4px;
-        height:4px;
-        border-radius:2px;
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: -12px;
+        width: 4px;
+        height: 4px;
+        border-radius: 2px;
         background-color: ${color.content.dark};
-        transform:translate(0,-50%);
+        transform: translate(0, -50%);
       }
     }
   }
@@ -372,11 +372,11 @@ const Resource = styled.a`
   padding: 4px 8px 4px 8px;
   margin: 0 0 8px 0;
   border: 1px solid ${color.content.superLight};
-  color:${color.content.dark};
+  color: ${color.content.dark};
   border-radius: 18px;
   filter: brightness(1);
-  transition:${curve.button};
-  span{
+  transition: ${curve.button};
+  span {
     ${font.body2};
   }
   &:hover {

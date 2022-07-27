@@ -113,7 +113,7 @@ const Header: React.VFC<Props> = ({ height }) => {
               Disconnect
             </DisconnectMenu>
           </WalletInfo>
-
+          <OwnedToaster>🍞 :{!isContextLoading && ownedToasters}</OwnedToaster>
           <PrimaryButton
             label={"MINT"}
             onClick={() =>
@@ -129,7 +129,7 @@ const Header: React.VFC<Props> = ({ height }) => {
                   })
             }
           />
-          <p>🍞 :{!isContextLoading && ownedToasters}</p>
+          
         </WalletWrapper>
       ) : (
         <PrimaryButton label={"Connect"} onClick={connectWallet} />
@@ -345,15 +345,20 @@ const SPMenu = styled(motion.div)`
 `;
 const WalletWrapper = styled.div`
   display: flex;
+  align-items: center;
+  gap:16px;
 `;
 const WalletInfo = styled.p`
   ${font.body2};
 `;
 const DisconnectMenu = styled(motion.p)`
   position: absolute;
-  bottom: -8px;
+  bottom: -16px;
   padding: 4px 12px;
   margin: 0 0 8px 0;
   background-color: #e0e0e0;
   border-radius: 16px;
 `;
+const OwnedToaster = styled.p`
+  
+`

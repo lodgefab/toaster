@@ -281,7 +281,7 @@ const HeroDescription = styled(motion.p)`
 const HeroLeft = styled.div`
   height: 480px;
   box-sizing: border-box;
-  canvas{
+  canvas {
     touch-action: none;
   }
   ${media.lg`
@@ -443,7 +443,7 @@ const StudioGalleryImg = styled(motion.img)<{ iscursor: string }>`
   cursor: pointer;
   box-sizing: border-box;
   border: ${(props) =>
-    props.iscursor==="true" ? `solid 1px ${color.content.dark}` : `none`};
+    props.iscursor === "true" ? `solid 1px ${color.content.dark}` : `none`};
 `;
 const PeopleGrid = styled.div`
   display: grid;

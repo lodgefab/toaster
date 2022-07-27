@@ -34,7 +34,7 @@ const Page = ({
   const title = "Toaster";
   const description =
     "「日々の営みに根付くものづくり」をテーマに生活にインパクトを与えるモノづくりの手法を「レシピ」としてオープンソースで公開していきます。";
-  const ogimage = '/OGP.jpg'
+  const ogimage = "/OGP.jpg";
 
   return (
     <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
@@ -51,11 +51,7 @@ const Page = ({
           title={"og:description"}
           content={description}
         />
-        <meta
-          name={"og:image"}
-          title={"og:image"}
-          content={ogimage}
-        />
+        <meta name={"og:image"} title={"og:image"} content={ogimage} />
       </Head>
 
       <Home blogPosts={blogPosts} projectPosts={projectPosts}></Home>

@@ -7,110 +7,108 @@ import {
   useEditionDrop,
   useUnclaimedNFTSupply,
   useNFTs,
-} from '@thirdweb-dev/react'
+} from "@thirdweb-dev/react";
 import {
   createContext,
   Dispatch,
   SetStateAction,
   useEffect,
   useState,
-} from 'react'
-import { BigNumber, ethers } from 'ethers'
-import { useConnectWallet } from '../hooks/useConnectWallet'
+} from "react";
+import { BigNumber, ethers } from "ethers";
+import { useConnectWallet } from "../hooks/useConnectWallet";
 
 type Store = {
-  isContextLoading: boolean
-  allTokens: Array<any>
-  isClaiming: boolean
-  isConnected: boolean
-  setIsClaiming?: Dispatch<SetStateAction<boolean>>
-  spMenuOpened: boolean
-  setSpMenuOpened?: Dispatch<SetStateAction<boolean>>
-  ownedTokens: Array<any>
-  ownedToasters: number
-  setOwnedTokens?: Dispatch<SetStateAction<boolean>>
-  claimPrice: string
-  totalSupply: number
-  claimedSupply: number
-}
+  isContextLoading: boolean;
+  allTokens: Array<any>;
+  isClaiming: boolean;
+  isConnected: boolean;
+  setIsClaiming?: Dispatch<SetStateAction<boolean>>;
+  spMenuOpened: boolean;
+  setSpMenuOpened?: Dispatch<SetStateAction<boolean>>;
+  ownedTokens: Array<any>;
+  ownedToasters: number;
+  setOwnedTokens?: Dispatch<SetStateAction<boolean>>;
+  claimPrice: string;
+  totalSupply: number;
+  claimedSupply: number;
+};
 
 export const NftContractContext = createContext<Store>({
   isContextLoading: true,
   allTokens: [],
   isClaiming: false,
-  isConnected:false,
+  isConnected: false,
   spMenuOpened: false,
   ownedTokens: [],
-  ownedToasters:0,
-  claimPrice: '',
+  ownedToasters: 0,
+  claimPrice: "",
   totalSupply: 0,
   claimedSupply: 0,
-})
+});
 
 type Props = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 const Component: React.FC<Props> = ({ children }: Props) => {
-  const editionDrop = useEditionDrop(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS)
+  const editionDrop = useEditionDrop(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS);
 
-  const tokenId = Number(process.env.TOKEN_ID)
+  const tokenId = Number(process.env.TOKEN_ID);
 
-  const address = useAddress()
+  const address = useAddress();
 
   // const { data: nfts, isLoading } = useNFTs(editionDrop);
 
-  const [allTokens, setAllTokens] = useState<Array<any>>([])
-  const [isContextLoading, setIsContextLoading] = useState(true)
-  const [isClaiming, setIsClaiming] = useState<boolean>(false)
-  const [isConnected, setIsConeccted] = useState<boolean>(false)
-  const [spMenuOpened, setSpMenuOpened] = useState<boolean>(false)
-  const [ownedTokens, setOwnedTokens] = useState<Array<any>>([])
-  const [ownedToasters, setOwnedToasters] = useState<number>(0)
-  const [claimPrice, setClaimPrice] = useState<string>('')
-  const [totalSupply, setTotalSupply] = useState<number>(0)
-  const [claimedSupply, setClaimedSupply] = useState<number>(0)
+  const [allTokens, setAllTokens] = useState<Array<any>>([]);
+  const [isContextLoading, setIsContextLoading] = useState(true);
+  const [isClaiming, setIsClaiming] = useState<boolean>(false);
+  const [isConnected, setIsConeccted] = useState<boolean>(false);
+  const [spMenuOpened, setSpMenuOpened] = useState<boolean>(false);
+  const [ownedTokens, setOwnedTokens] = useState<Array<any>>([]);
+  const [ownedToasters, setOwnedToasters] = useState<number>(0);
+  const [claimPrice, setClaimPrice] = useState<string>("");
+  const [totalSupply, setTotalSupply] = useState<number>(0);
+  const [claimedSupply, setClaimedSupply] = useState<number>(0);
   // useUnclaimedNFTSupply is not supported on editionDrop
   // const { data: unclaimedNft } = useUnclaimedNFTSupply(editionDrop)
-  const { data: claimedNft } = useClaimedNFTSupply(editionDrop)
-  
+  const { data: claimedNft } = useClaimedNFTSupply(editionDrop);
 
   // update connectionate connection
   useEffect(() => {
-    
-    setIsConeccted(address?true:false)
-  }, [address])
+    setIsConeccted(address ? true : false);
+  }, [address]);
 
   // get All Tokens of the Edition
   useEffect(() => {
-    
     editionDrop?.getAll().then((results) => {
-      setAllTokens(results)
-      setIsContextLoading(false)
-      // console.log(parseInt(allTokens[0].supply._hex, 16))  
-    })
-    
+      setAllTokens(results);
+      setIsContextLoading(false);
+      // console.log(parseInt(allTokens[0].supply._hex, 16))
+    });
 
     // editionDrop?.claimConditions.getActive(tokenId).then((activeClaimCondition) => {
     //   setClaimPrice(ethers.utils.formatUnits(activeClaimCondition.price._hex))
     // })
-  }, [])
+  }, []);
   //get Owned Toaster Token Info
-  useEffect(()=>{
-    setOwnedToasters(0)
+  useEffect(() => {
+    setOwnedToasters(0);
 
-    if(address){
-      setIsContextLoading(true)
+    if (address) {
+      setIsContextLoading(true);
       editionDrop?.getOwned(address).then((results) => {
-        results.map((result)=>{
-          setOwnedToasters((prev)=> prev + parseInt(result.quantityOwned._hex, 16))
-        })
-        setOwnedTokens(results)
-        setIsContextLoading(false)
-      })
+        results.map((result) => {
+          setOwnedToasters(
+            (prev) => prev + parseInt(result.quantityOwned._hex, 16)
+          );
+        });
+        setOwnedTokens(results);
+        setIsContextLoading(false);
+      });
     }
-  }, [address])
-  
+  }, [address]);
+
   //get Owned Token Info
   // useEffect(() => {
   //   if (address) {
@@ -132,7 +130,6 @@ const Component: React.FC<Props> = ({ children }: Props) => {
   //       : 0
   //   )
   // }, [allTokens])
-
 
   //update Token Status after claim
   // useEffect(() => {
@@ -160,13 +157,13 @@ const Component: React.FC<Props> = ({ children }: Props) => {
     claimPrice,
     claimedSupply,
     totalSupply,
-  }
+  };
 
   return (
     <NftContractContext.Provider value={store}>
       {children}
     </NftContractContext.Provider>
-  )
-}
+  );
+};
 
-export { Component as NftContractProvider }
+export { Component as NftContractProvider };

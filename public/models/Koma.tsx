@@ -26,31 +26,28 @@ export default function Model({ ...props }: JSX.IntrinsicElements["group"]) {
       <mesh
         geometry={nodes.mold_right_ejector.geometry}
         material={materials.Material_0}
-        >
-            <meshStandardMaterial transparent />
-            <Edges />
-        </mesh>
+      >
+        <meshStandardMaterial transparent />
+        <Edges />
+      </mesh>
       <mesh
         geometry={nodes.mold_right.geometry}
         material={materials.Material_1}
-        >
-            <meshStandardMaterial transparent />
-            <Edges />
-        </mesh>
-      <mesh
-        geometry={nodes.mold_left.geometry}
-        material={materials.Material_2}
-        >
-            <meshStandardMaterial transparent />
-            <Edges />
-        </mesh>
+      >
+        <meshStandardMaterial transparent />
+        <Edges />
+      </mesh>
+      <mesh geometry={nodes.mold_left.geometry} material={materials.Material_2}>
+        <meshStandardMaterial transparent />
+        <Edges />
+      </mesh>
       <mesh
         geometry={nodes.mold_left_ejector.geometry}
         material={materials.Material_3}
-        >
-            <meshStandardMaterial transparent />
-            <Edges />
-        </mesh>
+      >
+        <meshStandardMaterial transparent />
+        <Edges />
+      </mesh>
     </group>
   );
 }
