@@ -13,6 +13,8 @@ import { color, spring } from "../../src/styles";
 import { useAnimation, useCycle } from "framer-motion";
 import styled from "@emotion/styled";
 import { makeConsoleLogger } from "@notionhq/client/build/src/logging";
+import { useAddress } from "@thirdweb-dev/react";
+import { useConnectWallet } from "../../src/hooks/useConnectWallet";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -31,7 +33,8 @@ type GLTFResult = GLTF & {
 
 export default function Model(
   props: JSX.IntrinsicElements["group"],
-  isReady: boolean
+  isReady: boolean,
+  isConnected: boolean
 ) {
   const group = useRef<THREE.Group>();
   const { nodes, materials } = useGLTF(
@@ -72,6 +75,9 @@ export default function Model(
     };
   }, [isUp]);
 
+  // const address = useAddress()
+  const { address, connectWallet } = useConnectWallet();
+
   // 浮遊アニメーション
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
@@ -111,7 +117,10 @@ export default function Model(
             {...useCursor()}
             transition={{ ...spring, damping: 100 }}
           >
-            <meshStandardMaterial transparent />
+            <meshStandardMaterial
+              transparent
+              color={address ? "white" : "black"}
+            />
             <Edges />
           </motion.mesh>
         </motion.group>

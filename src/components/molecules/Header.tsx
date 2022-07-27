@@ -7,8 +7,15 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useMedia } from "../../utils/useMedia";
 import PrimaryButton from "../atoms/PrimaryButton";
-import {useConnectWallet} from "../../hooks/useConnectWallet"
-import { useClaimNFT, useDisconnect, useEditionDrop, useNetwork, useNetworkMismatch, useNFTs } from "@thirdweb-dev/react";
+import { useConnectWallet } from "../../hooks/useConnectWallet";
+import {
+  useClaimNFT,
+  useDisconnect,
+  useEditionDrop,
+  useNetwork,
+  useNetworkMismatch,
+  useNFTs,
+} from "@thirdweb-dev/react";
 import { BigNumber } from "ethers";
 import { NftContractContext } from "../../contexts/NFTContractProvider";
 import { Token } from "@thirdweb-dev/sdk";
@@ -18,8 +25,8 @@ type Props = {
 };
 
 const truncate = (str: string, len: number) => {
-  return str.length <= len ? str : str.substr(0, len) + '...'
-}
+  return str.length <= len ? str : str.substr(0, len) + "...";
+};
 
 const Header: React.VFC<Props> = ({ height }) => {
   const router = useRouter();
@@ -27,30 +34,29 @@ const Header: React.VFC<Props> = ({ height }) => {
   const [isSPMenuOpen, setSPMenuOpen] = useState(false);
   const isMobile = useMedia().isMobile;
   // Connect/Disconecct Wallet
-  const { address, connectWallet } = useConnectWallet()
-  const disconnectWallet = useDisconnect()
-  const [addressHovering, setAddressHovering] = useState(false)
+  const { address, connectWallet } = useConnectWallet();
+  const disconnectWallet = useDisconnect();
+  const [isShowDisconnectMenu, setIsShowDisconnectMenu] = useState(false);
 
   // Network Detection
   const networkMismatch = useNetworkMismatch();
   const [, switchNetwork] = useNetwork();
 
-
   // Connect to the Edition Drop contract
-  const editionDropContract = useEditionDrop(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS);
+  const editionDropContract = useEditionDrop(
+    process.env.NEXT_PUBLIC_CONTRACT_ADDRESS
+  );
 
   // Get all NFTs from the Edition Drop contract
   const { data: nfts, isLoading } = useNFTs(editionDropContract);
 
   // Claim an NFT (and update the nfts above)
-  const { mutate: claimNft, isLoading: claiming } = useClaimNFT(editionDropContract);
-
+  const { mutate: claimNft, isLoading: claiming } =
+    useClaimNFT(editionDropContract);
 
   //load owned token from NFTContractProvider
-  const {ownedToasters, isContextLoading} = useContext(NftContractContext)
+  const { ownedToasters, isContextLoading } = useContext(NftContractContext);
 
-  
-  
   const spMenu = {
     variantA: { rotate: 0 },
     variantB: { rotate: -90 },
@@ -91,41 +97,43 @@ const Header: React.VFC<Props> = ({ height }) => {
     };
   });
 
-  
-
   return (
     <Container height={height}>
       <Link href={"/"} passHref>
         <Logo>🍞 Toaster</Logo>
       </Link>
-      
-        {address ? (
-        <div
-          onMouseEnter={() => setAddressHovering(true)}
-          onMouseLeave={() => setAddressHovering(false)}
-        >
-          {addressHovering ? (
-            
-            <PrimaryButton label={'Disconnect'} onClick={disconnectWallet}/>
-          ) : (
-              <PrimaryButton label={truncate(address, 14)} onClick={disconnectWallet}/>
-          )}
-          <button
+
+      {address ? (
+        <WalletWrapper>
+          <WalletInfo
+            onClick={() => setIsShowDisconnectMenu(!isShowDisconnectMenu)}
+          >
+            👛:{truncate(address, 14)}
+            <DisconnectMenu onClick={disconnectWallet}>
+              Disconnect
+            </DisconnectMenu>
+          </WalletInfo>
+
+          <PrimaryButton
+            label={"MINT"}
             onClick={() =>
               networkMismatch
-                  ? switchNetwork && switchNetwork(Number(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS))
-                  : claimNft({
-                      quantity: 1,
-                      tokenId: 0,
-                      to: address,
-                    })
+                ? switchNetwork &&
+                  switchNetwork(
+                    Number(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS)
+                  )
+                : claimNft({
+                    quantity: 1,
+                    tokenId: 0,
+                    to: address,
+                  })
             }
-          >mint 1 token</button>
-          <p>🍞 :{!isContextLoading&&ownedToasters}</p>
-        </div>
+          />
+          <p>🍞 :{!isContextLoading && ownedToasters}</p>
+        </WalletWrapper>
       ) : (
-        <PrimaryButton label={'Connect'} onClick={connectWallet}/>
-      )}      
+        <PrimaryButton label={"Connect"} onClick={connectWallet} />
+      )}
       {isMobile && (
         <SPMenu
           onClick={() => {
@@ -334,4 +342,18 @@ const SPMenu = styled(motion.div)`
   background-image: url("/icons/handle.svg");
   background-size: contain;
   background-position: center;
+`;
+const WalletWrapper = styled.div`
+  display: flex;
+`;
+const WalletInfo = styled.p`
+  ${font.body2};
+`;
+const DisconnectMenu = styled(motion.p)`
+  position: absolute;
+  bottom: -8px;
+  padding: 4px 12px;
+  margin: 0 0 8px 0;
+  background-color: #e0e0e0;
+  border-radius: 16px;
 `;

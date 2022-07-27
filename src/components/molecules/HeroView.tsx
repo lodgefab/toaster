@@ -24,7 +24,8 @@ import { OrthographicCamera } from "@react-three/drei";
 import dynamic from "next/dynamic";
 import * as THREE from "three";
 import { MotionConfig } from "framer-motion";
-import { ThirdwebProvider } from "@thirdweb-dev/react";
+import { ThirdwebProvider, useAddress } from "@thirdweb-dev/react";
+import { useConnectWallet } from "../../hooks/useConnectWallet";
 
 type Props = {
   model: string;
@@ -35,12 +36,14 @@ const Loader = () => {
   const { active, progress, errors, item, loaded, total } = useProgress();
   return <Html center>{progress} % loaded</Html>;
 };
-const activeChainId: number = parseInt(`${process.env.NEXT_PUBLIC_CHAIN_ID}`)
-
-
+const activeChainId: number = parseInt(`${process.env.NEXT_PUBLIC_CHAIN_ID}`);
 
 const HeroView: React.VFC<Props> = ({ model, isReady }) => {
   const Model = lazy(() => import(`../../../public/models/${model}.tsx`));
+  const address = useAddress();
+  useEffect(() => {
+    console.log(address ? true : false);
+  });
 
   return (
     <Canvas
@@ -50,34 +53,33 @@ const HeroView: React.VFC<Props> = ({ model, isReady }) => {
     >
       {/* <Zoom/> */}
       <ThirdwebProvider desiredChainId={activeChainId}>
-      <ambientLight />
-      <hemisphereLight
-        color="#eeeeee"
-        groundColor="#eeeeee"
-        position={[-7, 25, 13]}
-        intensity={1}
-      />
-      <Suspense fallback={<Loader />}>
-        <PresentationControls
-          global
-          rotation={[0, -Math.PI / 4, 0]}
-          polar={[0, Math.PI / 4]}
-          azimuth={[-Math.PI / 4, Math.PI / 4]}
-          cursor={false}
-          snap={true}
-        >
-          <Bounds fit clip margin={1.2}>
-            <Model isReady={isReady} />
-            
-          </Bounds>
-          <gridHelper
-            args={[10, 40, "#aaaaaa", "#cccccc"]}
-            position={[-0.25, -1.2, 0]}
-            rotation={[0, 0, 0]}
-          />
-        </PresentationControls>
-      </Suspense>
-      {/* <OrthographicCamera zoom={1}/> */}
+        <ambientLight />
+        <hemisphereLight
+          color="#eeeeee"
+          groundColor="#eeeeee"
+          position={[-7, 25, 13]}
+          intensity={1}
+        />
+        <Suspense fallback={<Loader />}>
+          <PresentationControls
+            global
+            rotation={[0, -Math.PI / 4, 0]}
+            polar={[0, Math.PI / 4]}
+            azimuth={[-Math.PI / 4, Math.PI / 4]}
+            cursor={false}
+            snap={true}
+          >
+            <Bounds fit clip margin={1.2}>
+              <Model isReady={isReady} isConnected={address ? true : false} />
+            </Bounds>
+            <gridHelper
+              args={[10, 40, "#aaaaaa", "#cccccc"]}
+              position={[-0.25, -1.2, 0]}
+              rotation={[0, 0, 0]}
+            />
+          </PresentationControls>
+        </Suspense>
+        {/* <OrthographicCamera zoom={1}/> */}
       </ThirdwebProvider>
     </Canvas>
   );
