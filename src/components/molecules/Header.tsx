@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useMedia } from "../../utils/useMedia";
-import PrimaryButton from "../atoms/PrimaryButton";
+import {PrimaryButton} from "../atoms/PrimaryButton";
 import { useConnectWallet } from "../../hooks/useConnectWallet";
 import {
   useClaimNFT,

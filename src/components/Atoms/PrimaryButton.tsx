@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import Link from "next/link";
 import { color, font, zIndex } from "../../styles";
 
-const PrimaryButton = ({
+export const PrimaryButton = ({
   label,
   onClick,
   ...otherProps
@@ -11,7 +11,7 @@ const PrimaryButton = ({
   onClick: () => void;
 }) => <Container onClick={onClick}>{label}</Container>;
 
-export default PrimaryButton;
+// export default PrimaryButton;
 
 const Container = styled.button`
   cursor: pointer;
