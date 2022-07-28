@@ -47,6 +47,7 @@ const HeroView: React.VFC<Props> = ({ model, isReady }) => {
 
   useEffect(() => {
     sceneState.isConnected = address?true:false
+    sceneState.address = `${address}`
   },[address]);
   
 
