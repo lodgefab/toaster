@@ -7,7 +7,8 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Edges, Html, useGLTF, useTexture,Image, Text, Sphere, Circle } from "@react-three/drei";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { useFrame } from "@react-three/fiber";
-import { motion } from "framer-motion-3d";
+import { motion as motion3d } from "framer-motion-3d";
+import { motion } from "framer-motion";
 import { useCursor } from "../../src/utils/useCursor";
 import { color, spring } from "../../src/styles";
 import { useAnimation, useCycle } from "framer-motion";
@@ -98,7 +99,7 @@ export default function Model(
 
   return (
     <group ref={group} {...props} dispose={null}>
-      <motion.group
+      <motion3d.group
         animate={{ rotateY: 6.3 }}
         transition={{ ...spring, mass: 10, damping: 500 }}
       >
@@ -115,53 +116,62 @@ export default function Model(
         </group>
 
         {/* Handle */}
-        <motion.group whileHover={{ y: -0.08 }}>
-          <motion.mesh
+        <motion3d.group whileHover={{ y: -0.08 }}>
+          <motion3d.mesh
             castShadow
             receiveShadow
             geometry={nodes.handle.geometry}
             position={[0.55, -0.09, 0]}
-            onClick={() => {
-              isConnected&&address?
-              
-              (
-                claimNft({
-                  quantity: 1,
-                  tokenId: 0,
-                  to: address,
-                }),
-                console.log('minted!')
-              ):
-              setUp(!isUp)
-            }}
+            onClick={() => {setUp(!isUp)}}
             variants={handleVariants}
             animate={isUp ? "variantUp" : "variantDown"}
             {...useCursor()}
             transition={{ ...spring, damping: 100 }}
           >{
             isConnected?(
+              <>
               <meshStandardMaterial transparent color={'orange'}/>  
+              <Html 
+                  style={{
+                    transition: "all 0.2s",
+                    opacity: 1,
+                    // transform: `scale(1)`,
+                    width: 120,
+                    height: 120,
+                    padding: 0,
+                  }}
+                  position={[0.8, 0.9, 0]}
+                  center
+                  >
+                  <MintText>
+                    Press To<br/>
+                    Mint Toast🍞
+                  </MintText>
+                  <MintCursor 
+                    whileHover={{scale:1.1}}
+                    onClick={()=>{
+                      isConnected&&address&&claimNft({
+                          quantity: 1,
+                          tokenId: 0,
+                          to: address,
+                        })
+                      }}
+                  />
+              </Html>
+              </>
             ):(
               <meshStandardMaterial transparent />  
             )
           }
             
             <Edges />
-          </motion.mesh>
-          {/* {isConnected&&(
-            <>
-            <Circle>
-              <meshBasicMaterial color="hotpink" />
-            </Circle>
-            <Text characters="abcdefghijklmnopqrstuvwxyz0123456789!">
-              push to mint toast
-            </Text>
-            </>
-          )} */}
-        </motion.group>
+            
+          </motion3d.mesh>
+          
+        </motion3d.group>
 
         {/* Toast */}
-        <motion.group
+        <motion3d.group
           position={[0, -0.09, 0.17]}
           variants={toastVariants}
           animate={isUp ? "variantUp" : "variantDown"}
@@ -172,7 +182,7 @@ export default function Model(
             time: [0.5, 1],
           }}
         >
-          <motion.mesh
+          <mesh
             castShadow
             receiveShadow
             geometry={nodes.Cube004.geometry}
@@ -197,18 +207,18 @@ export default function Model(
             </Html>
             <meshStandardMaterial transparent />
             <Edges />
-          </motion.mesh>
+          </mesh>
 
-          <motion.mesh
+          <mesh
             castShadow
             receiveShadow
             geometry={nodes.Cube004_1.geometry}
           >
             <meshStandardMaterial transparent />
             <Edges />
-          </motion.mesh>
-        </motion.group>
-      </motion.group>
+          </mesh>
+        </motion3d.group>
+      </motion3d.group>
     </group>
   );
 }
@@ -239,3 +249,21 @@ const ToasterImage = styled.div`
   width: 100%;
   height: 24px;
 `;
+const MintCursor = styled(motion.div)`
+  border-radius:999px;
+  border:1px solid ${color.content.dark};
+  position:absolute;
+  width:100%;
+  height:100%;
+  cursor:pointer;
+  
+`
+
+const MintText = styled.p`
+text-align:center;
+  position:absolute;
+  top:-42px;
+  left:50%;
+  transform:translate(-50%,0);
+  width:100%;
+`
