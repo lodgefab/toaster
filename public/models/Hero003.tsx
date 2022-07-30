@@ -256,14 +256,22 @@ const MintCursor = styled(motion.div)`
   width:100%;
   height:100%;
   cursor:pointer;
-  
+  /* &:before{
+    content:'';
+    position:absolute;
+    display:block;
+    width:100%;
+    height:100%;
+    background-image: url('/icons/elipse.svg');
+    background-size: contain;
+  } */
 `
 
 const MintText = styled.p`
-text-align:center;
+  text-align:left;
   position:absolute;
-  top:-42px;
-  left:50%;
-  transform:translate(-50%,0);
+  top:50%;
+  left:-110%;
+  transform:translate(0,-50%);
   width:100%;
 `
