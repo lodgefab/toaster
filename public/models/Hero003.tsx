@@ -14,7 +14,7 @@ import { color, spring } from "../../src/styles";
 import { useAnimation, useCycle } from "framer-motion";
 import styled from "@emotion/styled";
 import { makeConsoleLogger } from "@notionhq/client/build/src/logging";
-import { useAddress, useClaimNFT, useEditionDrop } from "@thirdweb-dev/react";
+import { useAddress, useClaimNFT, useEditionDrop, useNetworkMismatch } from "@thirdweb-dev/react";
 import { useConnectWallet } from "../../src/hooks/useConnectWallet";
 import { proxy, useSnapshot } from 'valtio'
 import { sceneState } from "../../src/utils/sceneState";
@@ -52,6 +52,9 @@ export default function Model(
   // Claim an NFT (and update the nfts above)
   const { mutate: claimNft, isLoading: claiming } =
     useClaimNFT(editionDropContract);
+  
+    //networkDetection
+    const networkMismatch = useNetworkMismatch();
 
   const toastVariants = {
     variantUp: {
@@ -96,6 +99,7 @@ export default function Model(
     const t = state.clock.getElapsedTime();
     group.current!.position.y = (-4 + Math.sin(t * 2)) / 10;
   });
+
 
   return (
     <group ref={group} {...props} dispose={null}>
@@ -144,8 +148,12 @@ export default function Model(
                   center
                   >
                   <MintText>
-                    Press To<br/>
-                    Mint Toast🍞
+                    {networkMismatch?(
+                      `Wrong Network`
+                    ):(
+                      claiming?`Minting`:`Press To\nMint Toast🍞`
+                      
+                    )}
                   </MintText>
                   <MintCursor 
                     whileHover={{scale:1.1}}
