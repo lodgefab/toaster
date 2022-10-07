@@ -2,5 +2,7 @@ import { proxy, useSnapshot } from 'valtio'
 
 export const sceneState = proxy({
     isConnected: false,
-    address: ''
+    address: '',
+    isSuccessModalOpen: false,
+    txHash:''
   })

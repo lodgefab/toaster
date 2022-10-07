@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { AnimatePresence, motion, useCycle } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { BlogPost, People, ProjectPost } from "../../../@types/schema";
 import {
   color,
@@ -15,6 +15,8 @@ import RecipeCard from "../molecules/RecipeCard";
 import ProjectCard from "../molecules/ProjectCard";
 import { wrap } from "popmotion";
 import HeroView from "../molecules/HeroView";
+import SuccessModal from "../molecules/SuccessModal";
+import { AppContext } from "../../contexts/AppContextProvider";
 
 type Props = {
   blogPosts: BlogPost[];
@@ -115,6 +117,7 @@ export const Home: React.VFC<Props> = ({ blogPosts, projectPosts }) => {
   }, []);
 
   return (
+    <>
     <Container id="homeView">
       <Hero>
         <HeroLeft>
@@ -226,6 +229,8 @@ export const Home: React.VFC<Props> = ({ blogPosts, projectPosts }) => {
         </ThumbnailGrid>
       </StudioGrid>
     </Container>
+    <SuccessModal/>
+    </>
   );
 };
 

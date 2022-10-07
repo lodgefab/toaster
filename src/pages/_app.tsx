@@ -11,6 +11,7 @@ import GoogleTagManager, {
 import { googleTagManagerId } from "../utils/gtm";
 import { NftContractProvider } from "../contexts/NFTContractProvider";
 import { ThirdwebProvider } from "@thirdweb-dev/react";
+import { AppContextProvider } from "../contexts/AppContextProvider";
 
 const activeChainId: number = parseInt(`${process.env.NEXT_PUBLIC_CHAIN_ID}`);
 
@@ -65,11 +66,13 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       />
       <ThirdwebProvider desiredChainId={activeChainId}>
         <NftContractProvider>
+          <AppContextProvider>
           <Layout>
             <AnimatePresence>
               <Component {...pageProps} key={router.route} />
             </AnimatePresence>
           </Layout>
+          </AppContextProvider>
         </NftContractProvider>
       </ThirdwebProvider>
     </>

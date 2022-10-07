@@ -17,6 +17,7 @@ import {
 } from "react";
 import { BigNumber, ethers } from "ethers";
 import { useConnectWallet } from "../hooks/useConnectWallet";
+import React from "react";
 
 type Store = {
   isContextLoading: boolean;
@@ -26,6 +27,7 @@ type Store = {
   setIsClaiming?: Dispatch<SetStateAction<boolean>>;
   spMenuOpened: boolean;
   setSpMenuOpened?: Dispatch<SetStateAction<boolean>>;
+  
   ownedTokens: Array<any>;
   ownedToasters: number;
   setOwnedTokens?: Dispatch<SetStateAction<boolean>>;
@@ -33,6 +35,7 @@ type Store = {
   totalSupply: number;
   claimedSupply: number;
 };
+
 
 export const NftContractContext = createContext<Store>({
   isContextLoading: true,
@@ -46,6 +49,7 @@ export const NftContractContext = createContext<Store>({
   totalSupply: 0,
   claimedSupply: 0,
 });
+
 
 type Props = {
   children: React.ReactNode;
@@ -73,7 +77,9 @@ const Component: React.FC<Props> = ({ children }: Props) => {
   // useUnclaimedNFTSupply is not supported on editionDrop
   // const { data: unclaimedNft } = useUnclaimedNFTSupply(editionDrop)
   const { data: claimedNft } = useClaimedNFTSupply(editionDrop);
-
+  
+  
+  
   // update connectionate connection
   useEffect(() => {
     setIsConeccted(address ? true : false);
@@ -159,9 +165,10 @@ const Component: React.FC<Props> = ({ children }: Props) => {
     totalSupply,
   };
 
+
   return (
     <NftContractContext.Provider value={store}>
-      {children}
+        {children}
     </NftContractContext.Provider>
   );
 };
