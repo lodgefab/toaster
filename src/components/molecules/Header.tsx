@@ -15,10 +15,12 @@ import {
   useNetwork,
   useNetworkMismatch,
   useNFTs,
+  Web3Button,
 } from "@thirdweb-dev/react";
 import { BigNumber } from "ethers";
 import { NftContractContext } from "../../contexts/NFTContractProvider";
 import { Token } from "@thirdweb-dev/sdk";
+import { sceneState } from "../../utils/sceneState";
 
 type Props = {
   height: number;
@@ -56,6 +58,8 @@ const Header: React.VFC<Props> = ({ height }) => {
 
   //load owned token from NFTContractProvider
   const { ownedToasters, isContextLoading } = useContext(NftContractContext);
+
+  
 
   const spMenu = {
     variantA: { rotate: 0 },
@@ -186,12 +190,21 @@ const Header: React.VFC<Props> = ({ height }) => {
                     quantity: 1,
                     tokenId: 0,
                     to: address,
+                  },{
+                    onSuccess: (data) => {
+                      sceneState.isSuccessModalOpen = true
+                    },
+                    onError: (error) => {
+                      const e = error as Error;
+                      alert((e?.message as string) || "Something went wrong");
+                    },
                   })}
             />
             )
           }
-          
+          <p onClick={()=>{sceneState.isSuccessModalOpen = true}}>open Dialog</p>
         </WalletWrapper>
+
       ) : (
         <PrimaryButton label={"Connect"} onClick={connectWallet} />
       )}
