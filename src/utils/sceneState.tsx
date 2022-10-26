@@ -1,8 +1,8 @@
-import { proxy, useSnapshot } from 'valtio'
+import { proxy, useSnapshot } from "valtio";
 
 export const sceneState = proxy({
-    isConnected: false,
-    address: '',
-    isSuccessModalOpen: false,
-    txHash:''
-  })
+  isConnected: false,
+  address: "",
+  isSuccessModalOpen: false,
+  txHash: "",
+});

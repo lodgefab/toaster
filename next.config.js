@@ -5,6 +5,7 @@ module.exports = {
   reactStrictMode: true,
   basePath: process.env.GITHUB_ACTIONS ? "/toaster" : "",
   trailingSlash: true,
+  experimental: { esmExternals: true },
   images: {
     domains: ['s3.us-west-2.amazonaws.com'],
   },

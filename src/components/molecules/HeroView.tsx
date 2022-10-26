@@ -26,7 +26,7 @@ import * as THREE from "three";
 import { MotionConfig } from "framer-motion";
 import { ThirdwebProvider, useAddress } from "@thirdweb-dev/react";
 import { useConnectWallet } from "../../hooks/useConnectWallet";
-import { proxy, useSnapshot } from 'valtio'
+import { proxy, useSnapshot } from "valtio";
 import { sceneState } from "../../utils/sceneState";
 
 type Props = {
@@ -43,15 +43,12 @@ const activeChainId: number = parseInt(`${process.env.NEXT_PUBLIC_CHAIN_ID}`);
 const HeroView: React.VFC<Props> = ({ model, isReady }) => {
   const Model = lazy(() => import(`../../../public/models/${model}.tsx`));
   const address = useConnectWallet().address;
-  const snap = useSnapshot(sceneState)
+  const snap = useSnapshot(sceneState);
 
   useEffect(() => {
-    sceneState.isConnected = address?true:false
-    sceneState.address = `${address}`
-  },[address]);
-  
-
-  
+    sceneState.isConnected = address ? true : false;
+    sceneState.address = `${address}`;
+  }, [address]);
 
   return (
     <Canvas

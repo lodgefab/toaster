@@ -118,118 +118,118 @@ export const Home: React.VFC<Props> = ({ blogPosts, projectPosts }) => {
 
   return (
     <>
-    <Container id="homeView">
-      <Hero>
-        <HeroLeft>
-          <HeroView model={"Hero003"} isReady={isReady}></HeroView>
-        </HeroLeft>
-        <HeroRight
+      <Container id="homeView">
+        <Hero>
+          <HeroLeft>
+            <HeroView model={"Hero003"} isReady={isReady}></HeroView>
+          </HeroLeft>
+          <HeroRight
+            animate={isReady ? "animate" : "initial"}
+            initial={"initial"}
+          >
+            <HeroTitle variants={stagger} custom={1}>
+              <Character variants={letterUp}>T</Character>
+              <Character variants={letterUp}>o</Character>
+              <Character variants={letterUp}>a</Character>
+              <Character variants={letterUp}>s</Character>
+              <Character variants={letterUp}>t</Character>
+              <Character variants={letterUp}>e</Character>
+              <Character variants={letterUp}>r</Character>
+            </HeroTitle>
+            <motion.div variants={stagger} custom={2}>
+              <HeroDescription variants={descUp}>
+                『LODGE Toaster』は、
+                <br />
+                ヤフー社内のオープンコラボレーションハブ・LODGE内のfabスペースに日々持ち込まれる実験プロジェクトや社内外のパートナーとの共同プロジェクトの中で得られた知見や副産物を「レシピ」として公開し、オープンソースで発信していく取り組みです。
+              </HeroDescription>
+            </motion.div>
+          </HeroRight>
+        </Hero>
+        <motion.div
+          variants={stagger}
+          custom={2}
           animate={isReady ? "animate" : "initial"}
           initial={"initial"}
         >
-          <HeroTitle variants={stagger} custom={1}>
-            <Character variants={letterUp}>T</Character>
-            <Character variants={letterUp}>o</Character>
-            <Character variants={letterUp}>a</Character>
-            <Character variants={letterUp}>s</Character>
-            <Character variants={letterUp}>t</Character>
-            <Character variants={letterUp}>e</Character>
-            <Character variants={letterUp}>r</Character>
-          </HeroTitle>
-          <motion.div variants={stagger} custom={2}>
-            <HeroDescription variants={descUp}>
-              『LODGE Toaster』は、
-              <br />
-              ヤフー社内のオープンコラボレーションハブ・LODGE内のfabスペースに日々持ち込まれる実験プロジェクトや社内外のパートナーとの共同プロジェクトの中で得られた知見や副産物を「レシピ」として公開し、オープンソースで発信していく取り組みです。
-            </HeroDescription>
-          </motion.div>
-        </HeroRight>
-      </Hero>
-      <motion.div
-        variants={stagger}
-        custom={2}
-        animate={isReady ? "animate" : "initial"}
-        initial={"initial"}
-      >
-        <Title id="recipe" variants={motionConfig.fadeInUp}>
-          <span>Recipe</span>
-        </Title>
-      </motion.div>
-      <RecipeGrid
-        variants={stagger}
-        custom={2.2}
-        animate={isReady ? "animate" : "initial"}
-        initial={"initial"}
-      >
-        {blogPosts.map((post: BlogPost) => (
-          <RecipeCard key={post.id} post={post} />
-        ))}
-      </RecipeGrid>
-      <Title id={"projects"}>
-        <span>Projects</span>
-      </Title>
-      <ProjectGrid>
-        {projectPosts.map((post: ProjectPost) => (
-          <ProjectCard key={post.id} post={post} />
-        ))}
-      </ProjectGrid>
-      <Title id={"studio"}>
-        <span>Studio</span>
-      </Title>
-      <StudioGrid>
-        <SlideWrap>
-          <AnimatePresence initial={false} custom={direction}>
-            <motion.img
-              key={page}
-              src={galleyImages[imageIndex]}
-              custom={direction}
-              variants={studioGalleryVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{
-                x: { type: "spring", stiffness: 300, damping: 30 },
-                opacity: { duration: 0.2 },
-              }}
-              drag="x"
-              dragConstraints={{ left: 0, right: 0 }}
-              dragElastic={1}
-              onDragEnd={(e, { offset, velocity }) => {
-                const swipe = swipePower(offset.x, velocity.x);
-
-                if (swipe < -swipeConfidenceThreshold) {
-                  paginate(1);
-                } else if (swipe > swipeConfidenceThreshold) {
-                  paginate(-1);
-                }
-              }}
-            />
-          </AnimatePresence>
-        </SlideWrap>
-        <StudioDesc>
-          Toasterは、紀尾井町17Fに位置するLODGEのFabスペースを拠点に活動しています
-          <br />
-          <br />
-          機材：
-          <br />
-          光造形3Dプリンタ[Form2] 1台、​熱溶解積層方式3Dプリンタ[Ender3]
-          2台、CO2レーザーカッター[Trotec]、CNCミリングマシン1台[KitMill
-          BT200]、家庭用射出成型機[INARI F06]、その他一般工具
-        </StudioDesc>
-        <ThumbnailGrid>
-          {galleyImages.map((value, index) => (
-            <StudioGalleryImg
-              src={value}
-              key={index}
-              onHoverStart={() => setPage([index, 1])}
-              iscursor={index == imageIndex ? "true" : "false"}
-              onClick={() => setPage([index, 1])}
-            />
+          <Title id="recipe" variants={motionConfig.fadeInUp}>
+            <span>Recipe</span>
+          </Title>
+        </motion.div>
+        <RecipeGrid
+          variants={stagger}
+          custom={2.2}
+          animate={isReady ? "animate" : "initial"}
+          initial={"initial"}
+        >
+          {blogPosts.map((post: BlogPost) => (
+            <RecipeCard key={post.id} post={post} />
           ))}
-        </ThumbnailGrid>
-      </StudioGrid>
-    </Container>
-    <SuccessModal/>
+        </RecipeGrid>
+        <Title id={"projects"}>
+          <span>Projects</span>
+        </Title>
+        <ProjectGrid>
+          {projectPosts.map((post: ProjectPost) => (
+            <ProjectCard key={post.id} post={post} />
+          ))}
+        </ProjectGrid>
+        <Title id={"studio"}>
+          <span>Studio</span>
+        </Title>
+        <StudioGrid>
+          <SlideWrap>
+            <AnimatePresence initial={false} custom={direction}>
+              <motion.img
+                key={page}
+                src={galleyImages[imageIndex]}
+                custom={direction}
+                variants={studioGalleryVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  x: { type: "spring", stiffness: 300, damping: 30 },
+                  opacity: { duration: 0.2 },
+                }}
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={1}
+                onDragEnd={(e, { offset, velocity }) => {
+                  const swipe = swipePower(offset.x, velocity.x);
+
+                  if (swipe < -swipeConfidenceThreshold) {
+                    paginate(1);
+                  } else if (swipe > swipeConfidenceThreshold) {
+                    paginate(-1);
+                  }
+                }}
+              />
+            </AnimatePresence>
+          </SlideWrap>
+          <StudioDesc>
+            Toasterは、紀尾井町17Fに位置するLODGEのFabスペースを拠点に活動しています
+            <br />
+            <br />
+            機材：
+            <br />
+            光造形3Dプリンタ[Form2] 1台、​熱溶解積層方式3Dプリンタ[Ender3]
+            2台、CO2レーザーカッター[Trotec]、CNCミリングマシン1台[KitMill
+            BT200]、家庭用射出成型機[INARI F06]、その他一般工具
+          </StudioDesc>
+          <ThumbnailGrid>
+            {galleyImages.map((value, index) => (
+              <StudioGalleryImg
+                src={value}
+                key={index}
+                onHoverStart={() => setPage([index, 1])}
+                iscursor={index == imageIndex ? "true" : "false"}
+                onClick={() => setPage([index, 1])}
+              />
+            ))}
+          </ThumbnailGrid>
+        </StudioGrid>
+      </Container>
+      <SuccessModal />
     </>
   );
 };

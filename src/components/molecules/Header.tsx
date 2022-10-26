@@ -15,7 +15,7 @@ import {
   useNetwork,
   useNetworkMismatch,
   useNFTs,
-  Web3Button,
+  // Web3Button,
 } from "@thirdweb-dev/react";
 import { BigNumber } from "ethers";
 import { NftContractContext } from "../../contexts/NFTContractProvider";
@@ -59,8 +59,6 @@ const Header: React.VFC<Props> = ({ height }) => {
   //load owned token from NFTContractProvider
   const { ownedToasters, isContextLoading } = useContext(NftContractContext);
 
-  
-
   const spMenu = {
     variantA: { rotate: 0 },
     variantB: { rotate: -90 },
@@ -101,8 +99,8 @@ const Header: React.VFC<Props> = ({ height }) => {
       transitions: {
         duration: 0.2,
       },
-    }
-  }
+    },
+  };
 
   useEffect(() => {
     router.events.on("routeChangeStart", handleStart);
@@ -128,7 +126,9 @@ const Header: React.VFC<Props> = ({ height }) => {
         />
       )}
       <Link href={"/"} passHref>
-        <Logo><span>🍞</span> Toaster</Logo>
+        <Logo>
+          <span>🍞</span> Toaster
+        </Logo>
       </Link>
       <HeaderUL
         variants={stagger}
@@ -165,51 +165,58 @@ const Header: React.VFC<Props> = ({ height }) => {
             onClick={() => setIsShowDisconnectMenu(!isShowDisconnectMenu)}
           >
             👛:{truncate(address, 4)}
-            <DisconnectMenu onClick={disconnectWallet} variants={disconnectMenu} animate={isShowDisconnectMenu ? "animate" : "initial"}>
+            <DisconnectMenu
+              onClick={disconnectWallet}
+              variants={disconnectMenu}
+              animate={isShowDisconnectMenu ? "animate" : "initial"}
+            >
               Disconnect
             </DisconnectMenu>
           </WalletInfo>
           <OwnedToaster>🍞 :{!isContextLoading && ownedToasters}</OwnedToaster>
-          {
-            networkMismatch?
-            (
-              <PrimaryButton
-                label={"Wrong Network"}
-                color={color.utils.error}
-                onClick={() =>
-                  switchNetwork && switchNetwork(
-                        Number(process.env.NEXT_PUBLIC_CHAIN_ID)
-                      )
-                }
-              />
-            ):(
-              <PrimaryButton
-            label={"MINT"}
-            onClick={() =>
-                claimNft({
+          {networkMismatch ? (
+            <PrimaryButton
+              label={"Wrong Network"}
+              color={color.utils.error}
+              onClick={() =>
+                switchNetwork &&
+                switchNetwork(Number(process.env.NEXT_PUBLIC_CHAIN_ID))
+              }
+            />
+          ) : (
+            <PrimaryButton
+              label={"MINT"}
+              onClick={() =>
+                claimNft(
+                  {
                     quantity: 1,
                     tokenId: 0,
                     to: address,
-                  },{
+                  },
+                  {
                     onSuccess: (data) => {
-                      sceneState.isSuccessModalOpen = true
+                      sceneState.isSuccessModalOpen = true;
                     },
                     onError: (error) => {
                       const e = error as Error;
                       alert((e?.message as string) || "Something went wrong");
                     },
-                  })}
+                  }
+                )
+              }
             />
-            )
-          }
-          <p onClick={()=>{sceneState.isSuccessModalOpen = true}}>open Dialog</p>
+          )}
+          <p
+            onClick={() => {
+              sceneState.isSuccessModalOpen = true;
+            }}
+          >
+            open Dialog
+          </p>
         </WalletWrapper>
-
       ) : (
         <PrimaryButton label={"Connect"} onClick={connectWallet} />
       )}
-      
-      
     </Container>
   );
 };
@@ -311,7 +318,7 @@ const HeaderLinkItem: React.FC<{
 
 const Container = styled(motion.div)<{ height: number }>`
   display: grid;
-  grid-template-columns:auto auto auto;
+  grid-template-columns: auto auto auto;
   align-items: center;
   /* justify-content: space-between; */
   width: 100%;
@@ -335,7 +342,6 @@ const Logo = styled.h1`
         ${font.h3};
         margin:0 0 0 16px;
     `}
-
 `;
 
 const HeaderUL = styled(motion.ul)`
@@ -402,9 +408,9 @@ const DisconnectMenu = styled(motion.p)`
   bottom: -24px;
   padding: 4px 12px;
   border-radius: 16px;
-  border:1px solid ${color.utils.error};
-  cursor:pointer;
-  color:${color.utils.error};
+  border: 1px solid ${color.utils.error};
+  cursor: pointer;
+  color: ${color.utils.error};
 `;
 const OwnedToaster = styled.p`
   padding: 8px 16px;

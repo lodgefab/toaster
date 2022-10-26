@@ -67,11 +67,11 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       <ThirdwebProvider desiredChainId={activeChainId}>
         <NftContractProvider>
           <AppContextProvider>
-          <Layout>
-            <AnimatePresence>
-              <Component {...pageProps} key={router.route} />
-            </AnimatePresence>
-          </Layout>
+            <Layout>
+              <AnimatePresence>
+                <Component {...pageProps} key={router.route} />
+              </AnimatePresence>
+            </Layout>
           </AppContextProvider>
         </NftContractProvider>
       </ThirdwebProvider>
