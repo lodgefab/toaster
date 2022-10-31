@@ -15,7 +15,6 @@ import {
   useNetwork,
   useNetworkMismatch,
   useNFTs,
-  // Web3Button,
 } from "@thirdweb-dev/react";
 import { BigNumber } from "ethers";
 import { NftContractContext } from "../../contexts/NFTContractProvider";
