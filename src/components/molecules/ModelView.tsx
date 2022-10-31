@@ -38,6 +38,7 @@ const StepView: React.VFC<Props> = ({ model }) => {
       dpr={[1, 2]}
     >
       <ambientLight />
+      {/* @ts-ignore */}
       <hemisphereLight
         color="white"
         groundColor="#eeeeee"

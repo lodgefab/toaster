@@ -59,6 +59,7 @@ const HeroView: React.VFC<Props> = ({ model, isReady }) => {
       {/* <Zoom/> */}
       <ThirdwebProvider desiredChainId={activeChainId}>
         <ambientLight />
+        {/* @ts-ignore */}
         <hemisphereLight
           color="#eeeeee"
           groundColor="#eeeeee"
@@ -77,6 +78,7 @@ const HeroView: React.VFC<Props> = ({ model, isReady }) => {
             <Bounds fit clip margin={1.2}>
               <Model isReady={isReady} isConnected={address ? true : false} />
             </Bounds>
+            {/* @ts-ignore */}
             <gridHelper
               args={[10, 40, "#aaaaaa", "#cccccc"]}
               position={[-0.25, -1.2, 0]}
