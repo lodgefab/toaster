@@ -7,7 +7,6 @@ import Image from "next/image";
 import { AppContext } from "../../contexts/AppContextProvider";
 import { useSnapshot } from "valtio";
 import { sceneState } from "../../utils/sceneState";
-import { Description } from "@ethersproject/properties";
 
 type SuccessModalProps = {
 };
@@ -15,8 +14,8 @@ type SuccessModalProps = {
 const SuccessModal: VFC<SuccessModalProps> = ( props) => {
   
   const { isSuccessModalOpen } = useSnapshot(sceneState)
-  const titleRef1 = useRef<HTMLSpanElement | null>()
-  const titleRef2 = useRef<HTMLSpanElement | null>()
+  // const titleRef1 = useRef<HTMLSpanElement | null>()
+  // const titleRef2 = useRef<HTMLSpanElement | null>()
 
   return (
         <AnimatePresence>
@@ -34,7 +33,7 @@ const SuccessModal: VFC<SuccessModalProps> = ( props) => {
                           exit={{ opacity: 0, scale: 0 }}
                       >
                         <Heading  
-                        ><span ref={titleRef1}>Mint</span><br/><span ref={titleRef2}>Successfull</span></Heading>
+                        ><span>Mint</span><br/><span>Successfull</span></Heading>
                         <Video src={'/video/token.mp4'} loop autoPlay muted></Video>
                         <Bottom>
                           <LODGE href={'https://lodge.yahoo.co.jp/'} target={'_blank'}/>

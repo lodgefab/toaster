@@ -26,7 +26,7 @@ import { makeConsoleLogger } from "@notionhq/client/build/src/logging";
 import {
   useAddress,
   useClaimNFT,
-  useEditionDrop,
+  useContract,
   useNetworkMismatch,
 } from "@thirdweb-dev/react";
 import { useConnectWallet } from "../../src/hooks/useConnectWallet";
@@ -61,12 +61,14 @@ export default function Model(
   const { isConnected, address, isSuccessModalOpen } = useSnapshot(sceneState);
 
   // Connect to the Edition Drop contract
-  const editionDropContract = useEditionDrop(
-    process.env.NEXT_PUBLIC_CONTRACT_ADDRESS
+  const editionDropContract = useContract(
+    process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+    'edition-drop'
   );
+  
   // Claim an NFT (and update the nfts above)
   const { mutate: claimNft, isLoading: claiming } =
-    useClaimNFT(editionDropContract);
+    useClaimNFT(editionDropContract.contract);
 
   //networkDetection
   const networkMismatch = useNetworkMismatch();
@@ -106,9 +108,7 @@ export default function Model(
     };
   }, [isUp]);
 
-  useEffect(() => {
-    console.log(address);
-  }, [address]);
+  
   // 浮遊アニメーション
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
@@ -185,6 +185,7 @@ export default function Model(
                           {
                             onSuccess: (data) => {
                               sceneState.isSuccessModalOpen = true;
+                              // @ts-ignore
                               sceneState.txHash = data.receipt.transactionHash;
                             },
                             onError: (error) => {

@@ -4,9 +4,10 @@ import {
   useMetamask,
   useNetwork,
   useNetworkMismatch,
-  useEditionDrop,
   useUnclaimedNFTSupply,
   useNFTs,
+  useContract,
+  useOwnedNFTs,
 } from "@thirdweb-dev/react";
 import {
   createContext,
@@ -54,12 +55,16 @@ type Props = {
 };
 
 const Component: React.FC<Props> = ({ children }: Props) => {
-  const editionDrop = useEditionDrop(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS);
+  // SDK v2->v3
+  const editionDrop = useContract(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS, "edition-drop")
 
   const tokenId = Number(process.env.TOKEN_ID);
 
   const address = useAddress();
-
+  
+  // SDK v2->v3
+  const { data: ownedNFTs, isLoading, error } = useOwnedNFTs(editionDrop.contract, address);
+  
   // const { data: nfts, isLoading } = useNFTs(editionDrop);
 
   const [allTokens, setAllTokens] = useState<Array<any>>([]);
@@ -72,9 +77,6 @@ const Component: React.FC<Props> = ({ children }: Props) => {
   const [claimPrice, setClaimPrice] = useState<string>("");
   const [totalSupply, setTotalSupply] = useState<number>(0);
   const [claimedSupply, setClaimedSupply] = useState<number>(0);
-  // useUnclaimedNFTSupply is not supported on editionDrop
-  // const { data: unclaimedNft } = useUnclaimedNFTSupply(editionDrop)
-  const { data: claimedNft } = useClaimedNFTSupply(editionDrop);
 
   // update connectionate connection
   useEffect(() => {
@@ -83,68 +85,21 @@ const Component: React.FC<Props> = ({ children }: Props) => {
 
   // get All Tokens of the Edition
   useEffect(() => {
-    editionDrop?.getAll().then((results) => {
-      setAllTokens(results);
-      setIsContextLoading(false);
-      // console.log(parseInt(allTokens[0].supply._hex, 16))
-    });
+    // editionDrop?.getAll().then((results) => {
+    //   setAllTokens(results);
+    //   setIsContextLoading(false);
+    //   // console.log(parseInt(allTokens[0].supply._hex, 16))
+    // });
 
-    // editionDrop?.claimConditions.getActive(tokenId).then((activeClaimCondition) => {
-    //   setClaimPrice(ethers.utils.formatUnits(activeClaimCondition.price._hex))
-    // })
   }, []);
   //get Owned Toaster Token Info
   useEffect(() => {
     setOwnedToasters(0);
+    ownedNFTs?.map((NFT)=>{
+      setOwnedToasters((prev) => prev + NFT.quantityOwned!)
+    })
+  }, [address, isLoading]);
 
-    if (address) {
-      setIsContextLoading(true);
-      editionDrop?.getOwned(address).then((results) => {
-        results.map((result) => {
-          setOwnedToasters(
-            (prev) => prev + parseInt(result.quantityOwned._hex, 16)
-          );
-        });
-        setOwnedTokens(results);
-        setIsContextLoading(false);
-      });
-    }
-  }, [address]);
-
-  //get Owned Token Info
-  // useEffect(() => {
-  //   if (address) {
-  //     let owneds: Array<any> = []
-
-  //     allTokens.map((token) => {
-  //       if (token.owner == address) {
-  //         owneds.push(token)
-  //       }
-  //     })
-
-  //     setOwnedTokens(owneds)
-  //   }
-
-  //   setClaimedSupply(claimedNft?.toNumber() || 0)
-  //   setTotalSupply(
-  //     claimedNft
-  //       ? claimedNft.toNumber()
-  //       : 0
-  //   )
-  // }, [allTokens])
-
-  //update Token Status after claim
-  // useEffect(() => {
-  //   // TODO transaction終了時のみにする
-  //   editionDrop?.getAll().then((results) => {
-  //     setAllTokens(results)
-  //     setIsLoading(false)
-  //   })
-
-  //   editionDrop?.claimConditions.getActive(tokenId).then((activeClaimCondition) => {
-  //     setClaimPrice(ethers.utils.formatUnits(activeClaimCondition.price._hex))
-  //   })
-  // }, [isClaiming])
 
   const store: Store = {
     isContextLoading,

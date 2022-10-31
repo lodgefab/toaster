@@ -10,15 +10,13 @@ import PrimaryButton from "../Atoms/PrimaryButton";
 import { useConnectWallet } from "../../hooks/useConnectWallet";
 import {
   useClaimNFT,
+  useContract,
   useDisconnect,
-  useEditionDrop,
   useNetwork,
   useNetworkMismatch,
   useNFTs,
 } from "@thirdweb-dev/react";
-import { BigNumber } from "ethers";
 import { NftContractContext } from "../../contexts/NFTContractProvider";
-import { Token } from "@thirdweb-dev/sdk";
 import { sceneState } from "../../utils/sceneState";
 
 type Props = {
@@ -44,16 +42,18 @@ const Header: React.VFC<Props> = ({ height }) => {
   const [, switchNetwork] = useNetwork();
 
   // Connect to the Edition Drop contract
-  const editionDropContract = useEditionDrop(
-    process.env.NEXT_PUBLIC_CONTRACT_ADDRESS
-  );
+  // SDK v2->v3
+  const editionDropContract  = useContract(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS, 'edition-drop');
 
-  // Get all NFTs from the Edition Drop contract
-  const { data: nfts, isLoading } = useNFTs(editionDropContract);
+  
 
   // Claim an NFT (and update the nfts above)
-  const { mutate: claimNft, isLoading: claiming } =
-    useClaimNFT(editionDropContract);
+  const { mutate: claimNft, isLoading, error } =
+    useClaimNFT(editionDropContract.contract);
+  if (error) {
+      console.error("failed to claim nft", error);
+  }
+  
 
   //load owned token from NFTContractProvider
   const { ownedToasters, isContextLoading } = useContext(NftContractContext);
@@ -172,7 +172,7 @@ const Header: React.VFC<Props> = ({ height }) => {
               Disconnect
             </DisconnectMenu>
           </WalletInfo>
-          <OwnedToaster>🍞 :{!isContextLoading && ownedToasters}</OwnedToaster>
+          <OwnedToaster>🍞 :{ownedToasters}</OwnedToaster>
           {networkMismatch ? (
             <PrimaryButton
               label={"Wrong Network"}
@@ -195,6 +195,8 @@ const Header: React.VFC<Props> = ({ height }) => {
                   {
                     onSuccess: (data) => {
                       sceneState.isSuccessModalOpen = true;
+                      // @ts-ignore
+                      sceneState.txHash = data.receipt.transactionHash;
                     },
                     onError: (error) => {
                       const e = error as Error;

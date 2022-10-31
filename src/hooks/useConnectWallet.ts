@@ -26,7 +26,6 @@ export const useConnectWallet = () => {
 
       return;
     }
-    console.log("connect expected");
   };
 
   return { address, connectWallet };
