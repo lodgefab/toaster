@@ -80,7 +80,7 @@ const HeroView: React.VFC<Props> = ({ model, isReady }) => {
             </Bounds>
             {/* @ts-ignore */}
             <gridHelper
-              args={[10, 40, "#aaaaaa", "#cccccc"]}
+              args={[10, 40, "#d1d1d1", "#e2e2e2"]}
               position={[-0.25, -1.2, 0]}
               rotation={[0, 0, 0]}
             />
