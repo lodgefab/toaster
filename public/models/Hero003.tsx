@@ -58,17 +58,7 @@ export default function Model(
     "/models/hero003.glb"
   ) as unknown as GLTFResult;
   const [isUp, setUp] = useState(false);
-  const { isConnected, address, isSuccessModalOpen } = useSnapshot(sceneState);
-
-  // Connect to the Edition Drop contract
-  const editionDropContract = useContract(
-    process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
-    'edition-drop'
-  );
-  
-  // Claim an NFT (and update the nfts above)
-  const { mutate: claimNft, isLoading: claiming } =
-    useClaimNFT(editionDropContract.contract);
+  const {isSuccessDialogOpened} = useContext(AppContext)
 
   //networkDetection
   const networkMismatch = useNetworkMismatch();
@@ -148,7 +138,7 @@ export default function Model(
             {...useCursor()}
             transition={{ ...spring, damping: 100 }}
           >
-            {isConnected ? (
+            {/* {isConnected ? (
               <>
                 <meshStandardMaterial transparent color={"orange"} />
                 <Html
@@ -202,7 +192,7 @@ export default function Model(
               </>
             ) : (
               <meshStandardMaterial transparent />
-            )}
+            )} */}
 
             <Edges />
           </motion3d.mesh>

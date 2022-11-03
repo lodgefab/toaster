@@ -18,6 +18,7 @@ import {
 } from "@thirdweb-dev/react";
 import { NftContractContext } from "../../contexts/NFTContractProvider";
 import { sceneState } from "../../utils/sceneState";
+import { AppContext } from "../../contexts/AppContextProvider";
 
 type Props = {
   height: number;
@@ -57,6 +58,7 @@ const Header: React.VFC<Props> = ({ height }) => {
 
   //load owned token from NFTContractProvider
   const { ownedToasters, isContextLoading } = useContext(NftContractContext);
+  const {isSuccessDialogOpened, setIsSuccessDialogOpened} = useContext(AppContext)
 
   const spMenu = {
     variantA: { rotate: 0 },
@@ -207,17 +209,19 @@ const Header: React.VFC<Props> = ({ height }) => {
               }
             />
           )}
-          <p
-            onClick={() => {
-              sceneState.isSuccessModalOpen = true;
-            }}
-          >
-            open Dialog
-          </p>
+          
         </WalletWrapper>
       ) : (
         <PrimaryButton label={"Connect"} onClick={connectWallet} />
       )}
+      <p
+            onClick={() => {
+              sceneState.isSuccessModalOpen = true;
+              setIsSuccessDialogOpened(!isSuccessDialogOpened)
+            }}
+          >
+            open Dialog
+          </p>
     </Container>
   );
 };
