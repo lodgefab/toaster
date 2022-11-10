@@ -17,9 +17,11 @@ const PrimaryButton: React.VFC<Props> = ({ label, onClick, color }) => (
 export default PrimaryButton;
 
 const Container = styled.button<{ color: string | undefined }>`
+  display: flex;
   cursor: pointer;
   padding: 7.5px 16px;
-  width: 160px;
+  /* width: 160px; */
+  vertical-align: middle;
   ${font.subtitle2};
   color: ${color.background.white};
   background-color: ${(props) =>
@@ -32,7 +34,7 @@ const Container = styled.button<{ color: string | undefined }>`
     filter: brightness(0.9);
   }
   ${media.mdsp`
-    width:120px;
+    max-width:120px;
     ${font.label};
   `}
 `;

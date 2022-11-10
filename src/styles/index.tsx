@@ -10,6 +10,7 @@ export const color = {
   },
   background: {
     base: "#eeeeee",
+    tint: 'rgba(0, 0, 0, 0.04)',
     gray: "#cccccc",
     white: "#fff",
   },
