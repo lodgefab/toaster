@@ -190,22 +190,11 @@ const Header: React.VFC<Props> = ({ height }) => {
           </p>
       {address ? (
         <WalletWrapper>
-          <WalletInfo
-            onClick={() => setIsShowDisconnectMenu(!isShowDisconnectMenu)}
-          >
-            👛:{truncate(address, 4)}
-            <DisconnectMenu
-              onClick={disconnectWallet}
-              variants={disconnectMenu}
-              animate={isShowDisconnectMenu ? "animate" : "initial"}
-            >
-              Disconnect
-            </DisconnectMenu>
-          </WalletInfo>
+          
           <OwnedToaster>🍞 :{ownedToasters}</OwnedToaster>
           {networkMismatch ? (
             <PrimaryButton
-              label={"Wrong Network"}
+              label={"Switch"}
               color={color.utils.error}
               onClick={() =>
                 switchNetwork &&
@@ -499,9 +488,9 @@ const DisconnectMenu = styled(motion.p)`
   color: ${color.utils.error};
 `;
 const OwnedToaster = styled.p`
-  padding: 8px 16px;
+  padding: 8px 8px;
   background-color:${color.background.tint};
-  border-radius: 16px;
+  border-radius: 8px;
 `;
 const SNSLink = styled.a`
   display:flex;
