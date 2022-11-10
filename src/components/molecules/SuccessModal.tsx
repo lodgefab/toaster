@@ -32,8 +32,9 @@ const SuccessModal: VFC<SuccessModalProps> = ( props) => {
                           animate={{ opacity: 1, scale: 1 }}
                           exit={{ opacity: 0, scale: 0 }}
                       >
-                        <Heading  
-                        ><span>Mint</span><br/><span>Successfull</span></Heading>
+                        <Heading>
+                          <Image  src={"/images/success.svg"} layout={'fill'} objectFit='contain'/>
+                        </Heading>
                         <Video src={'/video/token.mp4'} loop autoPlay muted></Video>
                         <Bottom>
                           <LODGE href={'https://lodge.yahoo.co.jp/'} target={'_blank'}/>
@@ -77,6 +78,9 @@ const Container = styled(motion.div)`
   padding:0 0 64px 0;
   overflow: hidden;
   z-index:${zIndex.elevation.ev15};
+  ${media.mdsp`
+    padding:0 0 32px 0;
+  `}
  
 `
 
@@ -85,57 +89,66 @@ const Video = styled(motion.video)`
   max-width:980px;
 `
 
-const Heading = styled(motion.h1)`
+const Heading = styled.div`
   position: absolute;
   top:32px;
   left:32px;
-  ${font.h1}
-  font-size:98px;
-  line-height:0.8;
-  padding: 0 0 32px;
-  text-align: left;
-  color:transparent;
-  -webkit-text-stroke:1px ${color.content.dark};
-  span{
-    display: inline-block;
-    &:nth-of-type(1){
-      margin-top: -16px;
-    }
-  }
+  width:480px;
+  height:200px;
+  ${media.mdsp`
+    width:240px;
+    height:100px;
+  `} 
 `
 
 const Bottom = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap:32px;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  align-items: center;
+  gap:16px;
   padding:0 32px;
   width:100%;
 
   img{
     width:140px;
     height:auto;
+    ${media.mdsp`
+      width:120px;
+    `}
   }
 `
 const LODGE=styled.a`
-  min-width:64px;
+  width:64px;
   height:64px;
   display: block;
   background:url('/images/logo_lodge.svg');
+  ${media.mdsp`
+    width:44px;
+    height:44px;
+  `}
 `
 const Description = styled.p`
   display: flex;
   align-items: center;
-  /* width:100%; */
+  height:100%;
   border: 1px ${color.content.dark} solid;
   padding:8px 16px;
+  ${media.mdsp`
+    grid-column: 1/4;
+    grid-row: 2/3;
+  `}
 `
 
 const Etherscan = styled.a`
   display: inline-block;
-  min-width:64px;
+  width:64px;
   height:64px;
   border: 1px ${color.content.dark} solid;
   background-image: url('/images/logo_etherscan.svg');
   background-repeat: no-repeat;
   background-size: contain;
+  ${media.mdsp`
+    width:44px;
+    height:44px;
+  `}
 `
