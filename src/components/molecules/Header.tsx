@@ -179,7 +179,7 @@ const Header: React.VFC<Props> = ({ height }) => {
           </SNSs>
         </HeaderLinkItem>
       </HeaderUL>
-      <p
+      {/* <p
             onClick={() => {
               sceneState.isSuccessModalOpen = true;
               setIsSuccessDialogOpened(!isSuccessDialogOpened)
@@ -187,7 +187,7 @@ const Header: React.VFC<Props> = ({ height }) => {
             style={{position:'absolute', top:'64px', left:'32px'}}
           >
             Dialog
-          </p>
+          </p> */}
       {address ? (
         <WalletWrapper>
           
