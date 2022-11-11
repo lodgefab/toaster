@@ -20,35 +20,38 @@ type GLTFResult = GLTF & {
 
 export default function Model({ ...props }: JSX.IntrinsicElements["group"]) {
   const group = useRef<THREE.Group>();
-  const { nodes, materials } = useGLTF("/models/koma_bld.glb") as GLTFResult;
+  const { nodes, materials } = useGLTF("/models/koma_bld.glb") as unknown as GLTFResult;
   return (
-    <group ref={group} {...props} dispose={null}>
-      <mesh
-        geometry={nodes.mold_right_ejector.geometry}
-        material={materials.Material_0}
-      >
-        <meshStandardMaterial transparent />
-        <Edges />
-      </mesh>
-      <mesh
-        geometry={nodes.mold_right.geometry}
-        material={materials.Material_1}
-      >
-        <meshStandardMaterial transparent />
-        <Edges />
-      </mesh>
-      <mesh geometry={nodes.mold_left.geometry} material={materials.Material_2}>
-        <meshStandardMaterial transparent />
-        <Edges />
-      </mesh>
-      <mesh
-        geometry={nodes.mold_left_ejector.geometry}
-        material={materials.Material_3}
-      >
-        <meshStandardMaterial transparent />
-        <Edges />
-      </mesh>
-    </group>
+    <>
+    {/* @ts-ignore */}
+      <group ref={group} {...props} dispose={null}>
+        <mesh
+          geometry={nodes.mold_right_ejector.geometry}
+          material={materials.Material_0}
+        >
+          <meshStandardMaterial transparent />
+          <Edges />
+        </mesh>
+        <mesh
+          geometry={nodes.mold_right.geometry}
+          material={materials.Material_1}
+        >
+          <meshStandardMaterial transparent />
+          <Edges />
+        </mesh>
+        <mesh geometry={nodes.mold_left.geometry} material={materials.Material_2}>
+          <meshStandardMaterial transparent />
+          <Edges />
+        </mesh>
+        <mesh
+          geometry={nodes.mold_left_ejector.geometry}
+          material={materials.Material_3}
+        >
+          <meshStandardMaterial transparent />
+          <Edges />
+        </mesh>
+      </group>
+    </>
   );
 }
 

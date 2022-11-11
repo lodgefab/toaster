@@ -22,24 +22,30 @@ type GLTFResult = GLTF & {
 
 export default function Model({ ...props }: JSX.IntrinsicElements["group"]) {
   const group = useRef<THREE.Group>();
-  const { nodes, materials } = useGLTF("/models/gacha.glb") as GLTFResult;
+  const { nodes, materials } = useGLTF("/models/gacha.glb") as unknown as GLTFResult;
   return (
+    <>
+     {/* @ts-ignore */}
     <group ref={group} {...props} dispose={null}>
       <group rotation={[Math.PI / 2, 0, 0]} scale={0.3}>
+        {/* @ts-ignore */}
         <mesh geometry={nodes.gacha_1.geometry}>
           <meshStandardMaterial transparent />
           <Edges />
         </mesh>
+        {/* @ts-ignore */}
         <mesh geometry={nodes.gacha_2.geometry}>
           <meshStandardMaterial transparent />
           <Edges />
         </mesh>
+        {/* @ts-ignore */}
         <mesh geometry={nodes.gacha_3.geometry}>
           <meshStandardMaterial transparent />
           <Edges />
         </mesh>
       </group>
     </group>
+    </>
   );
 }
 

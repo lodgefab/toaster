@@ -1,7 +1,6 @@
 import { Client } from "@notionhq/client";
 import { BlogPost, PostPage, ProjectPost } from "../../@types/schema";
 import { NotionToMarkdown } from "notion-to-md";
-import Model from "../../public/models/Toaster";
 
 export default class NotionService {
   client: Client;

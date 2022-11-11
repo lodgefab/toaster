@@ -106,141 +106,144 @@ export default function Model(
   });
 
   return (
-    <group ref={group} {...props} dispose={null}>
-      <motion3d.group
-        animate={{ rotateY: 6.3 }}
-        transition={{ ...spring, mass: 10, damping: 500 }}
-      >
-        {/* Body */}
-        <group position={[0, 0.21, 0]}>
-          <mesh castShadow receiveShadow geometry={nodes.Cube001.geometry}>
-            <meshStandardMaterial transparent />
-            <Edges />
-          </mesh>
-          <mesh castShadow receiveShadow geometry={nodes.Cube001_1.geometry}>
-            <meshStandardMaterial transparent />
-            <Edges />
-          </mesh>
-        </group>
-
-        {/* Handle */}
-        <motion3d.group whileHover={{ y: -0.08 }}>
-          <motion3d.mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.handle.geometry}
-            position={[0.55, -0.09, 0]}
-            onClick={() => {
-              setUp(!isUp);
-            }}
-            variants={handleVariants}
-            animate={isUp ? "variantUp" : "variantDown"}
-            {...useCursor()}
-            transition={{ ...spring, damping: 100 }}
-          >
-            {/* {isConnected ? (
-              <>
-                <meshStandardMaterial transparent color={"orange"} />
-                <Html
-                  style={{
-                    transition: "all 0.2s",
-                    opacity: 1,
-                    // transform: `scale(1)`,
-                    width: 120,
-                    height: 120,
-                    padding: 0,
-                  }}
-                  zIndexRange={[zIndex.elevation.ev5, 0]}
-                  position={[0.8, 0.9, 0]}
-                  center
-                >
-                  <MintText>
-                    {networkMismatch
-                      ? `Wrong Network`
-                      : claiming
-                      ? `Minting`
-                      : `Press To\nMint Toast🍞`}
-                  </MintText>
-                  <MintCursor
-                    whileHover={{ scale: 1.1 }}
-                    onClick={() => {
-                      isConnected &&
-                        address &&
-                        claimNft(
-                          {
-                            quantity: 1,
-                            tokenId: 0,
-                            to: address,
-                          },
-                          {
-                            onSuccess: (data) => {
-                              sceneState.isSuccessModalOpen = true;
-                              // @ts-ignore
-                              sceneState.txHash = data.receipt.transactionHash;
-                            },
-                            onError: (error) => {
-                              const e = error as Error;
-                              alert(
-                                (e?.message as string) || "Something went wrong"
-                              );
-                            },
-                          }
-                        );
-                    }}
-                  />
-                </Html>
-              </>
-            ) : (
-              <meshStandardMaterial transparent />
-            )} */}
-
-            <Edges />
-          </motion3d.mesh>
-        </motion3d.group>
-
-        {/* Toast */}
+    <>
+    {/* @ts-ignore */}
+      <group ref={group} {...props} dispose={null}>
         <motion3d.group
-          position={[0, -0.09, 0.17]}
-          variants={toastVariants}
-          animate={isUp ? "variantUp" : "variantDown"}
-          transition={{
-            ...spring,
-            damping: 100,
-            duration: 0.5,
-            time: [0.5, 1],
-          }}
+          animate={{ rotateY: 6.3 }}
+          transition={{ ...spring, mass: 10, damping: 500 }}
         >
-          <mesh castShadow receiveShadow geometry={nodes.Cube004.geometry}>
-            <Html
-              style={{
-                transition: "all 0.2s",
-                opacity: 1,
-                transform: `scale(1)`,
-                width: 110,
-                height: 116,
-                padding: 0,
-              }}
-              distanceFactor={4}
-              position={[0, 1.3, 0.1]}
-              zIndexRange={[zIndex.elevation.ev5, 0]}
-              transform
-              occlude
-            >
-              <ToasterWrap>
-                <ToasterRecipe src={path} alt={"image"} />
-              </ToasterWrap>
-            </Html>
-            <meshStandardMaterial transparent />
-            <Edges />
-          </mesh>
+          {/* Body */}
+          <group position={[0, 0.21, 0]}>
+            <mesh castShadow receiveShadow geometry={nodes.Cube001.geometry}>
+              <meshStandardMaterial transparent />
+              <Edges />
+            </mesh>
+            <mesh castShadow receiveShadow geometry={nodes.Cube001_1.geometry}>
+              <meshStandardMaterial transparent />
+              <Edges />
+            </mesh>
+          </group>
 
-          <mesh castShadow receiveShadow geometry={nodes.Cube004_1.geometry}>
-            <meshStandardMaterial transparent />
-            <Edges />
-          </mesh>
+          {/* Handle */}
+          <motion3d.group whileHover={{ y: -0.08 }}>
+            <motion3d.mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.handle.geometry}
+              position={[0.55, -0.09, 0]}
+              onClick={() => {
+                setUp(!isUp);
+              }}
+              variants={handleVariants}
+              animate={isUp ? "variantUp" : "variantDown"}
+              {...useCursor()}
+              transition={{ ...spring, damping: 100 }}
+            >
+              {/* {isConnected ? (
+                <>
+                  <meshStandardMaterial transparent color={"orange"} />
+                  <Html
+                    style={{
+                      transition: "all 0.2s",
+                      opacity: 1,
+                      // transform: `scale(1)`,
+                      width: 120,
+                      height: 120,
+                      padding: 0,
+                    }}
+                    zIndexRange={[zIndex.elevation.ev5, 0]}
+                    position={[0.8, 0.9, 0]}
+                    center
+                  >
+                    <MintText>
+                      {networkMismatch
+                        ? `Wrong Network`
+                        : claiming
+                        ? `Minting`
+                        : `Press To\nMint Toast🍞`}
+                    </MintText>
+                    <MintCursor
+                      whileHover={{ scale: 1.1 }}
+                      onClick={() => {
+                        isConnected &&
+                          address &&
+                          claimNft(
+                            {
+                              quantity: 1,
+                              tokenId: 0,
+                              to: address,
+                            },
+                            {
+                              onSuccess: (data) => {
+                                sceneState.isSuccessModalOpen = true;
+                                // @ts-ignore
+                                sceneState.txHash = data.receipt.transactionHash;
+                              },
+                              onError: (error) => {
+                                const e = error as Error;
+                                alert(
+                                  (e?.message as string) || "Something went wrong"
+                                );
+                              },
+                            }
+                          );
+                      }}
+                    />
+                  </Html>
+                </>
+              ) : (
+                <meshStandardMaterial transparent />
+              )} */}
+
+              <Edges />
+            </motion3d.mesh>
+          </motion3d.group>
+
+          {/* Toast */}
+          <motion3d.group
+            position={[0, -0.09, 0.17]}
+            variants={toastVariants}
+            animate={isUp ? "variantUp" : "variantDown"}
+            transition={{
+              ...spring,
+              damping: 100,
+              duration: 0.5,
+              time: [0.5, 1],
+            }}
+          >
+            <mesh castShadow receiveShadow geometry={nodes.Cube004.geometry}>
+              <Html
+                style={{
+                  transition: "all 0.2s",
+                  opacity: 1,
+                  transform: `scale(1)`,
+                  width: 110,
+                  height: 116,
+                  padding: 0,
+                }}
+                distanceFactor={4}
+                position={[0, 1.3, 0.1]}
+                zIndexRange={[zIndex.elevation.ev5, 0]}
+                transform
+                occlude
+              >
+                <ToasterWrap>
+                  <ToasterRecipe src={path} alt={"image"} />
+                </ToasterWrap>
+              </Html>
+              <meshStandardMaterial transparent />
+              <Edges />
+            </mesh>
+
+            <mesh castShadow receiveShadow geometry={nodes.Cube004_1.geometry}>
+              <meshStandardMaterial transparent />
+              <Edges />
+            </mesh>
+          </motion3d.group>
         </motion3d.group>
-      </motion3d.group>
-    </group>
+      </group>
+    </>
   );
 }
 
