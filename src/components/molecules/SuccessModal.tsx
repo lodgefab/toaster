@@ -42,7 +42,7 @@ const SuccessModal: VFC<SuccessModalProps> = ( props) => {
                           <Description>
                             This Toaster NFT is a utility token given who contributes LODGE Fab community.
                           </Description>
-                          <Etherscan href={'https://goerli.etherscan.io/tx/${sceneState.txHash}'} target={'_blank'}/>
+                          <Etherscan href={`https://polygonscan.com/tx/${sceneState.txHash}`} target={'_blank'}/>
                         </Bottom>
                       </Container>
                     </Overlay>

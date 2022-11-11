@@ -64,7 +64,16 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       <GoogleTagManager
         googleTagManagerId={googleTagManagerId as GoogleTagManagerId}
       />
-      <ThirdwebProvider desiredChainId={activeChainId}>
+      <ThirdwebProvider 
+        desiredChainId={activeChainId}
+        sdkOptions={{
+          gasless: {
+            openzeppelin: {
+              relayerUrl: process.env.NEXT_PUBLIC_OPENZEPPELIN_URL!,
+            },
+          },
+        }}
+      >
         <NftContractProvider>
           <AppContextProvider>
             <Layout>
