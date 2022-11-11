@@ -165,7 +165,7 @@ const Header: React.VFC<Props> = ({ height }) => {
         /> */}
         <HeaderLinkItem isSPMenuOpen={isSPMenuOpen}>
           <SNSs>
-            <Link href={'https://discord.gg/Ghxu2N7U'} passHref>
+            <Link href={'https://discord.gg/DfYH3PC9YZ'} passHref>
               <SNSLink  target={'_blank'}>
                 <Image src={'/icons/discord.svg'} alt={'discord'} width={24} height={24}/>
               </SNSLink>
