@@ -3,6 +3,7 @@ import {
   FunctionComponent,
   lazy,
   Suspense,
+  useContext,
   useEffect,
   useRef,
   useState,
@@ -23,6 +24,10 @@ import { OrthographicCamera } from "@react-three/drei";
 import dynamic from "next/dynamic";
 import * as THREE from "three";
 import { MotionConfig } from "framer-motion";
+import { ThirdwebProvider, useAddress } from "@thirdweb-dev/react";
+import { useConnectWallet } from "../../hooks/useConnectWallet";
+import { proxy, useSnapshot } from "valtio";
+import { sceneState } from "../../utils/sceneState";
 
 type Props = {
   model: string;
@@ -33,9 +38,17 @@ const Loader = () => {
   const { active, progress, errors, item, loaded, total } = useProgress();
   return <Html center>{progress} % loaded</Html>;
 };
+const activeChainId: number = parseInt(`${process.env.NEXT_PUBLIC_CHAIN_ID}`);
 
 const HeroView: React.VFC<Props> = ({ model, isReady }) => {
   const Model = lazy(() => import(`../../../public/models/${model}.tsx`));
+  const address = useConnectWallet().address;
+  const snap = useSnapshot(sceneState);
+
+  useEffect(() => {
+    sceneState.isConnected = address ? true : false;
+    sceneState.address = `${address}`;
+  }, [address]);
 
   return (
     <Canvas
@@ -44,33 +57,37 @@ const HeroView: React.VFC<Props> = ({ model, isReady }) => {
       dpr={[1, 2]}
     >
       {/* <Zoom/> */}
-      <ambientLight />
-      <hemisphereLight
-        color="#eeeeee"
-        groundColor="#eeeeee"
-        position={[-7, 25, 13]}
-        intensity={1}
-      />
-      <Suspense fallback={<Loader />}>
-        <PresentationControls
-          global
-          rotation={[0, -Math.PI / 4, 0]}
-          polar={[0, Math.PI / 4]}
-          azimuth={[-Math.PI / 4, Math.PI / 4]}
-          cursor={false}
-          snap={true}
-        >
-          <Bounds fit clip margin={1.2}>
-            <Model isReady={isReady} />
-          </Bounds>
-          <gridHelper
-            args={[10, 40, "#aaaaaa", "#cccccc"]}
-            position={[-0.25, -1.2, 0]}
-            rotation={[0, 0, 0]}
-          />
-        </PresentationControls>
-      </Suspense>
-      {/* <OrthographicCamera zoom={1}/> */}
+      <ThirdwebProvider desiredChainId={activeChainId}>
+        <ambientLight />
+        {/* @ts-ignore */}
+        <hemisphereLight
+          color="#eeeeee"
+          groundColor="#eeeeee"
+          position={[-7, 25, 13]}
+          intensity={1}
+        />
+        <Suspense fallback={<Loader />}>
+          <PresentationControls
+            global
+            rotation={[0, -Math.PI / 4, 0]}
+            polar={[0, Math.PI / 4]}
+            azimuth={[-Math.PI / 4, Math.PI / 4]}
+            cursor={false}
+            snap={true}
+          >
+            <Bounds fit clip margin={1.2}>
+              <Model isReady={isReady} isConnected={address ? true : false} />
+            </Bounds>
+            {/* @ts-ignore */}
+            <gridHelper
+              args={[10, 40, "#d1d1d1", "#e2e2e2"]}
+              position={[-0.25, -1.2, 0]}
+              rotation={[0, 0, 0]}
+            />
+          </PresentationControls>
+        </Suspense>
+        {/* <OrthographicCamera zoom={1}/> */}
+      </ThirdwebProvider>
     </Canvas>
   );
 };

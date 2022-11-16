@@ -9,6 +9,11 @@ import GoogleTagManager, {
   GoogleTagManagerId,
 } from "../components/molecules/GoogleTagManager";
 import { googleTagManagerId } from "../utils/gtm";
+import { NftContractProvider } from "../contexts/NFTContractProvider";
+import { ThirdwebProvider } from "@thirdweb-dev/react";
+import { AppContextProvider } from "../contexts/AppContextProvider";
+
+const activeChainId: number = parseInt(`${process.env.NEXT_PUBLIC_CHAIN_ID}`);
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   return (
@@ -59,11 +64,26 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       <GoogleTagManager
         googleTagManagerId={googleTagManagerId as GoogleTagManagerId}
       />
-      <Layout>
-        <AnimatePresence>
-          <Component {...pageProps} key={router.route} />
-        </AnimatePresence>
-      </Layout>
+      <ThirdwebProvider 
+        desiredChainId={activeChainId}
+        sdkOptions={{
+          gasless: {
+            openzeppelin: {
+              relayerUrl: process.env.NEXT_PUBLIC_OPENZEPPELIN_URL!,
+            },
+          },
+        }}
+      >
+        <NftContractProvider>
+          <AppContextProvider>
+            <Layout>
+              <AnimatePresence>
+                <Component {...pageProps} key={router.route} />
+              </AnimatePresence>
+            </Layout>
+          </AppContextProvider>
+        </NftContractProvider>
+      </ThirdwebProvider>
     </>
   );
 }
