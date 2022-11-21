@@ -35,6 +35,7 @@ type Store = {
   claimPrice: string;
   totalSupply: number;
   claimedSupply: number;
+  address:string;
 };
 
 export const NftContractContext = createContext<Store>({
@@ -48,6 +49,7 @@ export const NftContractContext = createContext<Store>({
   claimPrice: "",
   totalSupply: 0,
   claimedSupply: 0,
+  address:'',
 });
 
 type Props = {
@@ -60,10 +62,10 @@ const Component: React.FC<Props> = ({ children }: Props) => {
 
   const tokenId = Number(process.env.TOKEN_ID);
 
-  const address = useAddress();
+  const connectedAddress = useAddress();
   
   // SDK v2->v3
-  const { data: ownedNFTs, isLoading, error } = useOwnedNFTs(editionDrop.contract, address);
+  const { data: ownedNFTs, isLoading, error } = useOwnedNFTs(editionDrop.contract, connectedAddress);
   
   // const { data: nfts, isLoading } = useNFTs(editionDrop);
 
@@ -77,11 +79,13 @@ const Component: React.FC<Props> = ({ children }: Props) => {
   const [claimPrice, setClaimPrice] = useState<string>("");
   const [totalSupply, setTotalSupply] = useState<number>(0);
   const [claimedSupply, setClaimedSupply] = useState<number>(0);
+  const [address, setAddress] = useState<string>("");
 
   // update connectionate connection
   useEffect(() => {
     setIsConeccted(address ? true : false);
-  }, [address]);
+    setAddress(connectedAddress!)
+  }, [connectedAddress]);
 
   // get All Tokens of the Edition
   useEffect(() => {
@@ -98,7 +102,7 @@ const Component: React.FC<Props> = ({ children }: Props) => {
     ownedNFTs?.map((NFT)=>{
       setOwnedToasters((prev) => prev + NFT.quantityOwned!)
     })
-  }, [address, isLoading]);
+  }, [connectedAddress, isLoading]);
 
 
   const store: Store = {
@@ -114,7 +118,9 @@ const Component: React.FC<Props> = ({ children }: Props) => {
     claimPrice,
     claimedSupply,
     totalSupply,
+    address
   };
+  
 
   return (
     <NftContractContext.Provider value={store}>

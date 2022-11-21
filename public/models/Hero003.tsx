@@ -33,6 +33,7 @@ import { useConnectWallet } from "../../src/hooks/useConnectWallet";
 import { proxy, useSnapshot } from "valtio";
 import { sceneState } from "../../src/utils/sceneState";
 import { AppContext } from "../../src/contexts/AppContextProvider";
+import { NftContractContext } from "../../src/contexts/NFTContractProvider";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -60,9 +61,28 @@ export default function Model(
   const [isUp, setUp] = useState(false);
   const {isSuccessDialogOpened} = useContext(AppContext)
 
+  const {isConnected, isClaiming} = useSnapshot(sceneState)
+  //addressはsceneState:stringでは代用できない可能性
+  const { address, connectWallet } = useConnectWallet();
+
   //networkDetection
   const networkMismatch = useNetworkMismatch();
 
+  //TODO あとでcontextにまとめる
+  // Connect to the Edition Drop contract
+  // SDK v2->v3
+  const editionDropContract  = useContract(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS, 'edition-drop');
+
+  
+
+  // Claim an NFT (and update the nfts above)
+  const { mutate: claimNft, isLoading, error } =
+    useClaimNFT(editionDropContract.contract);
+  if (error) {
+      console.error("failed to claim nft", error);
+  }
+
+  
   const toastVariants = {
     variantUp: {
       y: [-0.2, 1.0, 0.6],
@@ -140,7 +160,7 @@ export default function Model(
               {...useCursor()}
               transition={{ ...spring, damping: 100 }}
             >
-              {/* {isConnected ? (
+              {isConnected ? (
                 <>
                   <meshStandardMaterial transparent color={"orange"} />
                   <Html
@@ -159,7 +179,7 @@ export default function Model(
                     <MintText>
                       {networkMismatch
                         ? `Wrong Network`
-                        : claiming
+                        : isClaiming
                         ? `Minting`
                         : `Press To\nMint Toast🍞`}
                     </MintText>
@@ -182,9 +202,7 @@ export default function Model(
                               },
                               onError: (error) => {
                                 const e = error as Error;
-                                alert(
-                                  (e?.message as string) || "Something went wrong"
-                                );
+                                alert((e?.message as string) || "Something went wrong");
                               },
                             }
                           );
@@ -194,7 +212,7 @@ export default function Model(
                 </>
               ) : (
                 <meshStandardMaterial transparent />
-              )} */}
+              )}
 
               <Edges />
             </motion3d.mesh>
