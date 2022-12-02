@@ -17,6 +17,8 @@ import { wrap } from "popmotion";
 import HeroView from "../molecules/HeroView";
 import SuccessModal from "../molecules/SuccessModal";
 import { AppContext } from "../../contexts/AppContextProvider";
+import { sceneState } from "../../utils/sceneState";
+import { NftContractContext } from "../../contexts/NFTContractProvider";
 
 type Props = {
   blogPosts: BlogPost[];
@@ -115,6 +117,11 @@ export const Home: React.VFC<Props> = ({ blogPosts, projectPosts }) => {
   useEffect(() => {
     toggleReady(true);
   }, []);
+
+  // const address = useConnectWallet().address;
+  // const snap = useSnapshot(sceneState);
+
+  
 
   return (
     <>
