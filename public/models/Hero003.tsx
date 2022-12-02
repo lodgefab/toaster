@@ -34,6 +34,10 @@ import { proxy, useSnapshot } from "valtio";
 import { sceneState } from "../../src/utils/sceneState";
 import { AppContext } from "../../src/contexts/AppContextProvider";
 import { NftContractContext } from "../../src/contexts/NFTContractProvider";
+import { Depth, Fresnel, LayerMaterial } from "lamina";
+import { MeshBasicMaterial } from "three";
+import { LayerMaterialProps, LayerMaterialParameters, LayerProps } from "lamina/types";
+import { useControls } from 'leva';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -60,6 +64,15 @@ export default function Model(
   ) as unknown as GLTFResult;
   const [isUp, setUp] = useState(false);
   const {isSuccessDialogOpened} = useContext(AppContext)
+
+  const depthRef0 = useRef<any>(null!)
+  const depthRef1 = useRef<any>(null!)
+  const depthRef2 = useRef<any>(null!)
+  const depthRef3 = useRef<any>(null!)
+
+  
+  const  gradient  = 0.75
+  
 
   const {isConnected, isClaiming} = useSnapshot(sceneState)
   //addressはsceneState:stringでは代用できない可能性
@@ -123,6 +136,15 @@ export default function Model(
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
     group.current!.position.y = (-4 + Math.sin(t * 2)) / 10;
+    //レバーのGradientアニメーション
+    const sin = Math.sin(state.clock.elapsedTime / 2)
+    const cos = Math.cos(state.clock.elapsedTime / 2)
+
+    
+    depthRef0.current!.origin.set(cos / 2, 0, 0)
+    depthRef1.current!.origin.set(cos, sin, cos)
+    depthRef2.current!.origin.set(sin, cos, sin)
+    depthRef3.current!.origin.set(cos, sin, cos)
   });
 
   return (
@@ -162,7 +184,15 @@ export default function Model(
             >
               {isConnected ? (
                 <>
-                  <meshStandardMaterial transparent color={"orange"} />
+                  {/* <meshStandardMaterial transparent color={"orange"} /> */}
+                  <LayerMaterial toneMapped={false}>
+                    <Depth  ref={depthRef0} colorA="#ff0080" colorB="black" alpha={1} mode="normal" near={0.5 * gradient} far={0.5} origin={[0,0,0]} />
+                    <Depth ref={depthRef1} colorA="blue" colorB="#f7b955" alpha={1} mode="add" near={2 * gradient} far={2} origin={[0,1,1]} />
+                    <Depth ref={depthRef2} colorA="green" colorB="#f7b955" alpha={1} mode="add" near={3 * gradient} far={3} origin={[0,1,-1]} />
+                    <Depth ref={depthRef3} colorA="white" colorB="red" alpha={1} mode="overlay" near={1.5 * gradient} far={1.5} origin={[0,-1,-1]} />
+                    <Fresnel mode="add" color="white" intensity={0.5} power={1.5} bias={0.05} />
+                  </LayerMaterial>
+                  <Edges color="white" />
                   <Html
                     style={{
                       transition: "all 0.2s",
